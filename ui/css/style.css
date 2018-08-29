@@ -1,4 +1,6 @@
-/* General Styling */
+/******************
+** GENERAL Styling
+*******************/
 
 html,
 body {
@@ -11,6 +13,25 @@ body {
 .center-text {
   font-family: 'Open Sans', sans-serif;
   text-align: center;
+}
+
+.form {
+  padding: 20px;
+}
+
+.form .input-group {
+  margin-top: 10px;
+}
+
+.form .input-field {
+  display: block;
+  width: 100%;
+  margin: 0px auto;
+  box-sizing: border-box;
+  padding: .4rem .8rem;
+  line-height: 1.7;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
 }
 
 .btn {
@@ -36,14 +57,23 @@ body {
   clear: both;
 }
 
-/* Styling header/Header */
+/**************************
+** NAVBAR + HEADER Styling
+***************************/
 
-header {
+header.landing-page {
   width: 100%;
   height: 90vh;
   background: url('../images/bg_old.png') no-repeat;
   background-size: cover;
   margin: 0px auto 4em;
+}
+
+header.custom-page nav {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  background: #3f2b21;
 }
 
 header nav {
@@ -117,7 +147,9 @@ header nav .auth-links a {
   float: right;
 }
 
-/* Styling the page Content */
+/**************************
+** CONTENT Styling
+***************************/
 
 .intro {
   padding-top: 250px;
@@ -196,13 +228,30 @@ header nav .auth-links a {
   background: #2323db;
 }
 
+/**************************
+** SIGN UP PAGE Styling
+***************************/
+
+.signup-wrapper {
+  border: 1px solid #cbcbd6;
+  border-radius: 5px;
+  width: 30%;
+  margin: 30px auto;
+}
+
+.signup-wrapper .signup-btn {
+  background: #2929af;
+}
+
 footer {
   background: #26232f;
   color: white;
   Height: 90px;
 }
 
-/* Media Queries for mobile responsiveness */
+/****************************************
+** Media Queries for mobile responsiveness
+*******************************************/
 
 @media(max-width: 580px) {
   header nav .logo {
