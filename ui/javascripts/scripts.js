@@ -3,7 +3,6 @@ var navLinks = document.querySelector('.menu-links');
 var nav = document.getElementsByTagName('nav')[0];
 
 menuIcon.addEventListener('click', function (e) {
-  console.log(menuIcon.classList);
   navLinks.classList.toggle('showing');
 });
 

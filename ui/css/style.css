@@ -1,22 +1,55 @@
+/* General Styling */
+
 html,
 body {
   margin: 0px;
   padding: 0px;
   width: 100%;
+  height: 100%;
+}
+
+.center-text {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+.btn {
+  text-decoration: none;
+  border: 1px solid transparent;
+  background: #83868854;
+  color: #fff;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s
+}
+
+.clear {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 /* Styling header/Header */
 
 header {
   width: 100%;
-  height: 100vh;
-  background: url('../images/bg_old.jpg') no-repeat;
+  height: 90vh;
+  background: url('../images/bg_old.png') no-repeat;
   background-size: cover;
+  margin: 0px auto 4em;
 }
 
 header nav {
   position: fixed;
   width: 100%;
+  z-index: 3;
 }
 
 header nav .menu-icon {
@@ -86,21 +119,90 @@ header nav .auth-links a {
 
 /* Styling the page Content */
 
+.intro {
+  padding-top: 250px;
+  margin: 0px auto;
+  text-align: center;
+  color: white;
+  font-family: 'Pontano Sans', sans-serif;
+}
+
+.intro .btn {
+  background: #dab027;
+  padding: .61em 1.5em;
+}
+
 .content {
-  width: 90%;
-  margin: 4em auto;
+  width: 95%;
+  margin: 1em 0px 0px -200px;
   font-size: 20px;
   line-height: 30px;
   text-align: justify;
+  margin: auto;
 }
 
-.intro {
-  padding-top: 300px;
-  margin-left: 100px;
-  color: white;
-  font-family: 'Pontano Sans', sans-serif;
-  font-weight: lighter
+.content .food-items {
+  width: 80%;
+  margin: 0em auto 3em;
+  display: flex;
+  flex: 5;
 }
+
+.content .food-items .food-item {
+  border: none;
+  box-shadow: 0 2px 2px 0 #00000024, 0 3px 1px -2px #0000001f, 0 1px 5px 0 #00000033;
+  margin: 5px 10px;
+  flex: 1;
+  height: 350px;
+  position: relative;
+}
+
+.content .food-items h4 {
+  padding: 0px;
+  margin: 4px;
+}
+
+.content .food-items p {
+  padding: 0px;
+  margin: 5px;
+}
+
+.content .food-items img {
+  width: 100%;
+  height: 186px;
+}
+
+.content .food-items .action {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.content .food-items .action .price {
+  color: green;
+  margin: 10px;
+}
+
+.content .food-items .order-btn {
+  float: right;
+  margin: 10px;
+  background: #dab027;
+}
+
+.view-more-btn {
+  background: #2323db;
+}
+
+footer {
+  background: #26232f;
+  color: white;
+  Height: 90px;
+}
+
+/* Media Queries for mobile responsiveness */
 
 @media(max-width: 580px) {
   header nav .logo {
