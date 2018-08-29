@@ -19,6 +19,13 @@ body {
   text-align: center;
 }
 
+.content {
+  color: #4d4c4c;
+  font-size: 1em;
+}
+
+/* Form Styling */
+
 .form {
   padding: 20px;
 }
@@ -41,19 +48,70 @@ body {
 .btn {
   text-decoration: none;
   border: 1px solid transparent;
-  background: #83868854;
-  color: #fff;
+  color: #302f2f;
   display: inline-block;
-  font-weight: 400;
   text-align: center;
   vertical-align: middle;
-  border: 1px solid transparent;
-  padding: .375rem .75rem;
+  padding: .3rem .7rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
-  transition: color .15s
+  transition: color .15s;
+  white-space: nowrap;
 }
+
+.btn-sm {}
+
+.btn-orange {
+  color: #ffffff;
+  background: #dab027;
+}
+
+.btn-green {
+  color: #ffffff;
+  background-color: #5cb85c;
+}
+
+.btn-blue {
+  color: white;
+  background: #337ab7;
+}
+
+.btn-green {
+  color: white;
+  background: #29af70;
+}
+
+.btn-red {
+  background-color: #d9534f;
+  color: white;
+}
+
+/* Table Styling */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+tr {
+  border: 1px solid #ddd;
+}
+
+/* 
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid #f2f2f2;
+} */
 
 .clear {
   content: "";
@@ -164,7 +222,6 @@ header nav .auth-links a {
 }
 
 .intro .btn {
-  background: #dab027;
   padding: .61em 1.5em;
 }
 
@@ -175,6 +232,10 @@ header nav .auth-links a {
   line-height: 30px;
   text-align: justify;
   margin: auto;
+}
+
+.content.full-page {
+  padding-top: 3em
 }
 
 .content .food-items {
@@ -209,12 +270,15 @@ header nav .auth-links a {
 }
 
 .content .food-items .action {
-  display: flex;
-  justify-content: space-between;
   position: absolute;
   bottom: 0px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.content .food-items .action .btn {
+  float: right;
+  margin: 5px;
 }
 
 .content .food-items .action .price {
@@ -222,14 +286,8 @@ header nav .auth-links a {
   margin: 10px;
 }
 
-.content .food-items .order-btn {
-  float: right;
-  margin: 10px;
-  background: #dab027;
-}
-
 .view-more-btn {
-  background: #2323db;
+  border-color: #ccc;
 }
 
 /**************************
@@ -243,8 +301,25 @@ header nav .auth-links a {
   margin: 30px auto;
 }
 
-.signup-wrapper .signup-btn {
-  background: #2929af;
+/**************************
+** ORDER PAGE Styling
+***************************/
+
+.orders-table-wrapper {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.orders-table-wrapper table {
+  border-color: red;
+}
+
+.orders-table-wrapper thead {
+  background-color: #eeeded;
+}
+
+.orders-table-wrapper btn {
+  border: 1px solid #ddd;
 }
 
 footer {

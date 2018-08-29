@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Pontano+Sans" rel="stylesheet">
 
   <!-- Link to Custome css -->
   <link rel="stylesheet" href="css/style.css">
 
-  <title>Fast-Food-Fast - Signin</title>
+  <title>Fast-Food-Fast - Sign up</title>
 </head>
 
 <body>
@@ -52,26 +55,51 @@
 
   <div class="content full-page clear">
 
+    <h3 class="center-text">My Order History</h3>
 
-    <div class="signup-wrapper">
-      <form class="form" action="">
-        <h3 class="center-text">Sign in</h3>
-        <div class="input-group">
-          <label for="user">Username/Email</label>
-          <input type="user" id="user" class="input-field">
-        </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" class="input-field">
-        </div>
-        <div class="input-group" style="text-align: right;">
-          <button type="submit" class="btn btn-blue">Sign in</button>
-        </div>
-      </form>
+    <div class="orders-table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>OrderID</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price (NGN)</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          <tbody>
+        </thead>
+        <tr>
+          <td>1</td>
+          <td>Vegetable Salad</td>
+          <td>2</td>
+          <td>2000</td>
+          <td>3 minutes ago</td>
+          <td>PROCESSING</td>
+          <td>
+            <a href="#" class="btn btn-orange">
+              <i class="fa fa-close"></i>Cancel Order</a>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Fruit Salad</td>
+          <td>1</td>
+          <td>1000</td>
+          <td>2 days ago</td>
+          <td>DELIVERED</td>
+          <td>
+            <a href="#" class="btn btn-red">
+              <i class="fa fa-trash"></i> Delete Order</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <p class="center-text small">Don't yet have an account?
-      <a href="signup.html">Signin</a>
-    </p>
+
+
   </div>
 
 
