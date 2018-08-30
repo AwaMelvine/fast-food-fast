@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+
+  <!-- Link to Custome css -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>Fast-Food-Fast - Signin</title>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <header class="navbar custom-page">
+      <nav>
+        <div class="menu-icon">
+          <i class="fa fa-bars fa-2x"></i>
+        </div>
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/logo.png" alt="">
+          </a>
+        </div>
+        <div class="menu">
+          <ul class="menu-links">
+            <div>
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="index.html">contact</a>
+              </li>
+              <li>
+                <a href="order_history.html">My Orders</a>
+              </li>
+              <li>
+                <a href="admin/dashboard.html">Dashboard(Admin)</a>
+              </li>
+
+              <li class="auth-links">
+                <a href="signin.html">Login</a>
+                <a href="signup.html">Sign up</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <div class="content full-page clear">
+
+
+    <div class="signup-wrapper">
+      <form class="form" action="">
+        <h3 class="center-text">Sign in</h3>
+        <div class="input-group">
+          <label for="user">Username/Email</label>
+          <input type="user" id="user" class="input-field">
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="input-field">
+        </div>
+        <div class="input-group" style="text-align: right;">
+          <button type="submit" class="btn btn-blue">Sign in</button>
+        </div>
+      </form>
+    </div>
+    <p class="center-text small">Don't yet have an account?
+      <a href="signup.html">Signin</a>
+    </p>
+  </div>
+
+
+  <!-- JavaScripts -->
+  <script src="javascripts/scripts.js"></script>
+
+</body>
+
+</html>

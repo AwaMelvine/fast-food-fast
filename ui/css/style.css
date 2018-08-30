@@ -1,0 +1,543 @@
+/******************
+** GENERAL Styling
+*******************/
+
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.small {
+  font-size: .7em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.content {
+  color: #4d4c4c;
+  font-size: 1em;
+}
+
+/* Form Styling */
+
+.form {
+  padding: 20px;
+}
+
+.form .input-group {
+  margin-top: 10px;
+}
+
+.form .input-field {
+  display: block;
+  width: 100%;
+  margin: 0px auto;
+  box-sizing: border-box;
+  padding: .4rem .8rem;
+  line-height: 1.7;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.btn {
+  text-decoration: none;
+  border: 1px solid transparent;
+  color: #302f2f;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  padding: .3rem .7rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s;
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: .2rem .4rem;
+  font-size: .7em;
+}
+
+.btn-orange {
+  color: #ffffff;
+  background: #dab027;
+}
+
+.btn-green {
+  color: #ffffff;
+  background-color: #5cb85c;
+}
+
+.btn-blue {
+  color: white;
+  background: #337ab7;
+}
+
+.btn-green {
+  color: white;
+  background: #29af70;
+}
+
+.btn-red {
+  background-color: #d9534f;
+  color: white;
+}
+
+/* Table Styling */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+tr {
+  border: 1px solid #ddd;
+}
+
+.clear {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/**************************
+** NAVBAR + HEADER Styling
+***************************/
+
+header.landing-page {
+  width: 100%;
+  height: 90vh;
+  background: url('../images/bg_old.png') no-repeat;
+  background-size: cover;
+  margin: 0px auto 4em;
+}
+
+header.custom-page nav {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  background: #3f2b21;
+}
+
+header nav {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+header nav .menu-icon {
+  width: 100%;
+  background: #3e2111;
+  text-align: right;
+  box-sizing: border-box;
+  padding: 15px 24px;
+  cursor: pointer;
+  color: #fff;
+  display: none;
+}
+
+header nav .logo {
+  position: fixed;
+  float: left;
+}
+
+header nav .logo img {
+  height: 45px;
+  margin: 7px 0px 10px 30px;
+}
+
+header nav ul {
+  list-style: none;
+  background: transparent;
+  overflow: hidden;
+  color: #fff;
+  padding: 0px;
+  text-align: center;
+  margin: 0px;
+  transition: 1s;
+}
+
+header nav.solid ul {
+  background: #3f2b21;
+}
+
+header nav ul li {
+  display: inline-block;
+  padding: 20px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+header nav ul li a:hover {
+  color: yellow;
+}
+
+header nav .auth-links {
+  float: right;
+  margin-right: 30px;
+}
+
+header nav .auth-links a {
+  border: 1px solid #fff;
+  padding: 9px 20px;
+  border-radius: 20px;
+}
+
+.menu-links div {
+  float: right;
+}
+
+/**************************
+** CONTENT Styling
+***************************/
+
+.intro {
+  padding-top: 37vh;
+  margin: 0px auto;
+  text-align: center;
+  color: white;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 1em;
+}
+
+.intro .btn {
+  padding: .61em 1.5em;
+}
+
+.intro p {
+  font-size: 1.3em;
+}
+
+.content {
+  width: 95%;
+  margin: 1em 0px 0px -200px;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: justify;
+  margin: auto;
+}
+
+.content.full-page {
+  padding-top: 3em;
+  width: 100%;
+}
+
+.content .food-items {
+  width: 80%;
+  margin: 0em auto 3em;
+  display: flex;
+  flex: 5;
+}
+
+.content.full-page .food-items {
+  width: 90%;
+}
+
+.content .food-items .food-item {
+  border: none;
+  box-shadow: 0 2px 2px 0 #00000024, 0 3px 1px -2px #0000001f, 0 1px 5px 0 #00000033;
+  margin: 5px 10px;
+  flex: 1;
+  height: 350px;
+  position: relative;
+}
+
+.content .food-items h4 {
+  padding: 0px;
+  margin: 4px;
+}
+
+.content .food-items p {
+  padding: 0px;
+  margin: 5px;
+}
+
+.content .food-items img {
+  width: 100%;
+  height: 186px;
+}
+
+.content .food-items .action {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.content .food-items .action .btn {
+  float: right;
+  margin: 5px;
+}
+
+.content .food-items .action .price {
+  color: green;
+  margin: 10px;
+}
+
+.view-more-btn {
+  border-color: #ccc;
+}
+
+/**************************
+** SIGN UP/SIGNIN PAGE Styling
+***************************/
+
+.signup-wrapper {
+  border: 1px solid #cbcbd6;
+  border-radius: 5px;
+  width: 30%;
+  margin: 30px auto;
+}
+
+/**************************
+** ORDER HISTORY PAGE Styling
+***************************/
+
+.orders-table-wrapper {
+  width: 80%;
+  margin: 30px auto 100px;
+  margin-bottom: 200px;
+}
+
+.orders-table-wrapper thead {
+  background-color: #eeeded;
+}
+
+.orders-table-wrapper btn {
+  border: 1px solid #ddd;
+}
+
+/**************************
+** ORDER PAGE Styling
+***************************/
+
+.item {
+  border: 1px solid #f1f1f1;
+  overflow: inherit;
+  width: 90%;
+  display: flex;
+  margin: 0px auto 150px;
+}
+
+.item .item-images {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  float: left;
+  height: 80vh;
+}
+
+.item .item-images h3 {
+  margin: 10px auto;
+  padding: 0px;
+}
+
+.item .item-images .image {
+  flex: 1;
+  margin: 10px;
+  background: url('../images/salad.jpg') no-repeat;
+  background-size: 100%;
+  transition: background-size .2s ease-in;
+}
+
+.item .item-images .image:hover {
+  background-size: 110%;
+}
+
+.item .item-details {
+  float: right;
+  min-height: 300px;
+  width: 59%;
+  box-sizing: border-box;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/**************************
+** ADMIN - ORDERS PAGE Styling
+***************************/
+
+.table-filter select {
+  padding: 5px 9px;
+  width: 10%;
+  margin: 0px auto;
+  padding: .4rem .8rem;
+  line-height: 1.7;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.admin.orders-table-wrapper {
+  width: 95%;
+}
+
+/**************************
+** FOOTER Styling
+***************************/
+
+footer {
+  background: #26232f;
+  color: white;
+  Height: 220px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+footer .more-info {
+  display: flex;
+  flex-direction: row;
+  flex: 4;
+}
+
+footer .footer-left {
+  flex: 1;
+  padding: 0px 10px;
+}
+
+footer .footer-left p {
+  width: 60%;
+  font-size: 1em;
+  line-height: 26px;
+}
+
+footer .footer-right {
+  flex: 1;
+  padding: 5px 10px;
+}
+
+footer .footer-right i {
+  font-size: 2em;
+  margin-left: 10px;
+  color: #8f8f8f;
+}
+
+footer .copyright-info {
+  color: #b4b4b4;
+  text-align: center;
+}
+
+/****************************************
+** Media Queries for mobile responsiveness
+*******************************************/
+
+@media(max-width: 1014px) {
+  header nav .logo {
+    position: fixed;
+    top: 0px;
+    margin-top: 16px;
+  }
+  header nav ul {
+    max-height: 0px;
+    background: #3e2111;
+  }
+  header nav.solid ul {
+    background: #3e2111;
+  }
+  .showing {
+    max-height: 25em;
+  }
+  header nav ul li {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 24px;
+    text-align: center;
+  }
+  header nav .menu-icon {
+    display: block;
+  }
+  header nav .auth-links {
+    clear: both;
+    text-align: center;
+  }
+  header nav ul li:hover {
+    background: #211209;
+  }
+  header nav .logo img {
+    height: 45px;
+    margin: -5px 0px 10px 10px;
+  }
+  .signup-wrapper {
+    width: 60%;
+  }
+}
+
+@media(max-width: 868px) {
+  .content {
+    width: 100%;
+  }
+  .content.full-page {
+    width: 100%;
+  }
+  /* items listing page */
+  .content .food-items {
+    width: 100%;
+    flex-direction: column;
+  }
+  .content .food-items .food-item {
+    flex: 1;
+    height: 370px;
+  }
+  .content .food-items .food-item img {
+    height: 250px;
+  }
+  /* Order Page */
+  .item {
+    width: 100%;
+    flex-direction: column;
+  }
+  .item .item-images {
+    width: 100%;
+    flex-direction: column;
+    height: 30vh;
+  }
+  .item .item-images h3 {
+    display: none;
+  }
+  .item .item-details {
+    width: 100%;
+  }
+  /* footer */
+  footer {
+    height: 400px;
+    flex-direction: column;
+  }
+  footer .more-info {
+    flex-direction: column;
+  }
+  footer .footer-left p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 458px) {
+  .signup-wrapper {
+    width: 80%;
+  }
+}
