@@ -15,14 +15,14 @@
   <!-- Link to Custome css -->
   <link rel="stylesheet" href="css/style.css">
 
-  <title>Fast-Food-Fast - Home</title>
+  <title>Fast-Food-Fast - Sign up</title>
 </head>
 
 <body>
 
   <div class="page-wrapper">
 
-    <header class="navbar landing-page">
+    <header class="navbar custom-page">
       <nav>
         <div class="menu-icon">
           <i class="fa fa-bars fa-2x"></i>
@@ -50,56 +50,65 @@
           </ul>
         </div>
       </nav>
-      <div class="intro">
-        <h1>Fast Food. Fast Delivery!</h1>
-        <p>Get our latest delicacies delivered right at your doorstep with lightening speed!</p>
-        <a href="#" class="btn btn-orange">Place Your Order Now!</a>
-      </div>
     </header>
   </div>
 
-  <div class="content clear">
-    <h3 class="center-text">Latest on our menu</h3>
+  <div class="content full-page clear">
 
-    <div class="food-items">
-      <div class="food-item">
-        <img src="../ui/images/burger.jpg" alt="">
-        <h4>Hamburger</h4>
-        <p>This is one paragraph</p>
-        <div class="action">
-          <span class="price">NGN 2000</span>
-          <a href="order.html" class="btn btn-green">Order</a>
-        </div>
+    <h3 class="center-text">Confirm your order: Vegetable Salad</h3>
+
+    <div class="item">
+      <div class="item-images">
+        <h3 class="center-text">Images</h3>
+        <div class="image"></div>
+        <div class="image"></div>
       </div>
-      <div class="food-item">
-        <img src="../ui/images/fish.jpg" alt="">
-        <h4>Grilled fish</h4>
-        <p>Grilled fish and salad is one of our specialties</p>
-        <div class="action">
-          <span class="price">NGN 2000</span>
-          <a href="order.html" class="btn btn-green">Order</a>
-        </div>
-      </div>
-      <div class="food-item">
-        <img src="../ui/images/salad.jpg" alt="">
-        <h4>Vegetable Salad</h4>
-        <p>This is one paragraph</p>
-        <div class="action">
-          <span class="price">NGN 2000</span>
-          <a href="order.html" class="btn btn-green">Order</a>
-        </div>
+      <div class="item-details">
+        <h3>Details</h3>
+        <p>
+          Nice exotic vegetable salad!
+        </p>
+        <h4>Ingredients</h4>
+        <ul>
+          <li>lettuce</li>
+          <li>Carrots</li>
+          <li>Irish potatoes</li>
+          <li>Baked Beans in tomato sauce</li>
+          <li>Sweet corn</li>
+        </ul>
+
+        <form action="order_history.html" class="form">
+          <!-- <h3>Finalize Order</h3> -->
+          <div class="input-group">
+            <label for="quanity">Quantity</label>
+            <select name="Quantity" id="quantity" class="input-field">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <button type="submit" class="btn btn-green">Place Order Now</button>
+          </div>
+          <div class="input-group">
+            Total Price: NGN 3000
+          </div>
+        </form>
+
+
       </div>
     </div>
 
-    <div class="center-text">
-      <a href="food_menu.html" class="btn view-more-btn">View Complete List</a>
-    </div>
+
   </div>
 
   <footer>
     <h2>Footer</h2>
   </footer>
-
   <!-- JavaScripts -->
   <script src="javascripts/scripts.js"></script>
 

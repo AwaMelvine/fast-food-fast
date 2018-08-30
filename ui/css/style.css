@@ -60,7 +60,10 @@ body {
   white-space: nowrap;
 }
 
-.btn-sm {}
+.btn-sm {
+  padding: .2rem .4rem;
+  font-size: .7em;
+}
 
 .btn-orange {
   color: #ffffff;
@@ -103,15 +106,6 @@ td {
 tr {
   border: 1px solid #ddd;
 }
-
-/* 
-.table {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 1rem;
-  background-color: transparent;
-  border: 1px solid #f2f2f2;
-} */
 
 .clear {
   content: "";
@@ -302,7 +296,7 @@ header nav .auth-links a {
 }
 
 /**************************
-** ORDER PAGE Styling
+** ORDER HISTORY PAGE Styling
 ***************************/
 
 .orders-table-wrapper {
@@ -321,6 +315,56 @@ header nav .auth-links a {
 .orders-table-wrapper btn {
   border: 1px solid #ddd;
 }
+
+/**************************
+** ORDER PAGE Styling
+***************************/
+
+.item {
+  /* border: 1px solid #f1f1f1; */
+  overflow: inherit;
+  width: 80%;
+  height: 80vh;
+  margin: 0px auto 150px;
+}
+
+.item .item-images {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  float: left;
+  height: 80vh;
+}
+
+.item .item-images h3 {
+  margin: 10px auto;
+  padding: 0px;
+}
+
+.item .item-images .image {
+  flex: 1;
+  margin: 10px;
+  background: url('../images/salad.jpg') no-repeat;
+  background-size: 100%;
+  transition: background-size .2s ease-in;
+}
+
+.item .item-images .image:hover {
+  background-size: 110%;
+}
+
+.item .item-details {
+  float: right;
+  min-height: 300px;
+  width: 59%;
+  /* border: 1px dashed gray; */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/**************************
+** FOOTER Styling
+***************************/
 
 footer {
   background: #26232f;
