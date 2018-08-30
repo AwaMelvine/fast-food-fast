@@ -95,6 +95,7 @@ body {
 table {
   border-collapse: collapse;
   width: 100%;
+  box-sizing: border-box;
 }
 
 th,
@@ -208,11 +209,12 @@ header nav .auth-links a {
 ***************************/
 
 .intro {
-  padding-top: 250px;
+  padding-top: 37vh;
   margin: 0px auto;
   text-align: center;
   color: white;
   font-family: 'Pontano Sans', sans-serif;
+  font-size: 1em;
 }
 
 .intro .btn {
@@ -229,7 +231,8 @@ header nav .auth-links a {
 }
 
 .content.full-page {
-  padding-top: 3em
+  padding-top: 3em;
+  width: 100%;
 }
 
 .content .food-items {
@@ -237,6 +240,10 @@ header nav .auth-links a {
   margin: 0em auto 3em;
   display: flex;
   flex: 5;
+}
+
+.content.full-page .food-items {
+  width: 90%;
 }
 
 .content .food-items .food-item {
@@ -304,10 +311,6 @@ header nav .auth-links a {
   margin: 30px auto;
 }
 
-.orders-table-wrapper table {
-  border-color: red;
-}
-
 .orders-table-wrapper thead {
   background-color: #eeeded;
 }
@@ -321,10 +324,10 @@ header nav .auth-links a {
 ***************************/
 
 .item {
-  /* border: 1px solid #f1f1f1; */
+  border: 1px solid #f1f1f1;
   overflow: inherit;
-  width: 80%;
-  height: 80vh;
+  width: 90%;
+  display: flex;
   margin: 0px auto 150px;
 }
 
@@ -357,9 +360,27 @@ header nav .auth-links a {
   float: right;
   min-height: 300px;
   width: 59%;
-  /* border: 1px dashed gray; */
+  box-sizing: border-box;
   padding: 20px;
   box-sizing: border-box;
+}
+
+/**************************
+** ADMIN - ORDERS PAGE Styling
+***************************/
+
+.table-filter select {
+  padding: 5px 9px;
+  width: 10%;
+  margin: 0px auto;
+  padding: .4rem .8rem;
+  line-height: 1.7;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.admin.orders-table-wrapper {
+  width: 95%;
 }
 
 /**************************
@@ -376,7 +397,7 @@ footer {
 ** Media Queries for mobile responsiveness
 *******************************************/
 
-@media(max-width: 580px) {
+@media(max-width: 800px) {
   header nav .logo {
     position: fixed;
     top: 0px;
@@ -407,5 +428,62 @@ footer {
   }
   header nav ul li:hover {
     background: #211209;
+  }
+}
+
+@media(max-width: 868px) {
+  .content {
+    width: 100%;
+  }
+  .item {
+    width: 100%;
+  }
+}
+
+@media(max-width: 868px) {
+  .content {
+    width: 80%;
+  }
+  .content.full-page {
+    width: 100%;
+  }
+  .content .food-items {
+    width: 100%;
+    flex-direction: column;
+  }
+  .content .food-items .food-item {
+    flex: 1;
+    height: 370px;
+  }
+  .content .food-items .food-item img {
+    height: 250px;
+  }
+}
+
+@media(max-width: 868px) {
+  .content {
+    width: 100%;
+  }
+}
+
+@media(max-width: 868px) {
+  .item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .item .item-images {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 30vh;
+  }
+  .item .item-images h3 {
+    display: none;
+  }
+  .item .item-details {
+    float: right;
+    min-height: 300px;
+    width: 59%;
   }
 }
