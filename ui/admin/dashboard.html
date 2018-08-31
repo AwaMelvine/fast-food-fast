@@ -52,8 +52,48 @@
 
     <h3 class="center-text">Menu</h3>
 
-    <div class="orders-table-wrapper center-text">
-      <a href="orders.html" class="btn btn-blue">Manage Orders</a>
+    <ul class="admin-menu">
+      <li><a href="add_food_item.html">Add Fast-Food Items</a></li>
+      <li><a href="food_items.html">Manage Fast-Food Items</a></li>
+      <li><a href="orders.html">Manage Orders</a></li>
+    </ul>
+
+    <div class="stats">
+      <div class="stats-title">
+        <h2 class="center-text">Stats</h2>
+        <div class="table-filter">
+          <label for="filter">Period:</label>
+          <select name="filter" id="filter">
+            <option value="All">Today</option>
+            <option value="All">Yesterday</option>
+            <option value="Completed">This Week</option>
+            <option value="Declined">This Month</option>
+            <option value="Accepted">All Time</option>
+          </select>
+        </div>
+        <br>
+      </div>
+      <div class="stats-wrapper center-text">
+
+        <a href="orders.html" class="stat">
+          <span>23</span> <br>
+          Pending orders
+        </a>
+        <a href="orders.html" class="stat">
+          <span>3</span> <br>
+          Cancelled orders
+        </a>
+        <a href="#" class="stat">
+          <span>5</span> <br>
+          Unread Messages
+        </a>
+
+        <a href="#" class="stat">
+          <span>19</span> <br>
+          New customers
+        </a>
+
+      </div>
     </div>
 
   </div>

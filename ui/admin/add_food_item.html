@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Pontano+Sans" rel="stylesheet">
+
+  <!-- Link to Custome css -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <title>Fast-Food-Fast - Add Fast-Food item</title>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <header class="navbar custom-page">
+      <nav>
+        <div class="menu-icon">
+          <i class="fa fa-bars fa-2x"></i>
+        </div>
+        <div class="logo">
+          <a href="../index.html">
+            <img src="../images/logo.png" alt="">
+          </a>
+        </div>
+        <div class="menu">
+          <ul class="menu-links">
+            <div>
+              <li>
+                <a href="dashboard.html">Dashboard</a>
+              </li>
+              <li>
+                <a href="#">Admin</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <div class="content full-page clear">
+
+
+    <div class="food-form-wrapper">
+
+      <form action="food_items.html" class="form">
+        <h3 class="center-text">Add Fast-Food Item</h3>
+        <div class="input-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" class="input-field">
+        </div>
+        <div class="input-group">
+          <label for="images">Images:</label>
+          <input type="file" name="images[]" id="images" class="input-field">
+        </div>
+        <div class="input-group">
+          <label for="description">Description:</label>
+          <textarea name="description" id="description" cols="30" rows="4" class="input-field"></textarea>
+        </div>
+        <div class="input-group">
+          <label for="price">Price per unit (NGN):</label>
+          <input type="number" name="price" id="price" class="input-field">
+        </div>
+        <div class="input-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" name="quantity" id="quantity" class="input-field">
+        </div>
+        <div class="input-group align-right">
+          <button type="submit" class="btn btn-blue">Save Fast-Food Item</button>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- JavaScripts -->
+  <script src="javascripts/scripts.js"></script>
+
+</body>
+
+</html>
