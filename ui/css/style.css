@@ -274,7 +274,7 @@ header nav .auth-links a {
   box-shadow: 0 2px 2px 0 #00000024, 0 3px 1px -2px #0000001f, 0 1px 5px 0 #00000033;
   margin: 5px 10px;
   flex: 1;
-  height: 350px;
+  height: 370px;
   position: relative;
 }
 
@@ -364,7 +364,7 @@ header nav .auth-links a {
 .item .item-images .image {
   flex: 1;
   margin: 10px;
-  background: url('../images/salad.jpg') no-repeat;
+  background: url('../images/salad.png') no-repeat;
   background-size: 100%;
   transition: background-size .2s ease-in;
 }
@@ -582,7 +582,7 @@ footer .copyright-info {
 
   .content .food-items .food-item {
     flex: 1;
-    height: 370px;
+    height: 400px;
   }
 
   .content .food-items .food-item img {
