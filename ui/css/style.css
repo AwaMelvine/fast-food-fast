@@ -1,7 +1,6 @@
 /******************
 ** GENERAL Styling
 *******************/
-
 html,
 body {
   margin: 0px;
@@ -27,13 +26,16 @@ h6 {
   text-align: center;
 }
 
+.align-right {
+  text-align: right;
+}
+
 .content {
   color: #4d4c4c;
   font-size: 1em;
 }
 
 /* Form Styling */
-
 .form {
   padding: 20px;
 }
@@ -50,6 +52,7 @@ h6 {
   padding: .4rem .8rem;
   line-height: 1.7;
   border: 1px solid #ced4da;
+  color: #4d4c4c;
   border-radius: .25rem;
 }
 
@@ -75,7 +78,7 @@ h6 {
 
 .btn-orange {
   color: #ffffff;
-  background: #dab027;
+  background: #f1ab49;
 }
 
 .btn-green {
@@ -99,7 +102,6 @@ h6 {
 }
 
 /* Table Styling */
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -112,8 +114,17 @@ td {
   text-align: left;
 }
 
+td img {
+  width: 80px;
+  height: 80px;
+}
+
 tr {
   border: 1px solid #ddd;
+}
+
+.table-btn-group {
+  padding: 15px 10px 15px 0px;
 }
 
 .clear {
@@ -125,13 +136,13 @@ tr {
 /**************************
 ** NAVBAR + HEADER Styling
 ***************************/
-
 header.landing-page {
   width: 100%;
   height: 90vh;
   background: url('../images/bg_old.png') no-repeat;
   background-size: cover;
   margin: 0px auto 4em;
+  padding-bottom: 1em;
 }
 
 header.custom-page nav {
@@ -195,7 +206,7 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-  color: yellow;
+  color: #f1ab49;
 }
 
 header nav .auth-links {
@@ -216,7 +227,6 @@ header nav .auth-links a {
 /**************************
 ** CONTENT Styling
 ***************************/
-
 .intro {
   padding-top: 37vh;
   margin: 0px auto;
@@ -300,14 +310,9 @@ header nav .auth-links a {
   margin: 10px;
 }
 
-.view-more-btn {
-  border-color: #ccc;
-}
-
 /**************************
 ** SIGN UP/SIGNIN PAGE Styling
 ***************************/
-
 .signup-wrapper {
   border: 1px solid #cbcbd6;
   border-radius: 5px;
@@ -318,7 +323,6 @@ header nav .auth-links a {
 /**************************
 ** ORDER HISTORY PAGE Styling
 ***************************/
-
 .orders-table-wrapper {
   width: 80%;
   margin: 30px auto 100px;
@@ -336,7 +340,6 @@ header nav .auth-links a {
 /**************************
 ** ORDER PAGE Styling
 ***************************/
-
 .item {
   border: 1px solid #f1f1f1;
   overflow: inherit;
@@ -379,10 +382,9 @@ header nav .auth-links a {
   box-sizing: border-box;
 }
 
-/**************************
+/***************************
 ** ADMIN - ORDERS PAGE Styling
-***************************/
-
+*******************************/
 .table-filter select {
   padding: 5px 9px;
   width: 10%;
@@ -397,10 +399,69 @@ header nav .auth-links a {
   width: 95%;
 }
 
+.food-form-wrapper {
+  width: 50%;
+  margin: 30px auto;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+}
+
+/***************************
+** ADMIN - DASHBOARD Styling
+*******************************/
+.admin-menu {
+  width: 30%;
+  border: 1px dashed #f1f1f1;
+  list-style-type: none;
+  margin: 10px auto;
+  padding: 0px;
+}
+
+.admin-menu li a {
+  text-decoration: none;
+  font-size: .93em;
+  border-bottom: 1px dashed #f1f1f1;
+  display: block;
+  padding: 10px;
+  text-align: left;
+  color: rgb(83, 82, 82);
+}
+
+.admin-menu li a:hover {
+  background: #d6d4d425;
+  transition: .3s;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 60px auto 300px;
+}
+
+.stats .stats-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats .stats-wrapper .stat {
+  flex: 1;
+  margin: 0px 20px;
+  border-radius: 10px;
+  justify-content: space-around;
+  text-decoration: none;
+  border: 2px dashed #f1f1f1;
+  padding: 50px;
+}
+
+.stats .stats-wrapper .stat:hover {
+  background: #d6d4d425;
+  transition: .3s;
+}
+
 /**************************
 ** FOOTER Styling
 ***************************/
-
 footer {
   background: #26232f;
   color: white;
@@ -446,45 +507,61 @@ footer .copyright-info {
 /****************************************
 ** Media Queries for mobile responsiveness
 *******************************************/
-
 @media(max-width: 1014px) {
   header nav .logo {
     position: fixed;
     top: 0px;
     margin-top: 16px;
   }
+
   header nav ul {
     max-height: 0px;
     background: #3e2111;
   }
+
   header nav.solid ul {
     background: #3e2111;
   }
+
   .showing {
     max-height: 25em;
   }
+
   header nav ul li {
     box-sizing: border-box;
     width: 100%;
     padding: 24px;
     text-align: center;
   }
+
   header nav .menu-icon {
     display: block;
   }
+
   header nav .auth-links {
     clear: both;
     text-align: center;
   }
+
   header nav ul li:hover {
     background: #211209;
   }
+
   header nav .logo img {
     height: 45px;
     margin: -5px 0px 10px 10px;
   }
+
   .signup-wrapper {
     width: 60%;
+  }
+
+  .admin-menu {
+    width: 50%;
+  }
+
+  .stats {
+    width: 100%;
   }
 }
 
@@ -492,52 +569,76 @@ footer .copyright-info {
   .content {
     width: 100%;
   }
+
   .content.full-page {
     width: 100%;
   }
+
   /* items listing page */
   .content .food-items {
     width: 100%;
     flex-direction: column;
   }
+
   .content .food-items .food-item {
     flex: 1;
     height: 370px;
   }
+
   .content .food-items .food-item img {
     height: 250px;
   }
+
   /* Order Page */
   .item {
     width: 100%;
     flex-direction: column;
   }
+
   .item .item-images {
     width: 100%;
     flex-direction: column;
     height: 30vh;
   }
+
   .item .item-images h3 {
     display: none;
   }
+
   .item .item-details {
     width: 100%;
   }
+
   /* footer */
   footer {
     height: 400px;
     flex-direction: column;
   }
+
   footer .more-info {
     flex-direction: column;
   }
+
   footer .footer-left p {
     width: 100%;
+  }
+
+  /* Dashboard */
+  .stats .stats-wrapper {
+    flex-direction: column;
+  }
+
+  .stats .stats-wrapper .stat {
+    margin-top: 10px;
   }
 }
 
 @media (max-width: 458px) {
   .signup-wrapper {
+    width: 80%;
+  }
+
+  .admin-menu {
     width: 80%;
   }
 }
