@@ -14,3 +14,10 @@ export const getOrderById = (req, res) => {
   const order = allOrders.find(item => item.id === orderId);
   res.status(200).json(order);
 };
+
+export const placeOrder = (req, res) => {
+  const order = new Order(req.body);
+  allOrders.push(order);
+
+  res.status(200).json(allOrders);
+};

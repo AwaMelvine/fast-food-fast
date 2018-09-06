@@ -1,4 +1,4 @@
-import toInt from '../helpers/functions';
+import { toInt } from '../helpers/functions';
 
 export const allOrders = [];
 
