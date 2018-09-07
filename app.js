@@ -12,9 +12,7 @@ app.use(bodyParser.json());
 app.use('/api/v1/orders', orders);
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(process.env.PORT || 5000, () => {
-    console.log('Server started at localhost:5000');
-  });
+  app.listen(process.env.PORT || 5000, () => console.log('Server started at localhost:5000'));
 }
 
 
