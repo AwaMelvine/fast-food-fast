@@ -68,7 +68,7 @@ describe('Food Items', () => {
     it('should return an error if value of foodItemId is invalid', (done) => {
       const foodItemId = null;
       chai.request(app)
-        .get(`/api/v1/orders/${foodItemId}`)
+        .get(`/api/v1/foodItems/${foodItemId}`)
         .end((err, res) => {
           res.should.have.status(422);
           expect(res.body).to.have.property('errors');
@@ -107,8 +107,64 @@ describe('Food Items', () => {
         .end((err, res) => {
           if (err) return done(err);
           res.should.have.status(422);
+          expect(res.body).to.have.property('errors');
           done();
         });
+    });
+  });
+
+  describe('PUT /:foodItemId - Update Food Item', () => {
+    const modifiedFoodItem = {
+      id: 2,
+      name: 'Hamburger',
+      description: 'Very delicious',
+      quantity: 1000,
+      unitPrice: 600,
+      updatedAt: '04-09-2018',
+      createdAt: '04-09-2018',
+    };
+    it('should update a food item', (done) => {
+      chai.request(app)
+        .put('/api/v1/foodItems/1')
+        .send(modifiedFoodItem)
+        .end((err, res) => {
+          if (err) return done(err);
+          res.should.have.status(201);
+
+          expect(JSON.stringify(modifiedFoodItem)).equal(JSON.stringify(res.body));
+          done();
+        });
+    });
+    it('should return an error if value of foodItemId is invalid', (done) => {
+      const foodItemId = null;
+      chai.request(app)
+        .get(`/api/v1/foodItems/${foodItemId}`)
+        .end((err, res) => {
+          res.should.have.status(422);
+          expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /:foodItemId - Delete food item', () => {
+    it('should delete a food item given the item id', (done) => {
+      const foodItemId = 1;
+      chai.request(app)
+        .delete(`/api/v1/foodItems/${foodItemId}`)
+        .end((err, res) => {
+          res.should.have.status(204);
+          expect(res.body).to.deep.equal({});
+          done();
+        });
+    });
+  });
+  describe('FoodItem model', () => {
+    it('should instantiate a new FoodItem object', () => {
+      const createdAt = '03-09-2018';
+      const tempFoodItem = new FoodItem({ createdAt });
+      expect(tempFoodItem.createdAt).equal(createdAt);
+      expect(tempFoodItem).to.be.an.instanceOf(FoodItem);
     });
   });
 });
