@@ -125,8 +125,7 @@ describe('Orders', () => {
           if (err) return done(err);
           res.should.have.status(201);
 
-          const changedOrder = res.body.find(item => item.id === orderId);
-          expect(changedOrder.orderStatus).equal('DECLINED');
+          expect(res.body.orderStatus).equal('DECLINED');
           done();
         });
     });
