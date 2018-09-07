@@ -45,3 +45,11 @@ export const updateFoodItem = (req, res) => {
 
   res.status(201).json(updatedFoodItem);
 };
+
+
+export const deleteFoodItem = (req, res) => {
+  const foodItemId = toInt(req.params.foodItemId);
+  const index = allFoodItems.findIndex(item => toInt(item.id) === foodItemId);
+  allFoodItems.splice(index, 1);
+  res.status(204).json(allFoodItems);
+};
