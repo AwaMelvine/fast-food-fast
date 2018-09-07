@@ -76,4 +76,39 @@ describe('Food Items', () => {
         });
     });
   });
+
+  describe('POST /foodItems - Create food item', () => {
+    const foodItem2 = {
+      id: 2,
+      name: 'Hamburger',
+      description: 'Very delicious',
+      quantity: 1000,
+      unitPrice: 600,
+      updatedAt: '04-09-2018',
+      createdAt: '04-09-2018',
+    };
+
+    it('should create a new food item', (done) => {
+      chai.request(app)
+        .post('/api/v1/foodItems')
+        .send(foodItem2)
+        .end((err, res) => {
+          if (err) return done(err);
+          res.should.have.status(200);
+          expect(res.body.length).equal(2);
+          done();
+        });
+    });
+
+    it('should not create food item with invalid data', (done) => {
+      chai.request(app)
+        .post('/api/v1/foodItems')
+        .send({ a: 1 })
+        .end((err, res) => {
+          if (err) return done(err);
+          res.should.have.status(422);
+          done();
+        });
+    });
+  });
 });
