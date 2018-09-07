@@ -1,6 +1,6 @@
 import { toInt } from '../helpers/functions';
 
-export const allFoodItems = [];
+export const allFoodItems = [{ id: 1 }, { id: 2 }];
 
 export class FoodItem {
   constructor(foodItem) {

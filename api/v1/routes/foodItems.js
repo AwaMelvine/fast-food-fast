@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.get('/', foodItemsController.getAllFoodItems);
+router.get('/:foodItemId', foodItemsController.getFoodItemById);
 
 
 export default router;
