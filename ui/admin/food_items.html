@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Pontano+Sans" rel="stylesheet">
+
+  <!-- Link to Custome css -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <title>Fast-Food-Fast - All Fast-Food items</title>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <header class="navbar custom-page">
+      <nav>
+        <div class="menu-icon">
+          <i class="fa fa-bars fa-2x"></i>
+        </div>
+        <div class="logo">
+          <a href="../index.html">
+            <img src="../images/logo.png" alt="">
+          </a>
+        </div>
+        <div class="menu">
+          <ul class="menu-links">
+            <div>
+              <li>
+                <a href="dashboard.html">Dashboard</a>
+              </li>
+              <li>
+                <a href="#">Admin</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <div class="content full-page clear">
+
+    <h3 class="center-text">All Fast-Food Items</h3>
+
+    <div class="admin orders-table-wrapper">
+      <div class="table-filter">
+        <form action="" class="form">
+          <div class="input-group">
+            <label for="filter">Search:</label>
+            <input type="text" name="filter" id="filter" class="input-field" placeholder="Search Fast-Food items ...">
+          </div>
+        </form>
+      </div>
+      <div class="table-btn-group">
+        <a href="dashboard.html" class="btn btn-blue">
+          <i class="fa fa-chevron-left"></i>
+          Dashboard
+        </a>
+        <a href="add_food_item.html" class="btn btn-green">
+          <i class="fa fa-plus-circle"></i>
+          Add Food Item
+        </a>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>N</th>
+            <th>Item Name</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Price (NGN)</th>
+            <th>Quantity Available</th>
+            <th class="center-text" colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Vegetable Salad</td>
+            <td>
+              <img src="../images/salad.png" alt="">
+            </td>
+            <td>A garden salad consisting of lettuce, cucumber, scallions, cherry tomatoes, ...</td>
+            <td>2000</td>
+            <td>20</td>
+            <td>
+              <a href="edit_food_item.html" class="btn btn-green btn-sm">
+                <i class="fa fa-pencil"></i> Edit</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-trash"></i> Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Gril led Fish</td>
+            <td>
+              <img src="../images/fish.png" alt="">
+            </td>
+            <td>Grilled fish consists of ...</td>
+            <td>1000</td>
+            <td>50</td>
+            <td>
+              <a href="edit_food_item.html" class="btn btn-green btn-sm">
+                <i class="fa fa-pencil"></i> Edit</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-trash"></i> Delete</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+
+  <!-- JavaScripts -->
+  <script src="javascripts/scripts.js"></script>
+
+</body>
+
+</html>

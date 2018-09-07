@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Pontano+Sans" rel="stylesheet">
+
+  <!-- Link to Custome css -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <title>Fast-Food-Fast - All Orders</title>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <header class="navbar custom-page">
+      <nav>
+        <div class="menu-icon">
+          <i class="fa fa-bars fa-2x"></i>
+        </div>
+        <div class="logo">
+          <a href="../index.html">
+            <img src="../images/logo.png" alt="">
+          </a>
+        </div>
+        <div class="menu">
+          <ul class="menu-links">
+            <div>
+              <li>
+                <a href="dashboard.html">Dashboard</a>
+              </li>
+              <li>
+                <a href="#">Admin</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <div class="content full-page clear">
+
+    <h3 class="center-text">All Orders</h3>
+
+    <div class="admin orders-table-wrapper">
+      <div class="table-filter">
+        <label for="filter">Filter:</label>
+        <select name="filter" id="filter">
+          <option value="All">All</option>
+          <option value="All">New</option>
+          <option value="Completed">Completed</option>
+          <option value="Declined">Declined</option>
+          <option value="Accepted">Accepted</option>
+        </select>
+      </div>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>OrderID</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price (NGN)</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th class="center-text" colspan="3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe (johndoe@testmail.com)</td>
+            <td>1</td>
+            <td>Vegetable Salad</td>
+            <td>2</td>
+            <td>2000</td>
+            <td>3 minutes ago</td>
+            <td>NEW</td>
+            <td>
+              <a href="#" class="btn btn-orange btn-sm">
+                <i class="fa fa-check"></i> Accept</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-close"></i> Decline</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-green btn-sm">
+                <i class="fa fa-check-circle"></i> Mark as completed</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Jane Doe (janedoe@testmail.com)</td>
+            <td>2</td>
+            <td>Fruit Salad</td>
+            <td>1</td>
+            <td>1000</td>
+            <td>2 days ago</td>
+            <td>COMPLETED</td>
+            <td>
+              <a href="#" class="btn btn-orange btn-sm">
+                <i class="fa fa-check"></i> Accept</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-close"></i> Decline</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-green btn-sm">
+                <i class="fa fa-check-circle"></i> Mark as completed</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Bob (bob@testmail.com)</td>
+            <td>2</td>
+            <td>Fruit Salad</td>
+            <td>1</td>
+            <td>1000</td>
+            <td>2 days ago</td>
+            <td>DECLINED</td>
+            <td>
+              <a href="#" class="btn btn-orange btn-sm">
+                <i class="fa fa-check"></i> Accept</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-close"></i> Decline</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-green btn-sm">
+                <i class="fa fa-check-circle"></i> Mark as completed</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Alice (alice@testmail.com)</td>
+            <td>2</td>
+            <td>Fruit Salad</td>
+            <td>1</td>
+            <td>1000</td>
+            <td>2 days ago</td>
+            <td>ACCEPTED</td>
+            <td>
+              <a href="#" class="btn btn-orange btn-sm">
+                <i class="fa fa-check"></i> Accept</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-close"></i> Decline</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-green btn-sm">
+                <i class="fa fa-check-circle"></i> Mark as completed</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+
+  <!-- JavaScripts -->
+  <script src="javascripts/scripts.js"></script>
+
+</body>
+
+</html>
