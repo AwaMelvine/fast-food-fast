@@ -124,8 +124,9 @@ describe('Food Items', () => {
       createdAt: '04-09-2018',
     };
     it('should update a food item', (done) => {
+      const foodItemId = 1;
       chai.request(app)
-        .put('/api/v1/foodItems/1')
+        .put(`/api/v1/foodItems/${foodItemId}`)
         .send(modifiedFoodItem)
         .end((err, res) => {
           if (err) return done(err);
@@ -138,7 +139,8 @@ describe('Food Items', () => {
     it('should return an error if value of foodItemId is invalid', (done) => {
       const foodItemId = null;
       chai.request(app)
-        .get(`/api/v1/foodItems/${foodItemId}`)
+        .put(`/api/v1/foodItems/${foodItemId}`)
+        .send(modifiedFoodItem)
         .end((err, res) => {
           res.should.have.status(422);
           expect(res.body).to.have.property('errors');

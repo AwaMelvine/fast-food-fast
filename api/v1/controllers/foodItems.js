@@ -33,13 +33,9 @@ export const updateFoodItem = (req, res) => {
   const previousFoodItem = allFoodItems.find(item => toInt(item.id) === foodItemId);
   const updatedFoodItem = Object.assign(previousFoodItem, req.body);
 
+  const index = allFoodItems.findIndex(item => toInt(item.id) === previousFoodItem.id);
+  const updatedFoodItems = allFoodItems.splice(index, 1, updatedFoodItem);
 
-  const updatedFoodItems = allFoodItems.map((item) => {
-    if (item.id === foodItemId) {
-      return updatedFoodItem;
-    }
-    return item;
-  });
 
   Object.assign(allFoodItems, updatedFoodItems);
   res.status(201).json(updatedFoodItem);
