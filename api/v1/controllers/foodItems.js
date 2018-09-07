@@ -16,3 +16,10 @@ export const getFoodItemById = (req, res) => {
   const foodItem = allFoodItems.find(item => item.id === foodItemId);
   res.status(200).json(foodItem);
 };
+
+export const createFoodItem = (req, res) => {
+  const foodItem = new FoodItem(req.body);
+  allFoodItems.push(foodItem);
+
+  res.status(200).json(allFoodItems);
+};
