@@ -3,8 +3,6 @@ import chaiHttp from 'chai-http';
 import app from '../app';
 import { Order, allOrders } from '../api/v1/models/Order';
 
-process.env.NODE_ENV = 'test'; 
-
 const should = chai.should();
 chai.use(chaiHttp);
 
@@ -20,24 +18,20 @@ const initialOrder = new Order({
 });
 
 // Initialize test database for test
-if (process.env.NODE_ENV === 'test') {
-  beforeEach((done) => {
-    chai.request(app)
-      .post('/api/v1/orders')
-      .send(initialOrder)
-      .end((err, res) => {
-        if (err) return done(err);
-        done();
-      });
-  });
+beforeEach((done) => {
+  chai.request(app)
+    .post('/api/v1/orders')
+    .send(initialOrder)
+    .end((err, res) => {
+      if (err) return done(err);
+      done();
+    });
+});
 
-  afterEach((done) => {
-    allOrders.length = 0;
-    done();
-  });
-} else {
-  throw new Error('Attempt to clear non testing database!');
-}
+afterEach((done) => {
+  allOrders.length = 0;
+  done();
+});
 
 
 describe('Orders', () => {

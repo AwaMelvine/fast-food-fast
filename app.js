@@ -11,8 +11,11 @@ app.use(bodyParser.json());
 
 app.use('/api/v1/orders', orders);
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log('Server started at localhost:5000');
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(process.env.PORT || 5000, () => {
+    console.log('Server started at localhost:5000');
+  });
+}
 
-export default app;
+
+module.exports = app;
