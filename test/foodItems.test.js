@@ -9,6 +9,7 @@ chai.use(chaiHttp);
 const initialFoodItem = new FoodItem({
   id: 1,
   name: 'Vegetable Salad',
+  image: 'http://via.placeholder.com/170x170',
   description: 'A very healthy snack',
   quantity: 200,
   unitPrice: 500,
@@ -81,6 +82,7 @@ describe('Food Items', () => {
     const foodItem2 = {
       id: 2,
       name: 'Hamburger',
+      image: 'http://via.placeholder.com/170x170',
       description: 'Very delicious',
       quantity: 1000,
       unitPrice: 600,
@@ -117,6 +119,7 @@ describe('Food Items', () => {
     const modifiedFoodItem = {
       id: 2,
       name: 'Hamburger',
+      image: 'http://via.placeholder.com/170x170',
       description: 'Very delicious',
       quantity: 1000,
       unitPrice: 600,
