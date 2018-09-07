@@ -23,3 +23,25 @@ export const createFoodItem = (req, res) => {
 
   res.status(200).json(allFoodItems);
 };
+
+export const updateFoodItem = (req, res) => {
+  const foodItemId = toInt(req.params.foodItemId);
+  if (!foodItemId) {
+    res.status(422).send({ errors: { foodItemId: 'Food Item Id is required' } });
+  }
+
+  const previousFoodItem = allFoodItems.find(item => toInt(item.id) === foodItemId);
+  const updatedFoodItem = Object.assign(previousFoodItem, req.body);
+
+
+  const updatedFoodItems = allFoodItems.map((item) => {
+    if (item.id === foodItemId) {
+      return updatedFoodItem;
+    }
+    return item;
+  });
+
+  Object.assign(allFoodItems, updatedFoodItems);
+
+  res.status(201).json(updatedFoodItem);
+};
