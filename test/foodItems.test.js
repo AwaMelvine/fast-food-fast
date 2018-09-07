@@ -53,4 +53,27 @@ describe('Food Items', () => {
         });
     });
   });
+
+  describe('GET /:foodItemId - Get foodItem by ID', () => {
+    it('should return a json Object', (done) => {
+      const foodItemId = 1;
+      chai.request(app)
+        .get(`/api/v1/foodItems/${foodItemId}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          expect(res).to.be.a.json;
+          done();
+        });
+    });
+    it('should return an error if value of foodItemId is invalid', (done) => {
+      const foodItemId = null;
+      chai.request(app)
+        .get(`/api/v1/orders/${foodItemId}`)
+        .end((err, res) => {
+          res.should.have.status(422);
+          expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
+  });
 });
