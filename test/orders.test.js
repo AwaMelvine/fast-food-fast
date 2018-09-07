@@ -33,7 +33,6 @@ afterEach((done) => {
   done();
 });
 
-
 describe('Orders', () => {
   describe('GET /orders - Get all orders', () => {
     it('should return a json object', (done) => {
@@ -64,6 +63,16 @@ describe('Orders', () => {
         .end((err, res) => {
           res.should.have.status(200);
           expect(res).to.be.a.json;
+          done();
+        });
+    });
+    it('should return an error if value of orderId is invalid', (done) => {
+      const orderId = null;
+      chai.request(app)
+        .get(`/api/v1/orders/${orderId}`)
+        .end((err, res) => {
+          res.should.have.status(422);
+          expect(res.body).to.have.property('errors');
           done();
         });
     });
@@ -120,6 +129,39 @@ describe('Orders', () => {
           expect(changedOrder.orderStatus).equal('DECLINED');
           done();
         });
+    });
+    it('should return an error if orderId is invalid', (done) => {
+      const orderId = 0;
+      const status = 'CANCELLED';
+      chai.request(app)
+        .put(`/api/v1/orders/${orderId}`)
+        .send({ status })
+        .end((err, res) => {
+          res.should.have.status(422);
+          expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
+    it('should return an error if status is invalid', (done) => {
+      const orderId = 1;
+      const status = null;
+      chai.request(app)
+        .put(`/api/v1/orders/${orderId}`)
+        .send({ status })
+        .end((err, res) => {
+          res.should.have.status(422);
+          expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
+  });
+
+  describe('Order model', () => {
+    it('should instantiate a new order object', () => {
+      const orderDate = '03-09-2018';
+      const tempOrder = new Order({ orderDate });
+      expect(tempOrder.orderDate).equal(orderDate);
+      expect(tempOrder).to.be.an.instanceOf(Order);
     });
   });
 });

@@ -9,7 +9,7 @@ export class Order {
     this.itemId = order.itemId ? toInt(order.itemId) : 0;
     this.quantity = order.quantity ? toInt(order.quantity) : 0;
     this.totalPrice = order.totalPrice ? toInt(order.totalPrice) : 0;
-    this.orderDate = order.orderDate || null;
+    this.orderDate = order.orderDate ? order.orderDate : null;
     this.dateToDeliver = order.dateToDeliver || null;
     this.orderStatus = order.orderStatus ? order.orderStatus.toString() : null;
   }
