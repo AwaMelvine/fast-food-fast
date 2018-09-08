@@ -37,11 +37,14 @@ Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: `https://fast-f
 
 #### Get all Orders
 URL: `https://fast-food-fast-service.herokuapp.com/api/v1/orders`
-Request Type: GET
+
+Request Type: `GET`
 
 #### Place new order
 URL: `https://fast-food-fast-service.herokuapp.com/api/v1/orders`
-Request Type: POST
+
+Request Type: `POST`
+
 Data: 
 ```
 {
@@ -57,9 +60,67 @@ Data:
 ```
 #### Get specific Order
 URL: `https://fast-food-fast-service.herokuapp.com/api/v1/orders/1`
-Request type: GET
+
+Request type: `GET`
 
 #### Update Order status
 URL: `https://fast-food-fast-service.herokuapp.com/api/v1/orders/1`
-Request type: PUT
+
+Request type: `PUT`
+
 Data: `{ status: 'COMPLETED' }`
+
+
+
+## Examples - Food Items
+
+#### Get all Food Items
+URL: `https://fast-food-fast-service.herokuapp.com/api/v1/foodItems`
+
+Request Type: `GET`
+
+#### Create New Food Item
+URL: `https://fast-food-fast-service.herokuapp.com/api/v1/foodItems`
+
+Request Type: `POST`
+
+Data: 
+```
+{
+  "id": 1,
+  "quantity": 20,
+  "name": "Salad",
+  "image:http": "via.placeholder.com/170x170",
+  "description": "Test description",
+  "unitPrice": 500,
+  "updatedAt": "04-09-2018",
+  "createdAt": "04-09-2018"
+}
+```
+#### Get specific Food Item
+URL: `https://fast-food-fast-service.herokuapp.com/api/v1/foodItems/1`
+
+Request type: `GET`
+
+#### Update Food Item
+URL: `https://fast-food-fast-service.herokuapp.com/api/v1/foodItems/1`
+
+Request type: `PUT`
+
+Data: 
+```
+{
+  "id": 1,
+  "quantity": 40,
+  "name": "Vegetable Salad",
+  "image:http": "via.placeholder.com/270x270",
+  "description": "Test description for Vegetable salad",
+  "unitPrice": 1000,
+  "updatedAt": "04-09-2018",
+  "createdAt": "02-09-2018"
+}
+```
+#### Delete Food Item
+URL: `https://fast-food-fast-service.herokuapp.com/api/v1/foodItems/1`
+
+Request type: `DELETE`
