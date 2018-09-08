@@ -36,13 +36,10 @@ export const updateOrderStatus = (req, res) => {
     return res.status(422).send({ errors: { status: 'Order status is required' } });
   }
 
-  const updatedOrders = allOrders.map((item) => {
-    if (item.id === id) {
-      item.orderStatus = status;
-      return item;
-    }
-    return item;
-  });
-  Object.assign(allOrders, updatedOrders);
-  res.status(201).json(allOrders);
+  const order = allOrders.find(item => toInt(item.id) === id);
+  order.orderStatus = status;
+  const index = allOrders.findIndex(item => toInt(item.id) === order.id);
+  allOrders.splice(index, 1, order);
+
+  res.status(201).json(order);
 };
