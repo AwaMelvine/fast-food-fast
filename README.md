@@ -11,14 +11,25 @@ Fast-Food-Fast​ is a food delivery service app for a restaurant.
 
 Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: `https://fast-food-fast-service.herokuapp.com/api/v1/orders` and has the following endpoints.
 
-### Orders
+### Orders Endpoints
 
 | Endpoint                 | Request Method | Parameters  |
 | ------------------------ |:--------------:| :----------:|
 | /api/v1/orders           | GET            | None        |
-| /api/v1/orders/:orderId  | POST           |   orderId   |
+| /api/v1/orders/:orderId  | GET            |   orderId   |
 | /api/v1/orders           | POST           |    None     |
 | /api/v1/orders/:orderId  | PUT            |    orderId  |
+
+
+### Food Items Endpoints
+
+| Endpoint                       | Request Method | Parameters  |
+| ------------------------------ |:--------------:| :----------:|
+| /api/v1/foodItems              | GET            | None        |
+| /api/v1/foodItems/:foodItemId  | GET            |   orderId   |
+| /api/v1/foodItems              | POST           |    None     |
+| /api/v1/foodItems/:foodItemId  | PUT            |    orderId  |
+| /api/v1/foodItems/:foodItemId  | DELETE         |    orderId  |
 
 
 
