@@ -68,7 +68,7 @@ URL: `https://fast-food-fast-service.herokuapp.com/api/v1/orders/1`
 
 Request type: `PUT`
 
-Data: `{ status: 'COMPLETED' }`
+Data: `{ "status": "COMPLETED" }`
 
 
 
