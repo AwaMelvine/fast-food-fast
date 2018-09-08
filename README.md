@@ -26,10 +26,10 @@ Version 1 (v1) of the Fast-Food-Fast API is hosted on Heroku at: `https://fast-f
 | Endpoint                       | Request Method | Parameters  |
 | ------------------------------ |:--------------:| :----------:|
 | /api/v1/foodItems              | GET            |             |
-| /api/v1/foodItems/:foodItemId  | GET            |   orderId   |
+| /api/v1/foodItems/:foodItemId  | GET            |   foodItemId   |
 | /api/v1/foodItems              | POST           |             |
-| /api/v1/foodItems/:foodItemId  | PUT            |    orderId  |
-| /api/v1/foodItems/:foodItemId  | DELETE         |    orderId  |
+| /api/v1/foodItems/:foodItemId  | PUT            |    foodItemId  |
+| /api/v1/foodItems/:foodItemId  | DELETE         |    foodItemId  |
 
 
 
