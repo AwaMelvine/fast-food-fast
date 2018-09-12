@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.use('/v1/orders', orders);
-app.use('/v1/foodItems', foodItems);
+app.use('/api/v1/orders', orders);
+app.use('/api/v1/foodItems', foodItems);
 
 app.use('/', (req, res) => {
   res.status(200).json({ message: 'Check out Fast-Food-Fast api at /api/v1/orders or /api/v1/foodItems' });
