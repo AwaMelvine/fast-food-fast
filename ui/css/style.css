@@ -1,6 +1,6 @@
-/******************
-** GENERAL Styling
-*******************/
+/*************************
+** Global default Stylings
+**************************/
 html,
 body {
   margin: 0px;
@@ -47,7 +47,7 @@ h6 {
 .form .input-field {
   display: block;
   width: 100%;
-  margin: 0px auto;
+  margin: 5px auto;
   box-sizing: border-box;
   padding: .4rem .8rem;
   line-height: 1.7;
@@ -56,6 +56,17 @@ h6 {
   border-radius: .25rem;
 }
 
+.form .input-field.dropdown {
+  width: auto;
+  margin: 0px;
+}
+
+.form .input-field:focus {
+  outline: none;
+  border-color: #6e6c74;
+}
+
+/* Buttons */
 .btn {
   text-decoration: none;
   border: 1px solid transparent;
@@ -74,6 +85,10 @@ h6 {
 .btn-sm {
   padding: .2rem .4rem;
   font-size: .7em;
+}
+
+.btn-blk {
+  width: 100%;
 }
 
 .btn-orange {
@@ -101,7 +116,7 @@ h6 {
   color: white;
 }
 
-/* Table Styling */
+/* Tables */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -133,9 +148,9 @@ tr {
   clear: both;
 }
 
-/**************************
-** NAVBAR + HEADER Styling
-***************************/
+/******************************
+** Navbar + Landing page Intro
+*******************************/
 header.landing-page {
   width: 100%;
   height: 90vh;
@@ -220,13 +235,6 @@ header nav .auth-links a {
   border-radius: 20px;
 }
 
-.menu-links div {
-  float: right;
-}
-
-/**************************
-** CONTENT Styling
-***************************/
 .intro {
   padding-top: 37vh;
   margin: 0px auto;
@@ -244,8 +252,15 @@ header nav .auth-links a {
   font-size: 1.3em;
 }
 
+.menu-links div {
+  float: right;
+}
+
+/**************************
+** CONTENT Styling
+***************************/
+
 .content {
-  width: 95%;
   margin: 1em 0px 0px -200px;
   font-size: 20px;
   line-height: 30px;
@@ -259,23 +274,32 @@ header nav .auth-links a {
 }
 
 .content .food-items {
-  width: 80%;
-  margin: 0em auto 3em;
-  display: flex;
-  flex: 5;
+  width: 70%;
+  float: left;
+  padding: 0px 30px;
+  box-sizing: border-box;
+}
+
+.content .food-items .items-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 }
 
 .content.full-page .food-items {
-  width: 90%;
+  width: 100%;
 }
 
 .content .food-items .food-item {
-  border: none;
-  box-shadow: 0 2px 2px 0 #00000024, 0 3px 1px -2px #0000001f, 0 1px 5px 0 #00000033;
+  border: 1px solid #e0e0e0;
   margin: 5px 10px;
-  flex: 1;
+  box-sizing: border-box;
   height: 370px;
   position: relative;
+}
+
+.content .food-items .food-item:hover {
+  border: 1px solid orange;
+  cursor: default;
 }
 
 .content .food-items h4 {
@@ -309,6 +333,53 @@ header nav .auth-links a {
   color: green;
   margin: 10px;
 }
+
+
+.content .sidebar {
+  width: 26%;
+  float: left;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.content .sidebar .form .search-btn {
+  float: right;
+}
+
+.content .sidebar .categories {
+  /* border: 1px solid #f1f1f1; */
+  margin-top: 50px;
+}
+
+.content .sidebar .categories ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+
+
+.content .sidebar .categories ul li a {
+  display: block;
+  border-top: 1px dashed #f0f0f0;
+  padding: 10px 0px 10px 0px;
+  text-decoration: none;
+  color: #868686;
+}
+
+.content .sidebar .categories ul li a:hover {
+  background: #faf9f9;
+  transition: all .2s;
+}
+
+.content .sidebar .categories ul li a i {
+  color: #868686;
+}
+
+.content .sidebar .categories ul li:last-child a {
+  border-bottom: 1px dashed #f0f0f0;
+}
+
 
 /**************************
 ** SIGN UP/SIGNIN PAGE Styling
@@ -566,46 +637,13 @@ footer .copyright-info {
 }
 
 @media(max-width: 868px) {
-  .content {
+  .content .sidebar {
     width: 100%;
+    box-sizing: border-box;
+    padding: 0px 30px 0px 30px;
   }
 
-  .content.full-page {
-    width: 100%;
-  }
-
-  /* items listing page */
   .content .food-items {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .content .food-items .food-item {
-    flex: 1;
-    height: 400px;
-  }
-
-  .content .food-items .food-item img {
-    height: 250px;
-  }
-
-  /* Order Page */
-  .item {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .item .item-images {
-    width: 100%;
-    flex-direction: column;
-    height: 30vh;
-  }
-
-  .item .item-images h3 {
-    display: none;
-  }
-
-  .item .item-details {
     width: 100%;
   }
 
@@ -641,4 +679,16 @@ footer .copyright-info {
   .admin-menu {
     width: 80%;
   }
+
+  .content .sidebar {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 10px 0px 10px;
+    margin: 20px auto 20px;
+  }
+
+  .content .food-items {
+    padding: 5px;
+  }
+
 }
