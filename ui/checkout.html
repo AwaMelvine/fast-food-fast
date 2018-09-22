@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+
+  <!-- Link to Custome css -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>Fast-Food-Fast - Checkout</title>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <header class="navbar custom-page">
+      <nav>
+        <div class="menu-icon">
+          <i class="fa fa-bars fa-2x"></i>
+        </div>
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/logo.png" alt="">
+          </a>
+        </div>
+        <div class="menu">
+          <ul class="menu-links">
+            <div>
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="index.html">Cart</a>
+              </li>
+              <li>
+                <a href="order_history.html">My Orders</a>
+              </li>
+              <li>
+                <a href="admin/dashboard.html">Dashboard(Admin)</a>
+              </li>
+
+              <li class="auth-links">
+                <a href="signin.html">Login</a>
+                <a href="signup.html">Sign up</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </div>
+
+  <div class="content full-page clear">
+
+    <h3 class="center-text">Confirm order</h3>
+
+    <div class="orders-table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Item Name</th>
+            <th>Item Image</th>
+            <th>Quantity</th>
+            <th>Price (NGN)</th>
+            <th>Action</th>
+          </tr>
+        <tbody>
+          </thead>
+          <tr>
+            <td>1</td>
+            <td>Vegetable Salad</td>
+            <td><img src="images/salad.png" alt=""></td>
+            <td>
+              <form action="order_history.html" class="form">
+                <select name="Quantity" id="quantity" class="input-field dropdown">
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </form>
+            </td>
+            <td>2000</td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Grilled Fish</td>
+            <td><img src="images/fish.png" alt=""></td>
+            <td>
+              <form action="order_history.html" class="form">
+                <select name="Quantity" id="quantity" class="input-field dropdown">
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </form>
+            </td>
+            <td>1000</td>
+            <td>
+              <a href="#" class="btn btn-red btn-sm">
+                <i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="confirm-order-div">
+        <p>Total Cost: NGN 3000</p>
+        <button class="btn btn-orange btn-blk">Confirm Order</button>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <footer>
+    <div class="more-info">
+      <div class="footer-left">
+        <h2>About</h2>
+        <p>Fast-Food-Fast is a fast food delivery service. As a user, all you have to do is browse through our list of
+          available
+          food items, select your favorite and order. Then our deliver agents will bring what you ordered to you
+          wherever
+          you are. </p>
+      </div>
+      <div class="footer-right">
+        <h2>Follow us</h2>
+        <i class="fa  fa-facebook-square"></i>
+        <i class="fa  fa-twitter-square"></i>
+        <i class="fa  fa-linkedin-square"></i>
+      </div>
+    </div>
+    <div class="copyright-info">
+      <p class="copyright">Copyright 2018 Fast-Food-Fast</p>
+    </div>
+  </footer>
+
+  <!-- JavaScripts -->
+  <script src="javascripts/scripts.js"></script>
+
+</body>
+
+</html>
