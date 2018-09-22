@@ -3,49 +3,51 @@ import { toInt } from '../helpers/functions';
 // Import data structure for food items
 import { allFoodItems, FoodItem } from '../models/FoodItem';
 
-export const getAllFoodItems = (req, res) => {
-  res.status(200).json(allFoodItems);
-};
+export default {
 
-export const getFoodItemById = (req, res) => {
-  const foodItemId = toInt(req.params.foodItemId);
-  if (!foodItemId) {
-    res.status(422).send({ errors: { foodItemId: 'Food Item Id is required' } });
-  }
+  getAllFoodItems(req, res) {
+    res.status(200).json(allFoodItems);
+  },
 
-  const foodItem = allFoodItems.find(item => item.id === foodItemId);
-  res.status(200).json(foodItem);
-};
+  getFoodItemById(req, res) {
+    const foodItemId = toInt(req.params.foodItemId);
+    if (!foodItemId) {
+      res.status(422).send({ errors: { foodItemId: 'Food Item Id is required' } });
+    }
 
-export const createFoodItem = (req, res) => {
-  const foodItem = new FoodItem(req.body);
-  allFoodItems.push(foodItem);
+    const foodItem = allFoodItems.find(item => item.id === foodItemId);
+    res.status(200).json(foodItem);
+  },
 
-  res.status(200).json(allFoodItems);
-};
+  createFoodItem(req, res) {
+    const foodItem = new FoodItem(req.body);
+    allFoodItems.push(foodItem);
 
-export const updateFoodItem = (req, res) => {
-  const foodItemId = toInt(req.params.foodItemId);
-  if (!foodItemId) {
-    res.status(422).send({ errors: { foodItemId: 'Food Item Id is required' } });
-  }
+    res.status(200).json(allFoodItems);
+  },
 
-  const previousFoodItem = allFoodItems.find(item => toInt(item.id) === foodItemId);
-  const updatedFoodItem = Object.assign(previousFoodItem, req.body);
+  updateFoodItem(req, res) {
+    const foodItemId = toInt(req.params.foodItemId);
+    if (!foodItemId) {
+      res.status(422).send({ errors: { foodItemId: 'Food Item Id is required' } });
+    }
 
-  const index = allFoodItems.findIndex(item => toInt(item.id) === previousFoodItem.id);
-  const updatedFoodItems = allFoodItems.splice(index, 1, updatedFoodItem);
+    const previousFoodItem = allFoodItems.find(item => toInt(item.id) === foodItemId);
+    const updatedFoodItem = Object.assign(previousFoodItem, req.body);
 
-
-  Object.assign(allFoodItems, updatedFoodItems);
-  res.status(201).json(updatedFoodItem);
-};
+    const index = allFoodItems.findIndex(item => toInt(item.id) === previousFoodItem.id);
+    const updatedFoodItems = allFoodItems.splice(index, 1, updatedFoodItem);
 
 
-export const deleteFoodItem = (req, res) => {
-  const foodItemId = toInt(req.params.foodItemId);
-  const index = allFoodItems.findIndex(item => toInt(item.id) === foodItemId);
+    Object.assign(allFoodItems, updatedFoodItems);
+    res.status(201).json(updatedFoodItem);
+  },
 
-  allFoodItems.splice(index, 1);
-  res.status(204).json(allFoodItems);
+  deleteFoodItem(req, res) {
+    const foodItemId = toInt(req.params.foodItemId);
+    const index = allFoodItems.findIndex(item => toInt(item.id) === foodItemId);
+
+    allFoodItems.splice(index, 1);
+    res.status(204).json(allFoodItems);
+  },
 };

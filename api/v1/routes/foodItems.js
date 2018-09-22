@@ -1,5 +1,5 @@
 import express from 'express';
-import * as foodItemsController from '../controllers/foodItems';
+import foodItemsController from '../controllers/foodItems';
 import validateFoodItem from '../helpers/validateFoodItem';
 
 const router = express.Router();
