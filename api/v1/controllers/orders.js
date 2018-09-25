@@ -1,47 +1,47 @@
-import { toInt } from '../helpers/functions';
-
 // Import data structure for orders
 import { allOrders, Order } from '../models/Order';
 
-export const getAllOrders = (req, res) => {
-  res.status(200).json(allOrders);
-};
+export default {
 
-export const getOrderById = (req, res) => {
-  const orderId = toInt(req.params.orderId);
-  if (!orderId) {
-    res.status(422).send({ errors: { orderId: 'Order Id is required' } });
-  }
+  getAllOrders(req, res) {
+    res.status(200).json(allOrders);
+  },
 
-  const order = allOrders.find(item => item.id === orderId);
-  res.status(200).json(order);
-};
+  getOrderById(req, res) {
+    const orderId = parseInt(req.params.orderId, 10);
+    if (!orderId) {
+      res.status(400).send({ errors: { orderId: 'Order Id is required' } });
+    }
 
-export const placeOrder = (req, res) => {
-  const order = new Order(req.body);
-  allOrders.push(order);
+    const order = allOrders.find(item => item.id === orderId);
+    res.status(200).json(order);
+  },
 
-  res.status(200).json(allOrders);
-};
+  placeOrder(req, res) {
+    const order = new Order(req.body);
+    allOrders.push(order);
 
-export const updateOrderStatus = (req, res) => {
-  const { orderId } = req.params;
-  const { status } = req.body;
+    res.status(201).json(order);
+  },
 
-  const id = toInt(orderId);
-  if (!id) {
-    return res.status(422).send({ errors: { orderId: 'Order Id is required' } });
-  }
-  if (!status) {
-    return res.status(422).send({ errors: { status: 'Order status is required' } });
-  }
+  updateOrderStatus(req, res) {
+    const { orderId } = req.params;
+    const { status } = req.body;
 
+    const id = parseInt(orderId, 10);
+    if (!id) {
+      return res.status(400).send({ errors: { orderId: 'Order Id is required' } });
+    }
+    if (!status) {
+      return res.status(400).send({ errors: { status: 'Order status is required' } });
+    }
 
-  const order = allOrders.find(item => toInt(item.id) === id);
+    const order = allOrders.find(item => parseInt(item.id, 10) === id);
 
-  order.orderStatus = status;
-  const index = allOrders.findIndex(item => toInt(item.id) === order.id);
-  allOrders.splice(index, 1, order);
+    order.orderStatus = status;
+    const index = allOrders.findIndex(item => parseInt(item.id, 10) === order.id);
+    allOrders.splice(index, 1, order);
 
-  res.status(201).json(order);
+    res.status(200).json(order);
+  },
 };

@@ -33,6 +33,7 @@
     "nyc": "^13.0.1"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "body-parser": "^1.18.3",
     "cross-env": "^5.2.0",
     "express": "^4.16.3"
