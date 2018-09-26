@@ -12,7 +12,15 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Pontano+Sans" rel="stylesheet">
 
-  <!-- Link to Custome css -->
+  <!-- Default styling -->
+  <link rel="stylesheet" href="../css/general.css">
+
+  <!-- Admin styling -->
+  <link rel="stylesheet" href="../css/admin.css">
+
+  <link rel="stylesheet" href="../css/orders.css">
+
+  <!-- Link to Custom css -->
   <link rel="stylesheet" href="../css/style.css">
 
   <title>Fast-Food-Fast - All Orders</title>
@@ -39,7 +47,10 @@
                 <a href="dashboard.html">Dashboard</a>
               </li>
               <li>
-                <a href="#">Admin</a>
+                <a href="dashboard.html">
+                  <i class="fa fa-user"></i>
+                  Admin
+                </a>
               </li>
             </div>
           </ul>
@@ -79,13 +90,13 @@
         </thead>
         <tbody>
           <tr>
-            <td>John Doe (johndoe@testmail.com)</td>
+            <td>John Doe <small>(johndoe@testmail.com)</small></td>
             <td>1</td>
             <td>Vegetable Salad</td>
             <td>2</td>
             <td>2000</td>
             <td>3 minutes ago</td>
-            <td>NEW</td>
+            <td class="processing">PROCESSING</td>
             <td>
               <a href="#" class="btn btn-orange btn-sm">
                 <i class="fa fa-check"></i> Accept</a>
@@ -100,13 +111,13 @@
             </td>
           </tr>
           <tr>
-            <td>Jane Doe (janedoe@testmail.com)</td>
+            <td>Jane Doe <small>(janedoe@testmail.com)</small></td>
             <td>2</td>
             <td>Fruit Salad</td>
             <td>1</td>
             <td>1000</td>
             <td>2 days ago</td>
-            <td>COMPLETED</td>
+            <td class="completed">COMPLETED</td>
             <td>
               <a href="#" class="btn btn-orange btn-sm">
                 <i class="fa fa-check"></i> Accept</a>
@@ -121,13 +132,13 @@
             </td>
           </tr>
           <tr>
-            <td>Bob (bob@testmail.com)</td>
+            <td>Bob <small>(bob@testmail.com)</small></td>
             <td>2</td>
             <td>Fruit Salad</td>
             <td>1</td>
             <td>1000</td>
             <td>2 days ago</td>
-            <td>DECLINED</td>
+            <td class="declined">DECLINED</td>
             <td>
               <a href="#" class="btn btn-orange btn-sm">
                 <i class="fa fa-check"></i> Accept</a>
@@ -142,13 +153,13 @@
             </td>
           </tr>
           <tr>
-            <td>Alice (alice@testmail.com)</td>
+            <td>Alice <small>(alice@testmail.com)</small></td>
             <td>2</td>
             <td>Fruit Salad</td>
             <td>1</td>
             <td>1000</td>
             <td>2 days ago</td>
-            <td>ACCEPTED</td>
+            <td class="accepted">ACCEPTED</td>
             <td>
               <a href="#" class="btn btn-orange btn-sm">
                 <i class="fa fa-check"></i> Accept</a>

@@ -1,0 +1,107 @@
+/***************************
+** ADMIN - DASHBOARD Styling
+*******************************/
+.menu-wrapper {
+  /* border: 1px solid #7b8485; */
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 70%;
+  margin: 15px auto;
+  padding-bottom: 40px;
+}
+
+.admin-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.admin-menu a {
+  margin: 5px 20px;
+  border-radius: 10px;
+  text-align: left;
+  text-decoration: none;
+  border: 2px dashed #cecece;
+  background: #f1f1fc;
+  padding: 50px;
+  color: #444;
+  justify-items: center;
+}
+
+.admin-menu a:hover {
+  border: 2px solid #cecece;
+  background: #d4e7ee;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 60px auto 300px;
+}
+
+.stats .stats-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats .stats-wrapper .stat {
+  flex: 1;
+  margin: 0px 20px;
+  border-radius: 10px;
+  justify-content: space-around;
+  text-decoration: none;
+  border: 2px dashed #f1f1f1;
+  padding: 50px;
+}
+
+.stats .stats-wrapper .stat:hover {
+  background: #d6d4d425;
+  transition: .3s;
+}
+
+
+/***************************
+** ADMIN - ORDERS PAGE Styling
+*******************************/
+.table-filter select {
+  padding: 5px 9px;
+  width: 10%;
+  margin: 0px auto;
+  padding: .4rem .8rem;
+  line-height: 1.7;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.admin.orders-table-wrapper {
+  width: 95%;
+}
+
+.food-form-wrapper {
+  width: 50%;
+  margin: 30px auto;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+}
+
+@media(max-width: 1304px) {
+  .admin-menu {
+    overflow: auto;
+  }
+
+  .admin-menu a:last-child {
+    width: 300px;
+    margin-left: 200px;
+  }
+}
+
+@media(max-width: 1014px) {
+  .admin-menu {
+    overflow: auto;
+  }
+
+  .admin-menu a:last-child {
+    width: auto;
+    margin-left: 20px;
+  }
+}

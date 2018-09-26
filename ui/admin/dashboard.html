@@ -12,7 +12,13 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Pontano+Sans" rel="stylesheet">
 
-  <!-- Link to Custome css -->
+  <!-- Default styling -->
+  <link rel="stylesheet" href="../css/general.css">
+
+  <!-- Admin styling -->
+  <link rel="stylesheet" href="../css/admin.css">
+
+  <!-- Link to Custom css -->
   <link rel="stylesheet" href="../css/style.css">
 
   <title>Fast-Food-Fast - Sign up</title>
@@ -39,7 +45,10 @@
                 <a href="dashboard.html">Dashboard</a>
               </li>
               <li>
-                <a href="signup.html">Admin</a>
+                <a href="dashboard.html">
+                  <i class="fa fa-user"></i>
+                  Admin
+                </a>
               </li>
             </div>
           </ul>
@@ -50,13 +59,22 @@
 
   <div class="content full-page clear">
 
-    <h3 class="center-text">Menu</h3>
+    <div class="menu-wrapper">
+      <h2 class="center-text">Menu</h2>
 
-    <ul class="admin-menu">
-      <li><a href="add_food_item.html">Add Fast-Food Items</a></li>
-      <li><a href="food_items.html">Manage Fast-Food Items</a></li>
-      <li><a href="orders.html">Manage Orders</a></li>
-    </ul>
+      <div class="admin-menu clear">
+        <a href="add_food_item.html">
+          <div>Add Fast-Food Items</div>
+        </a>
+        <a href="food_items.html">
+          <div>Manage Fast-Food Items</div>
+        </a>
+        <a href="orders.html">
+          <div>Manage Orders</div>
+        </a>
+      </div>
+    </div>
+
 
     <div class="stats">
       <div class="stats-title">

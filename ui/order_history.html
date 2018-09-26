@@ -12,6 +12,12 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 
+  <!-- Default styling -->
+  <link rel="stylesheet" href="css/general.css">
+
+  <!-- Link to Custome css -->
+  <link rel="stylesheet" href="css/orders.css">
+
   <!-- Link to Custome css -->
   <link rel="stylesheet" href="css/style.css">
 
@@ -59,7 +65,7 @@
     </header>
   </div>
 
-  <div class="content full-page clear">
+  <div class="content full-page order-history clear">
 
     <h3 class="center-text">My Order History</h3>
 
@@ -85,7 +91,7 @@
             <td>2</td>
             <td>2000</td>
             <td>3 minutes ago</td>
-            <td>PROCESSING</td>
+            <td class="processing">PROCESSING</td>
             <td>
               <a href="#" class="btn btn-orange btn-sm">
                 <i class="fa fa-close"></i> Cancel Order</a>
@@ -98,7 +104,7 @@
             <td>1</td>
             <td>1000</td>
             <td>2 days ago</td>
-            <td>DELIVERED</td>
+            <td class="completed">DELIVERED</td>
             <td>
               <a href="#" class="btn btn-red btn-sm">
                 <i class="fa fa-trash"></i> Delete Order</a>
@@ -123,9 +129,11 @@
       </div>
       <div class="footer-right">
         <h2>Follow us</h2>
-        <i class="fa  fa-facebook-square"></i>
-        <i class="fa  fa-twitter-square"></i>
-        <i class="fa  fa-linkedin-square"></i>
+        <div class="social">
+          <i class="fa  fa-facebook-square"></i>
+          <i class="fa  fa-twitter-square"></i>
+          <i class="fa  fa-linkedin-square"></i>
+        </div>
       </div>
     </div>
     <div class="copyright-info">

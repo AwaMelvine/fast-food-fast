@@ -1,0 +1,282 @@
+/*************************
+** Global default Stylings
+**************************/
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.small {
+  font-size: .7em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.content {
+  color: #4d4c4c;
+  font-size: 1em;
+}
+
+/* Form Styling */
+.form {
+  padding: 20px;
+}
+
+.form .input-group {
+  margin-top: 10px;
+}
+
+.form .input-field {
+  display: block;
+  width: 100%;
+  margin: 5px auto;
+  box-sizing: border-box;
+  padding: .4rem .8rem;
+  line-height: 1.7;
+  border: 1px solid #ced4da;
+  color: #4d4c4c;
+  border-radius: .25rem;
+}
+
+.form .input-field.dropdown {
+  width: auto;
+  margin: 0px;
+}
+
+.form .input-field:focus {
+  outline: none;
+  border-color: #6e6c74;
+}
+
+/* Buttons */
+.btn {
+  text-decoration: none;
+  border: 1px solid transparent;
+  color: #302f2f;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  padding: .2rem .7rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s;
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: .2rem;
+  font-size: .7em;
+}
+
+.btn-blk {
+  width: 100%;
+}
+
+.btn-orange {
+  color: #ffffff;
+  background: #f1ab49;
+}
+
+.btn-green {
+  color: #ffffff;
+  background-color: #5cb85c;
+}
+
+.btn-dark-blue {
+  color: #ffffff;
+  background: #7e94aa;
+}
+
+.btn-dark-blue:hover {
+  color: white;
+  background: #58A9C9;
+}
+
+.btn-red {
+  background-color: #d9534f;
+  color: white;
+}
+
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: .98em;
+}
+
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+td img {
+  width: 80px;
+  height: 80px;
+}
+
+tr {
+  border: 1px solid #ddd;
+}
+
+.table-btn-group {
+  padding: 15px 10px 15px 0px;
+}
+
+tbody small {
+  font-size: .7em;
+}
+
+.processing {
+  color: #aaa9a9;
+}
+
+.completed {
+  color: green;
+}
+
+.declined {
+  color: orange;
+}
+
+.accepted {
+  color: rgb(0, 3, 160);
+}
+
+.clear {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+
+/***********************************
+** Navbar and Landing page styling
+************************************/
+header.landing-page {
+  width: 100%;
+  height: 100vh;
+  background: url('../images/bg_old.png') no-repeat;
+  background-size: cover;
+  margin: 0px auto 4em;
+  padding-bottom: 1em;
+}
+
+header.custom-page nav {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  background: #93ACB5;
+}
+
+header nav {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+header nav .menu-icon {
+  width: 100%;
+  background: #93ACB5;
+  text-align: right;
+  box-sizing: border-box;
+  padding: 15px 24px;
+  cursor: pointer;
+  color: #fff;
+  display: none;
+}
+
+header nav .logo {
+  position: fixed;
+  float: left;
+}
+
+header nav .logo img {
+  height: 45px;
+  margin: 7px 0px 10px 30px;
+}
+
+header nav ul {
+  list-style: none;
+  background: transparent;
+  overflow: hidden;
+  color: #fff;
+  padding: 0px;
+  text-align: center;
+  margin: 0px;
+  transition: 1s;
+}
+
+header nav.solid ul {
+  background: #93ACB5;
+}
+
+header nav ul li {
+  display: inline-block;
+  padding: 20px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+
+header nav ul li a:hover {
+  color: #6adffc;
+}
+
+header nav .auth-links {
+  float: right;
+  margin-right: 30px;
+}
+
+header nav .auth-links a {
+  border: 1px solid #fff;
+  padding: 9px 20px;
+  border-radius: 20px;
+}
+
+.intro {
+  padding-top: 37vh;
+  margin: 0px auto;
+  text-align: center;
+  color: white;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 1em;
+}
+
+.intro .btn {
+  padding: .61em 1.5em;
+}
+
+.intro p {
+  font-size: 1.3em;
+}
+
+.menu-links div {
+  float: right;
+}
