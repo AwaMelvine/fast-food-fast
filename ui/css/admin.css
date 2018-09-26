@@ -1,0 +1,77 @@
+/***************************
+** ADMIN - DASHBOARD Styling
+*******************************/
+.admin-menu {
+  width: 30%;
+  border: 1px dashed #f1f1f1;
+  list-style-type: none;
+  margin: 10px auto;
+  padding: 0px;
+}
+
+.admin-menu li a {
+  text-decoration: none;
+  font-size: .93em;
+  border-bottom: 1px dashed #f1f1f1;
+  display: block;
+  padding: 10px;
+  text-align: left;
+  color: rgb(83, 82, 82);
+}
+
+.admin-menu li a:hover {
+  background: #d6d4d425;
+  transition: .3s;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 60px auto 300px;
+}
+
+.stats .stats-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats .stats-wrapper .stat {
+  flex: 1;
+  margin: 0px 20px;
+  border-radius: 10px;
+  justify-content: space-around;
+  text-decoration: none;
+  border: 2px dashed #f1f1f1;
+  padding: 50px;
+}
+
+.stats .stats-wrapper .stat:hover {
+  background: #d6d4d425;
+  transition: .3s;
+}
+
+
+/***************************
+** ADMIN - ORDERS PAGE Styling
+*******************************/
+.table-filter select {
+  padding: 5px 9px;
+  width: 10%;
+  margin: 0px auto;
+  padding: .4rem .8rem;
+  line-height: 1.7;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.admin.orders-table-wrapper {
+  width: 95%;
+}
+
+.food-form-wrapper {
+  width: 50%;
+  margin: 30px auto;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+}
