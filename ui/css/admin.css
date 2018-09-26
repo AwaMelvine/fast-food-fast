@@ -11,13 +11,11 @@
 }
 
 .admin-menu {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .admin-menu a {
-  flex: 1;
   margin: 5px 20px;
   border-radius: 10px;
   text-align: left;
@@ -26,6 +24,7 @@
   background: #f1f1fc;
   padding: 50px;
   color: #444;
+  justify-items: center;
 }
 
 .admin-menu a:hover {
@@ -83,4 +82,26 @@
   margin: 30px auto;
   border: 1px solid #f1f1f1;
   border-radius: 5px;
+}
+
+@media(max-width: 1304px) {
+  .admin-menu {
+    overflow: auto;
+  }
+
+  .admin-menu a:last-child {
+    width: 300px;
+    margin-left: 200px;
+  }
+}
+
+@media(max-width: 1014px) {
+  .admin-menu {
+    overflow: auto;
+  }
+
+  .admin-menu a:last-child {
+    width: auto;
+    margin-left: 20px;
+  }
 }
