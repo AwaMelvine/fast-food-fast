@@ -2,20 +2,11 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../api/app';
 import { Order, allOrders } from '../api/v1/models/Order';
+import { initialOrder, order2, orderDate } from './data/orders';
 
 const should = chai.should();
 chai.use(chaiHttp);
 
-const initialOrder = new Order({
-  id: 1,
-  customerId: 12,
-  itemId: 5,
-  quantity: 2,
-  totalPrice: 4000,
-  orderDate: '03-09-2018',
-  dateToDeliver: '04-09-2018',
-  orderStatus: 'PROCESSING',
-});
 
 // Initialize test database for test
 beforeEach((done) => {
@@ -39,7 +30,7 @@ describe('Orders', () => {
       chai.request(app)
         .get('/api/v1/orders')
         .end((err, res) => {
-          res.should.have.status(200);
+          expect(res).to.have.status(200);
           expect(res).to.be.a.json;
           done();
         });
@@ -79,17 +70,6 @@ describe('Orders', () => {
   });
 
   describe('POST /orders - Place order', () => {
-    const order2 = {
-      id: 2,
-      customerId: 12,
-      itemId: 5,
-      quantity: 2,
-      totalPrice: 4000,
-      orderDate: '03-09-2018',
-      dateToDeliver: '04-09-2018',
-      orderStatus: 'PROCESSING',
-    };
-
     it('should place a new order', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
@@ -157,7 +137,6 @@ describe('Orders', () => {
 
   describe('Order model', () => {
     it('should instantiate a new order object', () => {
-      const orderDate = '03-09-2018';
       const tempOrder = new Order({ orderDate });
       expect(tempOrder.orderDate).equal(orderDate);
       expect(tempOrder).to.be.an.instanceOf(Order);

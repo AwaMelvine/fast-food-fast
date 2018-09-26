@@ -1,17 +1,10 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../api/app';
-import { Category, allCategories } from '../api/v1/models/Category';
+import app from '../../api/app';
+import { Category, allCategories } from '../../api/v1/models/Category';
+import { initialCategory, category2, modifiedCategory2 } from '../data/categories';
 
 chai.use(chaiHttp);
-
-const initialCategory = new Category({
-  id: 1,
-  name: 'Salads',
-  description: 'Healthy!!!',
-  updatedAt: '03-09-2018',
-  createdAt: '03-09-2018',
-});
 
 // Initialize test database for test
 beforeEach((done) => {
@@ -77,14 +70,6 @@ describe('Food Categories', () => {
   });
 
   describe('POST /categories - Create a Category', () => {
-    const category2 = {
-      id: 2,
-      name: 'Grains',
-      description: 'Very delicious',
-      updatedAt: '04-09-2018',
-      createdAt: '04-09-2018',
-    };
-
     it('should create a new category', (done) => {
       chai.request(app)
         .post('/api/v1/categories')
@@ -111,23 +96,16 @@ describe('Food Categories', () => {
   });
 
   describe('PUT /:categoryId - Update Food Item category', () => {
-    const modifiedCategory = {
-      id: 2,
-      name: 'African cuisine',
-      description: 'Only in Africa',
-      updatedAt: '04-09-2018',
-      createdAt: '04-09-2018',
-    };
     it('should update a category', (done) => {
       const categoryId = 1;
       chai.request(app)
         .put(`/api/v1/categories/${categoryId}`)
-        .send(modifiedCategory)
+        .send(modifiedCategory2)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
 
-          expect(JSON.stringify(modifiedCategory)).equal(JSON.stringify(res.body));
+          expect(JSON.stringify(modifiedCategory2)).equal(JSON.stringify(res.body));
           done();
         });
     });
@@ -135,7 +113,7 @@ describe('Food Categories', () => {
       const categoryId = null;
       chai.request(app)
         .put(`/api/v1/categories/${categoryId}`)
-        .send(modifiedCategory)
+        .send(modifiedCategory2)
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
@@ -154,14 +132,6 @@ describe('Food Categories', () => {
           expect(res.body).to.eql({});
           done();
         });
-    });
-  });
-  describe('Category model', () => {
-    it('should instantiate a new Category object', () => {
-      const createdAt = '03-09-2018';
-      const tempCategory = new Category({ createdAt });
-      expect(tempCategory.createdAt).equal(createdAt);
-      expect(tempCategory).to.be.an.instanceOf(Category);
     });
   });
 });
