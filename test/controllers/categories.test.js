@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { Category, allCategories } from '../../api/v1/models/Category';
+import { allCategories } from '../../api/v1/models/Category';
 import { initialCategory, category2, modifiedCategory2 } from '../data/categories';
 
 chai.use(chaiHttp);
@@ -63,6 +63,7 @@ describe('Food Categories', () => {
         .get(`/api/v1/categories/${categoryId}`)
         .end((err, res) => {
           expect(res).to.have.status(400);
+          expect(res.body.errors.categoryId).to.equal('A valid category Id is required');
           expect(res.body).to.have.property('errors');
           done();
         });
@@ -117,6 +118,7 @@ describe('Food Categories', () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
+          expect(res.body.errors.categoryId).to.equal('A valid category Id is required');
           done();
         });
     });

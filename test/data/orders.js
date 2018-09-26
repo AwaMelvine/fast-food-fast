@@ -23,3 +23,7 @@ export const order2 = {
 };
 
 export const orderDate = '03-09-2018';
+
+export const orderId = 1;
+
+export const invalidOrderId = null;

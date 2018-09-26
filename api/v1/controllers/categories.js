@@ -10,7 +10,7 @@ export default {
   getCategoryById(req, res) {
     const categoryId = parseInt(req.params.categoryId, 10);
     if (!categoryId) {
-      res.status(400).send({ errors: { categoryId: 'Category Id is required' } });
+      res.status(400).send({ errors: { categoryId: 'A valid category Id is required' } });
     }
 
     const category = allCategories.find(item => item.id === categoryId);
@@ -27,7 +27,7 @@ export default {
   updateCategory(req, res) {
     const categoryId = parseInt(req.params.categoryId, 10);
     if (!categoryId) {
-      res.status(400).send({ errors: { categoryId: 'Food Item Id is required' } });
+      res.status(400).send({ errors: { categoryId: 'A valid category Id is required' } });
     }
 
     const previousCategory = allCategories.find(item => parseInt(item.id, 10) === categoryId);

@@ -1,5 +1,3 @@
-import { toInt } from '../helpers/functions';
-
 // Import data structure for food items
 import { allFoodItems, FoodItem } from '../models/FoodItem';
 
@@ -10,9 +8,9 @@ export default {
   },
 
   getFoodItemById(req, res) {
-    const foodItemId = toInt(req.params.foodItemId);
+    const foodItemId = parseInt(req.params.foodItemId, 10);
     if (!foodItemId) {
-      res.status(422).send({ errors: { foodItemId: 'Food Item Id is required' } });
+      res.status(400).send({ errors: { foodItemId: 'A valid food Item Id is required' } });
     }
 
     const foodItem = allFoodItems.find(item => item.id === foodItemId);
@@ -23,29 +21,27 @@ export default {
     const foodItem = new FoodItem(req.body);
     allFoodItems.push(foodItem);
 
-    res.status(200).json(allFoodItems);
+    res.status(201).json(foodItem);
   },
 
   updateFoodItem(req, res) {
-    const foodItemId = toInt(req.params.foodItemId);
+    const foodItemId = parseInt(req.params.foodItemId, 10);
     if (!foodItemId) {
-      res.status(422).send({ errors: { foodItemId: 'Food Item Id is required' } });
+      res.status(400).send({ errors: { foodItemId: 'A valid food Item Id is required' } });
     }
 
-    const previousFoodItem = allFoodItems.find(item => toInt(item.id) === foodItemId);
-    const updatedFoodItem = Object.assign(previousFoodItem, req.body);
+    const previousFoodItem = allFoodItems.find(item => parseInt(item.id, 10) === foodItemId);
+    const updatedFoodItem = { ...previousFoodItem, ...req.body };
 
-    const index = allFoodItems.findIndex(item => toInt(item.id) === previousFoodItem.id);
-    const updatedFoodItems = allFoodItems.splice(index, 1, updatedFoodItem);
+    const index = allFoodItems.findIndex(item => parseInt(item.id, 10) === previousFoodItem.id);
+    allFoodItems.splice(index, 1, updatedFoodItem);
 
-
-    Object.assign(allFoodItems, updatedFoodItems);
-    res.status(201).json(updatedFoodItem);
+    res.status(200).json(updatedFoodItem);
   },
 
   deleteFoodItem(req, res) {
-    const foodItemId = toInt(req.params.foodItemId);
-    const index = allFoodItems.findIndex(item => toInt(item.id) === foodItemId);
+    const foodItemId = parseInt(req.params.foodItemId, 10);
+    const index = allFoodItems.findIndex(item => parseInt(item.id, 10) === foodItemId);
 
     allFoodItems.splice(index, 1);
     res.status(204).json(allFoodItems);
