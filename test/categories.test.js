@@ -3,7 +3,6 @@ import chaiHttp from 'chai-http';
 import app from '../api/app';
 import { Category, allCategories } from '../api/v1/models/Category';
 
-const should = chai.should();
 chai.use(chaiHttp);
 
 const initialCategory = new Category({
@@ -37,6 +36,7 @@ describe('Food Categories', () => {
         .get('/api/v1/categories')
         .end((err, res) => {
           expect(res).to.have.status(200);
+          expect(res.body[0].name).to.be.equal('Salads');
           expect(res).to.be.a.json;
           done();
         });
@@ -45,7 +45,7 @@ describe('Food Categories', () => {
       chai.request(app)
         .get('/api/v1/categories')
         .end((err, res) => {
-          res.should.have.status(200);
+          expect(res).to.have.status(200);
           expect(res.body.length).to.be.equal(1);
           done();
         });
@@ -58,7 +58,8 @@ describe('Food Categories', () => {
       chai.request(app)
         .get(`/api/v1/categories/${categoryId}`)
         .end((err, res) => {
-          res.should.have.status(200);
+          expect(res).to.have.status(200);
+          expect(res.body.id).to.be.equal(1);
           expect(res).to.be.a.json;
           done();
         });
@@ -68,7 +69,7 @@ describe('Food Categories', () => {
       chai.request(app)
         .get(`/api/v1/categories/${categoryId}`)
         .end((err, res) => {
-          res.should.have.status(400);
+          expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
           done();
         });
@@ -90,7 +91,7 @@ describe('Food Categories', () => {
         .send(category2)
         .end((err, res) => {
           if (err) return done(err);
-          res.should.have.status(201);
+          expect(res).to.have.status(201);
           expect(res.body.name).equal('Grains');
           done();
         });
@@ -102,7 +103,7 @@ describe('Food Categories', () => {
         .send({ a: 1 })
         .end((err, res) => {
           if (err) return done(err);
-          res.should.have.status(400);
+          expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
           done();
         });
@@ -124,7 +125,7 @@ describe('Food Categories', () => {
         .send(modifiedCategory)
         .end((err, res) => {
           if (err) return done(err);
-          res.should.have.status(200);
+          expect(res).to.have.status(200);
 
           expect(JSON.stringify(modifiedCategory)).equal(JSON.stringify(res.body));
           done();
@@ -136,7 +137,7 @@ describe('Food Categories', () => {
         .put(`/api/v1/categories/${categoryId}`)
         .send(modifiedCategory)
         .end((err, res) => {
-          res.should.have.status(400);
+          expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
           done();
         });
@@ -149,7 +150,7 @@ describe('Food Categories', () => {
       chai.request(app)
         .delete(`/api/v1/categories/${categoryId}`)
         .end((err, res) => {
-          res.should.have.status(204);
+          expect(res).to.have.status(204);
           expect(res.body).to.eql({});
           done();
         });
