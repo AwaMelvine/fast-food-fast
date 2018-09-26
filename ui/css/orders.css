@@ -5,6 +5,7 @@
   width: 80%;
   margin: 30px auto 100px;
   margin-bottom: 200px;
+  overflow-x: auto;
 }
 
 .orders-table-wrapper thead {

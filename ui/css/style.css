@@ -15,6 +15,11 @@
   width: 100%;
 }
 
+.content.menu-page {
+  width: 80%;
+  margin: 0px auto;
+}
+
 .content .food-items {
   width: 70%;
   float: left;
@@ -33,10 +38,14 @@
 
 .content .food-items .food-item {
   border: 1px solid #e0e0e0;
-  margin: 5px 10px;
   box-sizing: border-box;
   height: 370px;
   position: relative;
+}
+
+
+.content.menu-page .food-items .food-item {
+  margin: 10px;
 }
 
 .content .food-items .food-item:hover {
@@ -78,7 +87,7 @@
 
 
 .content .sidebar {
-  width: 26%;
+  width: 24%;
   float: left;
   margin-top: 10px;
   padding-bottom: 10px;
@@ -135,9 +144,9 @@
 ** FOOTER Styling
 ***************************/
 footer {
-  background: #26232f;
+  background: #4f495f;
   color: white;
-  Height: 220px;
+  Height: 250px;
   margin-top: 100px;
   display: flex;
   flex-direction: column;
@@ -152,6 +161,8 @@ footer .more-info {
 footer .footer-left {
   flex: 1;
   padding: 0px 10px;
+  padding-left: 5em;
+  padding-right: 1em;
 }
 
 footer .footer-left p {
@@ -162,7 +173,7 @@ footer .footer-left p {
 
 footer .footer-right {
   flex: 1;
-  padding: 5px 10px;
+  padding-left: 5em;
 }
 
 footer .footer-right i {
@@ -179,6 +190,12 @@ footer .copyright-info {
 /****************************************
 ** Media Queries for mobile responsiveness
 *******************************************/
+@media(max-width: 1128px) {
+  .content.menu-page {
+    width: 100%;
+  }
+}
+
 @media(max-width: 1014px) {
   header nav .logo {
     position: fixed;
@@ -232,9 +249,20 @@ footer .copyright-info {
     width: 50%;
   }
 
+  footer {
+    height: 400px;
+    width: 100%;
+    /* flex-direction: column; */
+  }
+
+  .orders-table-wrapper {
+    width: 90%;
+  }
+
   .stats {
     width: 100%;
   }
+
 }
 
 @media(max-width: 868px) {
@@ -251,6 +279,7 @@ footer .copyright-info {
   /* footer */
   footer {
     height: 400px;
+    width: 100%;
     flex-direction: column;
   }
 
@@ -270,7 +299,13 @@ footer .copyright-info {
   .stats .stats-wrapper .stat {
     margin-top: 10px;
   }
+
+  .orders-table-wrapper {
+    width: 98%;
+  }
+
 }
+
 
 @media (max-width: 458px) {
   .signup-wrapper {
