@@ -1,5 +1,3 @@
-import { toInt } from '../helpers/functions';
-
 // Import data structure for categories
 import { allCategories, Category } from '../models/Category';
 
@@ -10,9 +8,9 @@ export default {
   },
 
   getCategoryById(req, res) {
-    const categoryId = toInt(req.params.categoryId);
+    const categoryId = parseInt(req.params.categoryId, 10);
     if (!categoryId) {
-      res.status(422).send({ errors: { categoryId: 'Category Id is required' } });
+      res.status(400).send({ errors: { categoryId: 'Category Id is required' } });
     }
 
     const category = allCategories.find(item => item.id === categoryId);
@@ -23,29 +21,27 @@ export default {
     const category = new Category(req.body);
     allCategories.push(category);
 
-    res.status(200).json(allCategories);
+    res.status(201).json(category);
   },
 
   updateCategory(req, res) {
-    const categoryId = toInt(req.params.categoryId);
+    const categoryId = parseInt(req.params.categoryId, 10);
     if (!categoryId) {
-      res.status(422).send({ errors: { categoryId: 'Food Item Id is required' } });
+      res.status(400).send({ errors: { categoryId: 'Food Item Id is required' } });
     }
 
-    const previousCategory = allCategories.find(item => toInt(item.id) === categoryId);
-    const updatedCategory = Object.assign(previousCategory, req.body);
+    const previousCategory = allCategories.find(item => parseInt(item.id, 10) === categoryId);
+    const updatedCategory = { ...previousCategory, ...req.body };
 
-    const index = allCategories.findIndex(item => toInt(item.id) === previousCategory.id);
-    const updatedCategories = allCategories.splice(index, 1, updatedCategory);
+    const index = allCategories.findIndex(item => parseInt(item.id, 10) === previousCategory.id);
+    allCategories.splice(index, 1, updatedCategory);
 
-
-    Object.assign(allCategories, updatedCategories);
-    res.status(201).json(updatedCategory);
+    res.status(200).json(updatedCategory);
   },
 
   deleteCategory(req, res) {
-    const categoryId = toInt(req.params.categoryId);
-    const index = allCategories.findIndex(item => toInt(item.id) === categoryId);
+    const categoryId = parseInt(req.params.categoryId, 10);
+    const index = allCategories.findIndex(item => parseInt(item.id, 10) === categoryId);
 
     allCategories.splice(index, 1);
     res.status(204).json(allCategories);
