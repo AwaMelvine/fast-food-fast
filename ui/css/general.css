@@ -103,7 +103,7 @@ h6 {
 
 .btn-dark-blue {
   color: #ffffff;
-  background: #96C5F7;
+  background: #7e94aa;
 }
 
 .btn-dark-blue:hover {
@@ -122,7 +122,9 @@ table {
   border-collapse: collapse;
   width: 100%;
   box-sizing: border-box;
+  font-size: .98em;
 }
+
 
 th,
 td {
@@ -141,6 +143,26 @@ tr {
 
 .table-btn-group {
   padding: 15px 10px 15px 0px;
+}
+
+tbody small {
+  font-size: .7em;
+}
+
+.processing {
+  color: #aaa9a9;
+}
+
+.completed {
+  color: green;
+}
+
+.declined {
+  color: orange;
+}
+
+.accepted {
+  color: rgb(0, 3, 160);
 }
 
 .clear {
