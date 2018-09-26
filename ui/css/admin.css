@@ -2,27 +2,35 @@
 ** ADMIN - DASHBOARD Styling
 *******************************/
 .menu-wrapper {
-  border: 1px dashed brown;
+  /* border: 1px solid #7b8485; */
+  border-radius: 10px;
   margin-top: 10px;
-  width: 60%;
+  width: 70%;
   margin: 15px auto;
   padding-bottom: 40px;
 }
 
 .admin-menu {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .admin-menu a {
   flex: 1;
-  margin: 0px 20px;
+  margin: 5px 20px;
   border-radius: 10px;
-  justify-content: space-around;
+  text-align: left;
   text-decoration: none;
-  border: 2px dashed #f1f1f1;
+  border: 2px dashed #cecece;
+  background: #f1f1fc;
   padding: 50px;
+  color: #444;
+}
+
+.admin-menu a:hover {
+  border: 2px solid #cecece;
+  background: #d4e7ee;
 }
 
 .stats {
