@@ -40,7 +40,7 @@
 }
 
 .content .food-items .food-item:hover {
-  border: 1px solid orange;
+  border: 1px solid #96C5F7;
   cursor: default;
 }
 
@@ -188,11 +188,11 @@ footer .copyright-info {
 
   header nav ul {
     max-height: 0px;
-    background: #3e2111;
+    background: #93ACB5;
   }
 
   header nav.solid ul {
-    background: #3e2111;
+    background: #93ACB5;
   }
 
   .showing {
@@ -216,7 +216,7 @@ footer .copyright-info {
   }
 
   header nav ul li:hover {
-    background: #211209;
+    background: #93ACB5;
   }
 
   header nav .logo img {

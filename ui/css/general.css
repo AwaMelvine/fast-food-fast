@@ -101,20 +101,21 @@ h6 {
   background-color: #5cb85c;
 }
 
-.btn-blue {
-  color: white;
-  background: #337ab7;
+.btn-dark-blue {
+  color: #ffffff;
+  background: #96C5F7;
 }
 
-.btn-green {
+.btn-dark-blue:hover {
   color: white;
-  background: #29af70;
+  background: #58A9C9;
 }
 
 .btn-red {
   background-color: #d9534f;
   color: white;
 }
+
 
 /* Tables */
 table {
@@ -165,7 +166,7 @@ header.custom-page nav {
   position: fixed;
   width: 100%;
   z-index: 3;
-  background: #3f2b21;
+  background: #93ACB5;
 }
 
 header nav {
@@ -176,7 +177,7 @@ header nav {
 
 header nav .menu-icon {
   width: 100%;
-  background: #3e2111;
+  background: #93ACB5;
   text-align: right;
   box-sizing: border-box;
   padding: 15px 24px;
@@ -207,7 +208,7 @@ header nav ul {
 }
 
 header nav.solid ul {
-  background: #3f2b21;
+  background: #93ACB5;
 }
 
 header nav ul li {
@@ -221,8 +222,9 @@ header nav ul li a {
   font-size: 20px;
 }
 
+
 header nav ul li a:hover {
-  color: #f1ab49;
+  color: #6adffc;
 }
 
 header nav .auth-links {
