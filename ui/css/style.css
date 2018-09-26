@@ -336,3 +336,51 @@ footer .copyright-info {
   }
 
 }
+
+
+@media screen and (min-width: 2200px) {
+  .btn {
+    padding: 10px;
+    font-size: 1.2em;
+  }
+
+  footer {
+    Height: 350px;
+    margin-top: 600px;
+  }
+
+  footer .footer-left {
+    flex: 1;
+    padding: 0px 80px 0px 80px;
+    padding-left: 7rem;
+  }
+
+  footer .footer-left p {
+    font-size: 1.2em;
+    line-height: 30px;
+  }
+
+  footer .footer-right {
+    padding-left: 7em;
+  }
+
+  footer .footer-right i {
+    font-size: 3em;
+    margin: 0px 15px;
+  }
+
+}
+
+@media screen and (min-width: 2800px) {
+
+  .btn {
+    padding: 10px;
+    font-size: 1.2em;
+  }
+
+  footer {
+    Height: 350px;
+    margin-top: 1100px;
+  }
+
+}
