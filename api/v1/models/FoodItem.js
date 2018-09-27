@@ -10,7 +10,11 @@ export class FoodItem {
     this.description = foodItem.description ? foodItem.description.toString() : 0;
     this.quantity = foodItem.quantity ? parseInt(foodItem.quantity, 10) : 0;
     this.unitPrice = foodItem.unitPrice ? parseInt(foodItem.unitPrice, 10) : 0;
-    this.updatedAt = foodItem.updatedAt || null;
-    this.createdAt = foodItem.createdAt || null;
+    if (foodItem.created_at) {
+      this.created_at = foodItem.created_at;
+    }
+    if (foodItem.updated_at) {
+      this.updated_at = foodItem.updated_at;
+    }
   }
 }

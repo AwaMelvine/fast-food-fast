@@ -2,13 +2,19 @@ import db from '../db';
 
 export default class User {
   constructor(user) {
-    this.id = user && user.id ? user.id : 0;
+    if (user && user.id) {
+      this.id = user.id;
+    }
     this.role = user && user.role ? user.role : 'user';
     this.username = user && user.username ? user.username : null;
     this.email = user && user.email ? user.email : null;
     this.password = user && user.password ? user.password : null;
-    this.created_at = user && user.created_at ? user.created_at : null;
-    this.updated_at = user && user.updated_at ? user.updated_at : null;
+    if (user.created_at) {
+      this.created_at = user.created_at;
+    }
+    if (user.updated_at) {
+      this.updated_at = user.updated_at;
+    }
   }
 
 

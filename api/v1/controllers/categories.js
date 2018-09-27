@@ -1,49 +1,47 @@
-// Import data structure for categories
-import { allCategories, Category } from '../models/Category';
+import Category from '../models/Category';
 
 export default {
 
-  getAllCategories(req, res) {
+  async getAllCategories(req, res) {
+    const allCategories = await Category.find({});
+
     res.status(200).json(allCategories);
   },
 
-  getCategoryById(req, res) {
-    const categoryId = parseInt(req.params.categoryId, 10);
+  async getCategoryById(req, res) {
+    const { categoryId } = req.params;
     if (!categoryId) {
       res.status(400).send({ errors: { categoryId: 'A valid category Id is required' } });
     }
 
-    const category = allCategories.find(item => item.id === categoryId);
+    const category = await Category.findById(categoryId);
     res.status(200).json(category);
   },
 
-  createCategory(req, res) {
+  async createCategory(req, res) {
     const category = new Category(req.body);
-    allCategories.push(category);
-
-    res.status(201).json(category);
+    const newCategory = await category.save();
+    res.status(201).json(newCategory);
   },
 
-  updateCategory(req, res) {
-    const categoryId = parseInt(req.params.categoryId, 10);
+  async updateCategory(req, res) {
+    const { categoryId } = req.params;
     if (!categoryId) {
       res.status(400).send({ errors: { categoryId: 'A valid category Id is required' } });
     }
 
-    const previousCategory = allCategories.find(item => parseInt(item.id, 10) === categoryId);
-    const updatedCategory = { ...previousCategory, ...req.body };
+    const category = await Category.findById(categoryId);
+    category.name = req.body.name;
+    category.description = req.body.description;
 
-    const index = allCategories.findIndex(item => parseInt(item.id, 10) === previousCategory.id);
-    allCategories.splice(index, 1, updatedCategory);
-
+    const updatedCategory = await category.update();
     res.status(200).json(updatedCategory);
   },
 
-  deleteCategory(req, res) {
-    const categoryId = parseInt(req.params.categoryId, 10);
-    const index = allCategories.findIndex(item => parseInt(item.id, 10) === categoryId);
+  async deleteCategory(req, res) {
+    const { categoryId } = req.params;
+    await Category.delete(categoryId);
 
-    allCategories.splice(index, 1);
-    res.status(204).json(allCategories);
+    res.status(204).json({ message: 'Category deleted!' });
   },
 };
