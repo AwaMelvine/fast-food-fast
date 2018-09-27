@@ -2,35 +2,38 @@ import jwt from 'jsonwebtoken';
 import config from '../../config';
 
 async function decodeToken(token) {
-  const { err, decoded } = await jwt.verify(token, config.jwtSecret);
-  if (err) {
+  try {
+    const decoded = await jwt.verify(token, config.jwtSecret);
+    return decoded;
+  } catch (error) {
+    console.log(error);
     return false;
   }
-  return decoded;
 }
 
 export default {
-  user(req, res, next) {
+  async user(req, res, next) {
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
     if (!token) {
-      res.status(403).json({ error: 'No token provided' });
+      return res.status(403).json({ error: 'No token provided' });
     }
 
-    const userInfo = decodeToken(token);
+    const userInfo = await decodeToken(token);
+
     if (!userInfo) {
-      res.status(401).json({ error: 'Failed to authenticate' });
+      return res.status(401).json({ error: 'Failed to authenticate' });
     }
     next();
   },
 
-  admin(req, res, next) {
+  async admin(req, res, next) {
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
     if (!token) {
       res.status(403).json({ error: 'No token provided' });
     }
 
-    const userInfo = decodeToken(token);
+    const userInfo = await decodeToken(token);
 
     if (!userInfo) {
       res.status(401).json({ error: 'Failed to authenticate' });
