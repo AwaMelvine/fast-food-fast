@@ -86,4 +86,13 @@ export default class User {
       console.log(error);
     }
   }
+
+  static async blacklistToken(token) {
+    try {
+      const result = await db.query('INSERT INTO token_blacklist (token) VALUES ($1)', [token]);
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

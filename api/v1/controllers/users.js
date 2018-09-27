@@ -11,6 +11,7 @@ async function loginById(userId) {
     username: user.username,
     email: user.email,
     role: user.role,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
   }, config.jwtSecret);
 
   return token;
@@ -30,6 +31,12 @@ export default {
       return res.status(200).json({ token });
     }
     return res.status(400).json({ errors: { global: 'Wrong credentials' } });
+  },
+
+  logout(req, res) {
+    const token = req.headers.authorization.split(' ')[1];
+    User.blacklistToken(token);
+    res.status(200).json({});
   },
 
   async signUp(req, res) {
