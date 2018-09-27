@@ -12,7 +12,7 @@ const client = new Client({
 });
 client.connect();
 
-const dropAllTables = 'DROP TABLE IF EXISTS users, orders, food_items';
+const dropAllTables = 'DROP TABLE IF EXISTS users, orders, food_items, token_blacklist';
 const dropAllTypes = 'DROP TYPE IF EXISTS user_role';
 
 const createRoleEnum = `CREATE TYPE user_role AS ENUM (
@@ -28,6 +28,12 @@ const createUsersTable = `CREATE TABLE users (
   password varchar(255) NOT NULL,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NULL
+)`;
+
+const createTokenBlacklistTable = `CREATE TABLE token_blacklist (
+  id SERIAL PRIMARY KEY,
+  token varchar(255) NULL,
+  created_at TIMESTAMP DEFAULT NOW()
 )`;
 
 const createFoodItemsTable = `CREATE TABLE food_items (
@@ -66,6 +72,8 @@ async function initializeTables() {
     // create tables
     await client.query(createUsersTable);
     console.log('users table created!');
+    await client.query(createTokenBlacklistTable);
+    console.log('token_blacklist table created!');
     await client.query(createFoodItemsTable);
     console.log('food_items table created!');
     await client.query(createOrdersTable);
