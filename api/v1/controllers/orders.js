@@ -1,30 +1,32 @@
-// Import data structure for orders
-import { allOrders, Order } from '../models/Order';
+import Order from '../models/Order';
 
 export default {
 
-  getAllOrders(req, res) {
+  async getAllOrders(req, res) {
+    const allOrders = await Order.find({});
     res.status(200).json(allOrders);
   },
 
-  getOrderById(req, res) {
-    const orderId = parseInt(req.params.orderId, 10);
+  async getOrderById(req, res) {
+    const { orderId } = req.params;
     if (!orderId) {
-      res.status(400).send({ errors: { orderId: 'Order Id is required' } });
+      res.status(400).send({ errors: { orderId: 'A valid order Id is required' } });
     }
 
-    const order = allOrders.find(item => item.id === orderId);
+    const order = await Order.findById(orderId);
     res.status(200).json(order);
   },
 
-  placeOrder(req, res) {
+  async placeOrder(req, res) {
+    req.body.customerId = req.user.id;
     const order = new Order(req.body);
-    allOrders.push(order);
 
-    res.status(201).json(order);
+    const newOrder = await order.save();
+
+    res.status(201).json(newOrder);
   },
 
-  updateOrderStatus(req, res) {
+  async updateOrderStatus(req, res) {
     const { orderId } = req.params;
     const { status } = req.body;
 
@@ -36,12 +38,10 @@ export default {
       return res.status(400).send({ errors: { status: 'Order status is required' } });
     }
 
-    const order = allOrders.find(item => parseInt(item.id, 10) === id);
-
+    const order = await Order.findById(orderId);
     order.orderStatus = status;
-    const index = allOrders.findIndex(item => parseInt(item.id, 10) === order.id);
-    allOrders.splice(index, 1, order);
+    const newOrder = await order.update();
 
-    res.status(200).json(order);
+    res.status(200).json(newOrder);
   },
 };

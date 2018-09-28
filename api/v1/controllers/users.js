@@ -1,7 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import User from '../models/User';
-import config from '../../config';
+
+dotenv.config();
 
 async function loginById(userId) {
   const user = await User.findById(userId);
@@ -12,7 +14,7 @@ async function loginById(userId) {
     email: user.email,
     role: user.role,
     exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
-  }, config.jwtSecret);
+  }, process.env.JWT_SECRET);
 
   return token;
 }

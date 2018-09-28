@@ -1,49 +1,50 @@
-// Import data structure for food items
-import { allFoodItems, FoodItem } from '../models/FoodItem';
+import FoodItem from '../models/FoodItem';
 
 export default {
 
-  getAllFoodItems(req, res) {
+  async getAllFoodItems(req, res) {
+    const allFoodItems = await FoodItem.find({});
     res.status(200).json(allFoodItems);
   },
 
-  getFoodItemById(req, res) {
-    const foodItemId = parseInt(req.params.foodItemId, 10);
+  async getFoodItemById(req, res) {
+    const { foodItemId } = req.params;
     if (!foodItemId) {
       res.status(400).send({ errors: { foodItemId: 'A valid food Item Id is required' } });
     }
 
-    const foodItem = allFoodItems.find(item => item.id === foodItemId);
+    const foodItem = await FoodItem.findById(foodItemId);
     res.status(200).json(foodItem);
   },
 
-  createFoodItem(req, res) {
+  async createFoodItem(req, res) {
     const foodItem = new FoodItem(req.body);
-    allFoodItems.push(foodItem);
+    const newFoodItem = await foodItem.save();
 
-    res.status(201).json(foodItem);
+    res.status(201).json(newFoodItem);
   },
 
-  updateFoodItem(req, res) {
-    const foodItemId = parseInt(req.params.foodItemId, 10);
+  async updateFoodItem(req, res) {
+    const { foodItemId } = req.params;
     if (!foodItemId) {
       res.status(400).send({ errors: { foodItemId: 'A valid food Item Id is required' } });
     }
 
-    const previousFoodItem = allFoodItems.find(item => parseInt(item.id, 10) === foodItemId);
-    const updatedFoodItem = { ...previousFoodItem, ...req.body };
-
-    const index = allFoodItems.findIndex(item => parseInt(item.id, 10) === previousFoodItem.id);
-    allFoodItems.splice(index, 1, updatedFoodItem);
+    const previousFoodItem = await FoodItem.findById(foodItemId);
+    previousFoodItem.name = req.body.name;
+    previousFoodItem.image = req.body.image;
+    previousFoodItem.description = req.body.description;
+    previousFoodItem.quantity = req.body.quantity;
+    previousFoodItem.unitPrice = req.body.unitPrice;
+    const updatedFoodItem = await previousFoodItem.save();
 
     res.status(200).json(updatedFoodItem);
   },
 
-  deleteFoodItem(req, res) {
-    const foodItemId = parseInt(req.params.foodItemId, 10);
-    const index = allFoodItems.findIndex(item => parseInt(item.id, 10) === foodItemId);
+  async deleteFoodItem(req, res) {
+    const { foodItemId } = req.params;
+    await FoodItem.delete(foodItemId);
 
-    allFoodItems.splice(index, 1);
-    res.status(204).json(allFoodItems);
+    res.status(204).json({});
   },
 };

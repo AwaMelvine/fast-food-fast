@@ -1,4 +1,6 @@
-import { Order } from '../../api/v1/models/Order';
+import Order from '../../api/v1/models/Order';
+
+export const allOrders = [];
 
 export const initialOrder = new Order({
   id: 1,

@@ -1,7 +1,6 @@
 import express from 'express';
 import usersController from '../controllers/users';
 import { validateUser, validateUserLogin } from '../helpers/validateUser';
-import authenticate from '../helpers/authenticate';
 
 const router = express.Router();
 

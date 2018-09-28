@@ -1,7 +1,13 @@
 // This file creates the database tables needed
 import { Pool, Client } from 'pg';
+import dotenv from 'dotenv';
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:melvine@localhost:5432/fast-food-fast';
+dotenv.config();
+
+// if (process.env.NODE_ENV == 'test') {}
+
+const connectionString = process.env.DATABASE_URL || `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@localhost:5432/${process.env.DB_NAME}`;
+
 
 const pool = new Pool({
   connectionString,
@@ -13,11 +19,19 @@ const client = new Client({
 client.connect();
 
 const dropAllTables = 'DROP TABLE IF EXISTS users, orders, food_items, token_blacklist, categories';
-const dropAllTypes = 'DROP TYPE IF EXISTS user_role';
+const dropAllTypes = 'DROP TYPE IF EXISTS user_role, order_status';
 
 const createRoleEnum = `CREATE TYPE user_role AS ENUM (
   'user', 
   'admin'
+)`;
+
+const createStatusEnum = `CREATE TYPE order_status AS ENUM (
+  'COMPLETED', 
+  'PROCESSING',
+  'DECLINED',
+  'ACCEPTED',
+  'NEW'
 )`;
 
 const createUsersTable = `CREATE TABLE users (
@@ -61,6 +75,7 @@ const createOrdersTable = `CREATE TABLE orders (
   itemId integer NOT NULL,
   quantity integer NOT NULL,
   totalPrice integer NOT NULL,
+  status order_status DEFAULT 'NEW',
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NULL,
   dateToDeliver TIMESTAMP DEFAULT NULL,
@@ -76,6 +91,7 @@ async function initializeTables() {
 
     // create enum types
     await client.query(createRoleEnum);
+    await client.query(createStatusEnum);
 
     // create tables
     await client.query(createUsersTable);

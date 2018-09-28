@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', ordersController.getAllOrders);
 router.get('/:orderId', ordersController.getOrderById);
-router.post('/', validateOrder, ordersController.placeOrder);
+router.post('/', validateOrder, authenticate.user, ordersController.placeOrder);
 router.put('/:orderId', ordersController.updateOrderStatus);
 
 

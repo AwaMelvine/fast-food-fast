@@ -1,4 +1,6 @@
-import { FoodItem } from '../../api/v1/models/FoodItem';
+import FoodItem from '../../api/v1/models/FoodItem';
+
+export const allFoodItems = [];
 
 export const initialFoodItem = new FoodItem({
   id: 1,

@@ -1,9 +1,12 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { allOrders } from '../../api/v1/models/Order';
 import {
-  initialOrder, order2, orderId, invalidOrderId,
+  allOrders,
+  initialOrder,
+  order2,
+  orderId,
+  invalidOrderId,
 } from '../data/orders';
 
 chai.use(chaiHttp);

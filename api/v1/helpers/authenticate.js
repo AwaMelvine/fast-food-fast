@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
-import config from '../../config';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function decodeToken(token) {
   try {
-    const decoded = await jwt.verify(token, config.jwtSecret);
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     return decoded;
   } catch (error) {
-    console.log(error);
     return false;
   }
 }
@@ -19,10 +20,11 @@ export default {
     }
 
     const userInfo = await decodeToken(token);
-
     if (!userInfo) {
       return res.status(401).json({ error: 'Failed to authenticate' });
     }
+
+    req.user = userInfo;
     next();
   },
 

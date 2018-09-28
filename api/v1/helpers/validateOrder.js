@@ -2,9 +2,6 @@ export default (req, res, next) => {
   const errors = {};
   const order = req.body;
 
-  if (!order.customerId) {
-    errors.customerId = 'Customer Id required';
-  }
   if (!order.itemId) {
     errors.itemId = 'Item required';
   }

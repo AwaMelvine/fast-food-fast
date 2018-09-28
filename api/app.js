@@ -1,11 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 
+// routes
 import orders from './v1/routes/orders';
 import users from './v1/routes/users';
 import auth from './v1/routes/auth';
 import categories from './v1/routes/categories';
 import foodItems from './v1/routes/foodItems';
+
+dotenv.config();
 
 const app = express();
 

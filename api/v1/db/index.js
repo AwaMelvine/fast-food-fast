@@ -1,6 +1,9 @@
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:melvine@localhost:5432/fast-food-fast';
+dotenv.config();
+
+const connectionString = process.env.DATABASE_URL || `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@localhost:5432/${process.env.DB_NAME}`;
 
 const pool = new Pool({ connectionString });
 

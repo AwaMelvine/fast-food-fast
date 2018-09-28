@@ -1,9 +1,11 @@
-import { Category } from '../../api/v1/models/Category';
+import Category from '../../api/v1/models/Category';
+
+export const allCategories = [];
 
 export const initialCategory = new Category({
   id: 1,
   name: 'Salads',
-  description: 'Healthy!!!',
+  description: 'Healthy -- after running tests',
   updatedAt: '03-09-2018',
   createdAt: '03-09-2018',
 });
