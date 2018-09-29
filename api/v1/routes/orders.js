@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get('/', ordersController.getAllOrders);
 router.get('/:order_id', ordersController.getOrderById);
-router.post('/', validateOrder, ordersController.placeOrder);
-router.put('/:order_id', ordersController.updateOrderStatus);
+router.post('/', validateOrder.create, ordersController.placeOrder);
+router.put('/:order_id', validateOrder.update, ordersController.updateOrderStatus);
 
 
 export default router;

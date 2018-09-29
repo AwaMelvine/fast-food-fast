@@ -30,15 +30,15 @@ export default {
     }
     if (bcrypt.compareSync(password, user.password)) {
       const token = await loginById(user.id);
-      return res.status(200).json({ token });
+      return res.status(200).send({ data: token, message: 'Sign in successful' });
     }
     return res.status(400).json({ errors: { global: 'Wrong credentials' } });
   },
 
-  logout(req, res) {
+  async logout(req, res) {
     const token = req.headers.authorization.split(' ')[1];
-    User.blacklistToken(token);
-    res.status(200).json({});
+    await User.blacklistToken(token);
+    res.status(200).json({ message: 'You are now logged out' });
   },
 
   async signUp(req, res) {
@@ -47,12 +47,15 @@ export default {
     const newUser = await user.save();
 
     const token = await loginById(newUser.id);
-    return res.status(200).json({ token });
+    return res.status(200).json({ data: token, message: 'Signup successful' });
   },
 
   async getAllUsers(req, res) {
     const users = await User.find({});
-    return res.status(200).json(users);
+    if (!users) {
+      return res.status(200).send({ data: [], message: 'No users yet' });
+    }
+    return res.status(200).json({ data: users, message: 'success' });
   },
 
   async getUserById(req, res) {
@@ -62,7 +65,12 @@ export default {
     }
 
     const user = await User.findById(user_id);
-    res.status(200).json(user);
+
+    if (!user) {
+      return res.status(200).send({ data: [], message: 'User not found' });
+    }
+
+    res.status(200).json({ data: user, message: 'success' });
   },
 
   async registerUser(req, res) {
@@ -73,11 +81,11 @@ export default {
     // If it's a normal user signup (not admin), log that user in
     if (newUser.role === 'user') {
       const token = await loginById(user.id);
-      return res.json({ token });
+      return res.status(201).json({ data: token, message: 'You are not signed in' });
     }
 
     const users = await User.find({});
-    return res.status(201).json(users);
+    return res.status(201).json({ data: users, message: 'Admin user created' });
   },
 
   async updateUser(req, res) {
@@ -89,7 +97,7 @@ export default {
     // Confirm old password before update
     const user = await User.findById(user_id);
     if (!user) {
-      return res.status(404).send({ errors: { global: 'User not found' } });
+      return res.status(200).send({ errors: { global: 'User not found' } });
     }
 
     if (!bcrypt.compareSync(req.body.passwordOld, user.password)) {
@@ -101,7 +109,7 @@ export default {
     user.role = req.body.role;
     user.password = bcrypt.hashSync(req.body.password, 10);
     const updatedUser = await user.update();
-    return res.status(200).json(updatedUser);
+    return res.status(200).json({ data: updatedUser, message: 'User successfully updated' });
   },
 
   async deleteUser(req, res) {

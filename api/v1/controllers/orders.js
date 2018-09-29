@@ -5,7 +5,10 @@ export default {
 
   async getAllOrders(req, res) {
     const allOrders = await Order.find({});
-    res.status(200).json(allOrders);
+    if (!allOrders.length) {
+      return res.status(200).send({ data: [], message: 'No orders yet' });
+    }
+    res.status(200).json({ data: allOrders, message: 'success' });
   },
 
   async getOrderById(req, res) {
@@ -15,7 +18,12 @@ export default {
     }
 
     const order = await Order.findById(order_id);
-    res.status(200).json(order);
+
+    if (!order) {
+      return res.status(200).send({ message: 'Order not found' });
+    }
+
+    res.status(200).json({ data: order, message: 'success' });
   },
 
   async placeOrder(req, res) {
@@ -23,13 +31,12 @@ export default {
 
     const foodItem = await FoodItem.findById(req.body.item_id);
     if (!foodItem) {
-      return res.status(404).send({ errors: { global: 'Food item not found' } });
+      return res.status(200).send({ errors: { global: 'Food item not found' } });
     }
 
     const order = new Order(req.body);
     const newOrder = await order.save();
-
-    res.status(201).json(newOrder);
+    res.status(201).json({ data: newOrder, message: 'Order placed successfully' });
   },
 
   async updateOrderStatus(req, res) {
@@ -39,18 +46,14 @@ export default {
     if (!order_id || Number.isNaN(order_id)) {
       return res.status(400).send({ errors: { order_id: 'A valid order Id is required' } });
     }
-    if (!status) {
-      return res.status(400).send({ errors: { status: 'Order status is required' } });
-    }
 
     const order = await Order.findById(order_id);
-
     if (!order) {
-      return res.status(404).send({ errors: { global: 'Order not found' } });
+      return res.status(200).send({ errors: { global: 'Order not found' } });
     }
 
     order.status = status;
     const newOrder = await order.update();
-    res.status(200).json(newOrder);
+    res.status(200).json({ data: newOrder, message: 'Order status updated' });
   },
 };
