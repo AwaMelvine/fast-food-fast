@@ -27,7 +27,7 @@ export const validateUser = async (req, res, next) => {
   }
 
   // do not perform this check if updating user
-  if (!req.params.userId && req.method !== 'PUT' && req.method !== 'PATCH') {
+  if (!req.params.user_id && req.method !== 'PUT' && req.method !== 'PATCH') {
     const otherUser = await User.find({ email: user.email });
     if (otherUser.length > 0) {
       errors.email = 'Email already exists';

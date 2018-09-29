@@ -1,9 +1,14 @@
 import express from 'express';
 import usersController from '../controllers/users';
-import authenticate from '../helpers/authenticate';
+import { validateUser } from '../helpers/validateUser';
 
 const router = express.Router();
 
-router.post('/', authenticate.user, usersController.signUp);
+router.get('/', usersController.getAllUsers);
+router.post('/', validateUser, usersController.registerUser);
+
+router.get('/:user_id', usersController.getUserById);
+router.put('/:user_id', usersController.updateUser);
+router.delete('/:user_id', usersController.deleteUser);
 
 export default router;

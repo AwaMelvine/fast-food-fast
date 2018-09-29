@@ -1,6 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
+import db from '../../api/v1/db';
 import {
   allCategories, initialCategory, category2, modifiedCategory2,
 } from '../data/categories';
@@ -8,7 +9,7 @@ import {
 chai.use(chaiHttp);
 
 // Initialize test database for test
-beforeEach((done) => {
+before((done) => {
   chai.request(app)
     .post('/api/v1/categories')
     .send(initialCategory)
@@ -18,7 +19,9 @@ beforeEach((done) => {
     });
 });
 
-afterEach((done) => {
+after((done) => {
+  // clear database
+  // clear_categories();
   allCategories.length = 0;
   done();
 });
@@ -35,7 +38,7 @@ describe('Food Categories', () => {
           done();
         });
     });
-    it('should have all available Categories', (done) => {
+    it('should return all available Categories', (done) => {
       chai.request(app)
         .get('/api/v1/categories')
         .end((err, res) => {
@@ -55,17 +58,6 @@ describe('Food Categories', () => {
           expect(res).to.have.status(200);
           expect(res.body.id).to.be.equal(1);
           expect(res).to.be.a.json;
-          done();
-        });
-    });
-    it('should return an error if categoryId is invalid', (done) => {
-      const categoryId = null;
-      chai.request(app)
-        .get(`/api/v1/categories/${categoryId}`)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body.errors.categoryId).to.equal('A valid category Id is required');
-          expect(res.body).to.have.property('errors');
           done();
         });
     });
@@ -107,19 +99,7 @@ describe('Food Categories', () => {
           if (err) return done(err);
           expect(res).to.have.status(200);
 
-          expect(JSON.stringify(modifiedCategory2)).equal(JSON.stringify(res.body));
-          done();
-        });
-    });
-    it('should return an error if value of categoryId is invalid', (done) => {
-      const categoryId = null;
-      chai.request(app)
-        .put(`/api/v1/categories/${categoryId}`)
-        .send(modifiedCategory2)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors.categoryId).to.equal('A valid category Id is required');
+          expect(res.body.name).equal('African');
           done();
         });
     });

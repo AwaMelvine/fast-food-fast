@@ -5,17 +5,16 @@ import {
   allFoodItems,
   initialFoodItem,
   foodItem2,
-  modifiedFoodItem,
-  invalidFoodItemId,
+  modifiedFoodItem2,
   foodItemId,
-  createdAt,
+  created_at,
 } from '../data/foodItems';
 
 chai.use(chaiHttp);
 
 
 // Initialize test database for test
-beforeEach((done) => {
+before((done) => {
   chai.request(app)
     .post('/api/v1/foodItems')
     .send(initialFoodItem)
@@ -25,7 +24,7 @@ beforeEach((done) => {
     });
 });
 
-afterEach((done) => {
+after((done) => {
   allFoodItems.length = 0;
   done();
 });
@@ -46,7 +45,8 @@ describe('Food Items', () => {
         .get('/api/v1/foodItems')
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body.length).to.be.equal(1);
+          expect(res.body.length).to.be.equal(2);
+          expect(res.body[1].id).to.be.equal(2);
           done();
         });
     });
@@ -58,18 +58,8 @@ describe('Food Items', () => {
         .get(`/api/v1/foodItems/${foodItemId}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body.name).to.be.equal('Vegetable Salad');
+          expect(res.body.name).to.be.equal('Vegetable');
           expect(res).to.be.a.json;
-          done();
-        });
-    });
-    it('should return an error if value of foodItemId is invalid', (done) => {
-      chai.request(app)
-        .get(`/api/v1/foodItems/${invalidFoodItemId}`)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors.foodItemId).to.equal('A valid food Item Id is required');
           done();
         });
     });
@@ -83,7 +73,7 @@ describe('Food Items', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.name).equal('Hamburger');
+          expect(res.body.name).equal('Rice');
           done();
         });
     });
@@ -105,24 +95,11 @@ describe('Food Items', () => {
     it('should update a food item', (done) => {
       chai.request(app)
         .put(`/api/v1/foodItems/${foodItemId}`)
-        .send(modifiedFoodItem)
+        .send(modifiedFoodItem2)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-
-          expect(JSON.stringify(modifiedFoodItem)).equal(JSON.stringify(res.body));
-          done();
-        });
-    });
-    it('should return an error if value of foodItemId is invalid', (done) => {
-      const foodItemId = null;
-      chai.request(app)
-        .put(`/api/v1/foodItems/${foodItemId}`)
-        .send(modifiedFoodItem)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors.foodItemId).to.equal('A valid food Item Id is required');
+          expect(modifiedFoodItem2.name).equal(res.body.name);
           done();
         });
     });

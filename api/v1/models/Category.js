@@ -5,12 +5,12 @@ export default class Category {
     if (category && category.id) {
       this.id = category.id;
     }
-    this.name = category.name ? category.name.toString() : null;
-    this.description = category.description ? category.description.toString() : '';
+    this.name = category.name ? category.name : null;
+    this.description = category.description ? category.description : '';
     if (category.created_at) {
       this.created_at = category.created_at;
     }
-    if (category.updated_at) {
+    if (category.updated_at || category.updated_at == null) {
       this.updated_at = category.updated_at;
     }
   }
@@ -18,10 +18,10 @@ export default class Category {
   async save() {
     const params = [this.name, this.description];
     try {
-      await db.query(`INSERT INTO categories (name, description)
-      VALUES ($1, $2)`, params);
-      const categoryData = await Category.find({ name: this.name });
-      return categoryData[0];
+      const { rows } = await db.query(`INSERT INTO categories (name, description)
+      VALUES ($1, $2) RETURNING *`, params);
+      const category = new Category(rows[0]);
+      return category;
     } catch (error) {
       return error;
     }
@@ -31,12 +31,12 @@ export default class Category {
   async update() {
     const params = [this.name, this.description, this.id];
     try {
-      await db.query(`UPDATE categories SET 
+      const { rows } = await db.query(`UPDATE categories SET 
                       name=$1, 
                       description=$2, 
                       updated_at=NOW() 
-                    WHERE id=$3`, params);
-      const category = await Category.findById(this.id);
+                    WHERE id=$3 RETURNING *`, params);
+      const category = new Category(rows[0]);
       return category;
     } catch (error) {
       return error;
@@ -74,7 +74,7 @@ export default class Category {
   static async findById(categoryId) {
     try {
       const { rows } = await db.query('SELECT * FROM categories WHERE id=$1 LIMIT 1', [categoryId]);
-      return rows.length ? new Category(rows[0]) : {};
+      return rows.length ? new Category(rows[0]) : false;
     } catch (error) {
       return error;
     }

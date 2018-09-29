@@ -1,4 +1,6 @@
-export default (req, res, next) => {
+import FoodItem from '../models/FoodItem';
+
+export default async (req, res, next) => {
   const errors = {};
   const foodItem = req.body;
 
@@ -11,8 +13,16 @@ export default (req, res, next) => {
   if (!foodItem.quantity) {
     errors.quantity = 'Food Item Quantity required';
   }
-  if (!foodItem.unitPrice) {
-    errors.unitPrice = 'Food item unit price required';
+  if (!foodItem.unit_price) {
+    errors.unit_price = 'Food item unit price required';
+  }
+
+  // do not perform this check if updating food ite
+  if (!req.params.food_item_id && req.method !== 'PUT' && req.method !== 'PATCH') {
+    const item = await FoodItem.find({ name: foodItem.name });
+    if (item.length > 0) {
+      errors.name = 'Food item already exists';
+    }
   }
 
   if (Object.keys(errors).length !== 0) {

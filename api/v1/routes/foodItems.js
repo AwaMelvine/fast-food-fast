@@ -4,12 +4,10 @@ import validateFoodItem from '../helpers/validateFoodItem';
 
 const router = express.Router();
 
-
 router.get('/', foodItemsController.getAllFoodItems);
-router.get('/:foodItemId', foodItemsController.getFoodItemById);
+router.get('/:food_item_id', foodItemsController.getFoodItemById);
 router.post('/', validateFoodItem, foodItemsController.createFoodItem);
-router.put('/:foodItemId', validateFoodItem, foodItemsController.updateFoodItem);
-router.delete('/:foodItemId', foodItemsController.deleteFoodItem);
-
+router.put('/:food_item_id', validateFoodItem, foodItemsController.updateFoodItem);
+router.delete('/:food_item_id', foodItemsController.deleteFoodItem);
 
 export default router;

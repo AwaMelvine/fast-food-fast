@@ -6,6 +6,8 @@ import {
   initialOrder,
   order2,
   orderId,
+  status,
+  invalidStatus,
   invalidOrderId,
 } from '../data/orders';
 
@@ -13,18 +15,19 @@ chai.use(chaiHttp);
 
 
 // Initialize test database for test
-beforeEach((done) => {
+before((done) => {
   chai.request(app)
     .post('/api/v1/orders')
     .send(initialOrder)
+    .set('authorization', 'token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoiSmFuZSIsImVtYWlsIjoibWVsdmluZWF3YTlAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJleHAiOjE1MzgxNDU0MjQsImlhdCI6MTUzODA1OTAyNH0.NlJDTHEOBcZoweNF4GcSfAdHM2Xgg1PNbQ5u1tqJ1Cg')
     .end((err, res) => {
       if (err) return done(err);
       done();
     });
 });
 
-afterEach((done) => {
-  allOrders.length = 0;
+after((done) => {
+  // allOrders.length = 0;
   done();
 });
 
@@ -39,7 +42,7 @@ describe('Orders', () => {
           done();
         });
     });
-    it('should all available orders', (done) => {
+    it('should return all available orders', (done) => {
       chai.request(app)
         .get('/api/v1/orders')
         .end((err, res) => {
@@ -60,15 +63,6 @@ describe('Orders', () => {
           done();
         });
     });
-    it('should return an error if value of orderId is invalid', (done) => {
-      chai.request(app)
-        .get(`/api/v1/orders/${invalidOrderId}`)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property('errors');
-          done();
-        });
-    });
   });
 
   describe('POST /orders - Place order', () => {
@@ -79,7 +73,7 @@ describe('Orders', () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.id).equal(2);
+          expect(res.body.id).equal(1);
           done();
         });
     });
@@ -97,8 +91,6 @@ describe('Orders', () => {
   });
 
   describe('PUT /:orderId - Update Order Status', () => {
-    const orderId = 1;
-    const status = 'DECLINED';
     it('should update an order status', (done) => {
       chai.request(app)
         .put(`/api/v1/orders/${orderId}`)
@@ -111,24 +103,10 @@ describe('Orders', () => {
           done();
         });
     });
-    it('should return an error if orderId is invalid', (done) => {
-      const orderId = 0;
-      const status = 'CANCELLED';
-      chai.request(app)
-        .put(`/api/v1/orders/${orderId}`)
-        .send({ status })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property('errors');
-          done();
-        });
-    });
     it('should return an error if status is invalid', (done) => {
-      const orderId = 1;
-      const status = null;
       chai.request(app)
         .put(`/api/v1/orders/${orderId}`)
-        .send({ status })
+        .send({ status: invalidStatus })
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');

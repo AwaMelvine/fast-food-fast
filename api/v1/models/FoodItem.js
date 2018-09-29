@@ -8,23 +8,23 @@ export default class FoodItem {
     this.name = foodItem.name ? foodItem.name.toString() : null;
     this.image = foodItem.image ? foodItem.image.toString() : 'http://via.placeholder.com/170x170';
     this.description = foodItem.description ? foodItem.description.toString() : 0;
-    this.quantity = foodItem.quantity ? parseInt(foodItem.quantity, 10) : 0;
-    this.unitPrice = foodItem.unitPrice ? parseInt(foodItem.unitPrice, 10) : 0;
+    this.quantity = foodItem.quantity ? foodItem.quantity : 0;
+    this.unit_price = foodItem.unit_price ? foodItem.unit_price : 0;
     if (foodItem.created_at) {
       this.created_at = foodItem.created_at;
     }
-    if (foodItem.updated_at) {
+    if (foodItem.updated_at || foodItem.updated_at == null) {
       this.updated_at = foodItem.updated_at;
     }
   }
 
   async save() {
-    const params = [this.name, this.image, this.description, this.quantity, this.unitPrice];
+    const params = [this.name, this.image, this.description, this.quantity, this.unit_price];
     try {
-      await db.query(`INSERT INTO food_items (name, image, description, quantity, unitPrice)
-      VALUES ($1, $2, $3, $4, $5)`, params);
-      const foodItemData = await FoodItem.find({ name: this.name });
-      return foodItemData[0];
+      const { rows } = await db.query(`INSERT INTO food_items (name, image, description, quantity, unit_price)
+      VALUES ($1, $2, $3, $4, $5) RETURNING *`, params);
+      const foodItemData = new FoodItem(rows[0]);
+      return foodItemData;
     } catch (error) {
       return error;
     }
@@ -32,14 +32,14 @@ export default class FoodItem {
 
 
   async update() {
-    const params = [this.name, this.image, this.description, this.quantity, this.unitPrice, this.id];
+    const params = [this.name, this.image, this.description, this.quantity, this.unit_price, this.id];
     try {
       await db.query(`UPDATE food_items SET 
-                        name=$1
-                        image=$2
-                        description=$3
-                        quantity=$4
-                        unitPrice=$5
+                        name=$1,
+                        image=$2,
+                        description=$3,
+                        quantity=$4,
+                        unit_price=$5,
                         updated_at=NOW() 
                     WHERE id=$6`, params);
       const foodItem = await FoodItem.findById(this.id);
@@ -80,7 +80,7 @@ export default class FoodItem {
   static async findById(foodItemId) {
     try {
       const { rows } = await db.query('SELECT * FROM food_items WHERE id=$1 LIMIT 1', [foodItemId]);
-      return rows.length ? new FoodItem(rows[0]) : {};
+      return rows.length ? new FoodItem(rows[0]) : false;
     } catch (error) {
       return error;
     }
