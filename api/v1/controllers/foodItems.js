@@ -37,7 +37,6 @@ export default {
     }
 
     const previousFoodItem = await FoodItem.findById(food_item_id);
-
     if (!previousFoodItem.id) {
       res.status(200).send({ errors: { global: 'Food item not found' } });
     }

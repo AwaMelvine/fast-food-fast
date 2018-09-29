@@ -52,7 +52,7 @@ export default {
 
   async getAllUsers(req, res) {
     const users = await User.find({});
-    if (!users) {
+    if (!users.length) {
       return res.status(200).send({ data: [], message: 'No users yet' });
     }
     return res.status(200).json({ data: users, message: 'success' });
@@ -65,7 +65,6 @@ export default {
     }
 
     const user = await User.findById(user_id);
-
     if (!user) {
       return res.status(200).send({ data: [], message: 'User not found' });
     }
@@ -117,7 +116,7 @@ export default {
     if (!user_id || Number.isNaN(user_id)) {
       return res.status(400).send({ errors: { user_id: 'Invalid user id' } });
     }
-    // delete user from db
+
     await User.delete(user_id);
     return res.status(204).json({ message: 'User deleted successfully' });
   },

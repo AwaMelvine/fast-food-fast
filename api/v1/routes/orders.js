@@ -9,5 +9,4 @@ router.get('/:order_id', ordersController.getOrderById);
 router.post('/', validateOrder.create, ordersController.placeOrder);
 router.put('/:order_id', validateOrder.update, ordersController.updateOrderStatus);
 
-
 export default router;
