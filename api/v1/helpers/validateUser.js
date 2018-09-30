@@ -6,55 +6,80 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-export const validateUser = async (req, res, next) => {
-  const errors = {};
-  const user = req.body;
+export default {
+  async create(req, res, next) {
+    const errors = {};
+    const user = req.body;
 
-  if (!user.username) {
-    errors.username = 'Username is required';
-  }
-  if (!user.email) {
-    errors.email = 'Email is required';
-  }
-  if (!validateEmail(user.email)) {
-    errors.email = 'Email address is not valid!!';
-  }
-  if (!user.password) {
-    errors.password = 'Password is required';
-  }
-  if (user.password !== user.passwordConf) {
-    errors.passwordConf = 'The two passwords do not match';
-  }
+    if (!user.username) {
+      errors.username = 'Username is required';
+    }
+    if (!user.email) {
+      errors.email = 'Email is required';
+    }
+    if (!validateEmail(user.email)) {
+      errors.email = 'Email address is not valid!!';
+    }
+    if (!user.password) {
+      errors.password = 'Password is required';
+    }
+    if (user.password !== user.passwordConf) {
+      errors.passwordConf = 'The two passwords do not match';
+    }
 
-  // do not perform this check if updating user
-  if (!req.params.userId && req.method !== 'PUT' && req.method !== 'PATCH') {
     const otherUser = await User.find({ email: user.email });
     if (otherUser.length > 0) {
       errors.email = 'Email already exists';
     }
-  }
 
-  if (Object.keys(errors).length !== 0) {
-    return res.status(400).json({ errors });
-  }
+    if (Object.keys(errors).length !== 0) {
+      return res.status(400).json({ errors });
+    }
 
-  next();
-};
+    next();
+  },
+  update(req, res, next) {
+    const errors = {};
+    const user = req.body;
+
+    if (!user.username) {
+      errors.username = 'Username is required';
+    }
+    if (!user.email) {
+      errors.email = 'Email is required';
+    }
+    if (!validateEmail(user.email)) {
+      errors.email = 'Email address is not valid!!';
+    }
+    if (!user.password) {
+      errors.password = 'Password is required';
+    }
+    if (user.password !== user.passwordConf) {
+      errors.passwordConf = 'The two passwords do not match';
+    }
+
+    if (Object.keys(errors).length !== 0) {
+      return res.status(400).json({ errors });
+    }
+
+    next();
+  },
 
 
-export const validateUserLogin = (req, res, next) => {
-  const errors = {};
-  const user = req.body;
+  login(req, res, next) {
+    const errors = {};
+    const user = req.body;
 
-  if (!user.email) {
-    errors.username = 'Username or Email is required';
-  }
-  if (!user.password) {
-    errors.password = 'Password is required';
-  }
+    if (!user.email) {
+      errors.username = 'Username or Email is required';
+    }
+    if (!user.password) {
+      errors.password = 'Password is required';
+    }
 
-  if (Object.keys(errors).length !== 0) {
-    return res.status(400).json({ errors });
-  }
-  next();
+    if (Object.keys(errors).length !== 0) {
+      return res.status(400).json({ errors });
+    }
+    next();
+  },
 };

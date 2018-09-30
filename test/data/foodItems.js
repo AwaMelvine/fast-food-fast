@@ -1,41 +1,31 @@
-import { FoodItem } from '../../api/v1/models/FoodItem';
-
-export const initialFoodItem = new FoodItem({
-  id: 1,
+export const firstItem = {
   name: 'Vegetable Salad',
   image: 'http://via.placeholder.com/170x170',
   description: 'A very healthy snack',
   quantity: 200,
-  unitPrice: 500,
-  updatedAt: '03-09-2018',
-  createdAt: '03-09-2018',
-});
+  unit_price: 500,
+};
 
-export const foodItem2 = {
-  id: 2,
-  name: 'Hamburger',
+export const secondItem = {
+  name: 'Rice',
   image: 'http://via.placeholder.com/170x170',
   description: 'Very delicious',
   quantity: 1000,
-  unitPrice: 600,
-  updatedAt: '04-09-2018',
-  createdAt: '04-09-2018',
+  unit_price: 600,
 };
 
-export const modifiedFoodItem = {
-  id: 2,
-  name: 'Hamburger',
+export const modifiedSecondItem = {
+  name: 'Vegetable',
   image: 'http://via.placeholder.com/170x170',
-  description: 'Very delicious',
-  quantity: 1000,
-  unitPrice: 600,
-  updatedAt: '04-09-2018',
-  createdAt: '04-09-2018',
+  description: 'Test description',
+  quantity: 200,
+  unit_price: 250,
 };
 
+export const created_at = '03-09-2018';
 
-export const createdAt = '03-09-2018';
+export const firstItemId = 1;
 
-export const foodItemId = 1;
+export const secondItemId = 2;
 
-export const invalidFoodItemId = null;
+export const invalidFoodItemId = undefined;

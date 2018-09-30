@@ -1,11 +1,11 @@
 import chai, { expect } from 'chai';
-import { FoodItem } from '../../api/v1/models/FoodItem';
-import { createdAt } from '../data/foodItems';
+import FoodItem from '../../api/v1/models/FoodItem';
+import { created_at } from '../data/foodItems';
 
 describe('FoodItem model', () => {
   it('should instantiate a new FoodItem object', () => {
-    const tempFoodItem = new FoodItem({ createdAt });
-    expect(tempFoodItem.createdAt).equal(createdAt);
+    const tempFoodItem = new FoodItem({ created_at });
+    expect(tempFoodItem.created_at).equal(created_at);
     expect(tempFoodItem).to.be.an.instanceOf(FoodItem);
   });
 });

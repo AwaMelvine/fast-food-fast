@@ -1,49 +1,60 @@
-// Import data structure for food items
-import { allFoodItems, FoodItem } from '../models/FoodItem';
+import FoodItem from '../models/FoodItem';
 
 export default {
 
-  getAllFoodItems(req, res) {
-    res.status(200).json(allFoodItems);
+  async getAllFoodItems(req, res) {
+    const allFoodItems = await FoodItem.find({});
+    if (!allFoodItems.length) {
+      return res.status(200).send({ data: [], message: 'No food items yet' });
+    }
+    return res.status(200).send({ data: allFoodItems, message: 'success' });
   },
 
-  getFoodItemById(req, res) {
-    const foodItemId = parseInt(req.params.foodItemId, 10);
-    if (!foodItemId) {
-      res.status(400).send({ errors: { foodItemId: 'A valid food Item Id is required' } });
+  async getFoodItemById(req, res) {
+    const food_item_id = parseInt(req.params.food_item_id, 10);
+    if (!food_item_id || Number.isNaN(food_item_id)) {
+      return res.status(400).send({ errors: { food_item_id: 'A valid food Item Id is required' } });
     }
 
-    const foodItem = allFoodItems.find(item => item.id === foodItemId);
-    res.status(200).json(foodItem);
+    const foodItem = await FoodItem.findById(food_item_id);
+    if (!foodItem) {
+      return res.status(200).send({ errors: { global: 'Food item not found' } });
+    }
+    res.status(200).send({ data: foodItem, message: 'success' });
   },
 
-  createFoodItem(req, res) {
+  async createFoodItem(req, res) {
     const foodItem = new FoodItem(req.body);
-    allFoodItems.push(foodItem);
+    const newFoodItem = await foodItem.save();
 
-    res.status(201).json(foodItem);
+    res.status(201).send({ data: newFoodItem, message: 'Food item created successfully' });
   },
 
-  updateFoodItem(req, res) {
-    const foodItemId = parseInt(req.params.foodItemId, 10);
-    if (!foodItemId) {
-      res.status(400).send({ errors: { foodItemId: 'A valid food Item Id is required' } });
+  async updateFoodItem(req, res) {
+    const { food_item_id } = req.params;
+    if (food_item_id == null) {
+      res.status(400).send({ errors: { food_item_id: 'A valid food Item Id is required' } });
     }
 
-    const previousFoodItem = allFoodItems.find(item => parseInt(item.id, 10) === foodItemId);
-    const updatedFoodItem = { ...previousFoodItem, ...req.body };
+    const previousFoodItem = await FoodItem.findById(food_item_id);
+    if (!previousFoodItem.id) {
+      res.status(200).send({ errors: { global: 'Food item not found' } });
+    }
 
-    const index = allFoodItems.findIndex(item => parseInt(item.id, 10) === previousFoodItem.id);
-    allFoodItems.splice(index, 1, updatedFoodItem);
+    previousFoodItem.name = req.body.name;
+    previousFoodItem.image = req.body.image;
+    previousFoodItem.description = req.body.description;
+    previousFoodItem.quantity = req.body.quantity;
+    previousFoodItem.unit_price = req.body.unit_price;
+    const updatedFoodItem = await previousFoodItem.update();
 
-    res.status(200).json(updatedFoodItem);
+    res.status(200).json({ data: updatedFoodItem, message: 'Item updated successfully' });
   },
 
-  deleteFoodItem(req, res) {
-    const foodItemId = parseInt(req.params.foodItemId, 10);
-    const index = allFoodItems.findIndex(item => parseInt(item.id, 10) === foodItemId);
+  async deleteFoodItem(req, res) {
+    const food_item_id = parseInt(req.params.food_item_id, 10);
+    await FoodItem.delete(food_item_id);
 
-    allFoodItems.splice(index, 1);
-    res.status(204).json(allFoodItems);
+    res.status(204).json({ message: 'Item deleted successfully' });
   },
 };

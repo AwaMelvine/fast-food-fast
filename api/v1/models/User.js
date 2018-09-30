@@ -2,23 +2,29 @@ import db from '../db';
 
 export default class User {
   constructor(user) {
-    this.id = user && user.id ? user.id : 0;
+    if (user && user.id) {
+      this.id = user.id;
+    }
     this.role = user && user.role ? user.role : 'user';
     this.username = user && user.username ? user.username : null;
     this.email = user && user.email ? user.email : null;
     this.password = user && user.password ? user.password : null;
-    this.created_at = user && user.created_at ? user.created_at : null;
-    this.updated_at = user && user.updated_at ? user.updated_at : null;
+    if (user.created_at) {
+      this.created_at = user.created_at;
+    }
+    if (user.updated_at || user.updated_at == null) {
+      this.updated_at = user.updated_at;
+    }
   }
 
 
   async save() {
     const params = [this.role, this.username, this.email, this.password];
     try {
-      await db.query(`INSERT INTO users (role, username, email, password)
-      VALUES ($1, $2, $3, $4)`, params);
-      const userData = await User.find({ email: this.email });
-      return userData[0];
+      const { rows } = await db.query(`INSERT INTO users (role, username, email, password)
+      VALUES ($1, $2, $3, $4) RETURNING *`, params);
+      const newUser = new User(rows[0]);
+      return newUser;
     } catch (error) {
       console.log(error);
     }
@@ -27,14 +33,14 @@ export default class User {
   async update() {
     const params = [this.role, this.username, this.email, this.password, this.id];
     try {
-      await db.query(`UPDATE users SET 
+      const { rows } = await db.query(`UPDATE users SET 
                             role=$1, 
                             username=$2, 
                             email=$3, 
                             updated_at=NOW(), 
                             password=$4
-                    WHERE id=$5`, params);
-      const user = await User.findById(this.id);
+                    WHERE id=$5 RETURNING *`, params);
+      const user = new User(rows[0]);
       return user;
     } catch (error) {
       console.log(error);
@@ -72,7 +78,7 @@ export default class User {
   static async findById(userId) {
     try {
       const { rows } = await db.query('SELECT * FROM users WHERE id=$1 LIMIT 1', [userId]);
-      return rows.length ? new User(rows[0]) : {};
+      return rows.length ? new User(rows[0]) : false;
     } catch (error) {
       console.log(error);
     }

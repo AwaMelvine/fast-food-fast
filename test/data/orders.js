@@ -1,29 +1,30 @@
-import { Order } from '../../api/v1/models/Order';
-
-export const initialOrder = new Order({
-  id: 1,
-  customerId: 12,
-  itemId: 5,
+export const firstOrder = {
+  customer_id: 1,
+  item_id: 1,
   quantity: 2,
-  totalPrice: 4000,
-  orderDate: '03-09-2018',
-  dateToDeliver: '04-09-2018',
-  orderStatus: 'PROCESSING',
-});
-
-export const order2 = {
-  id: 2,
-  customerId: 12,
-  itemId: 5,
-  quantity: 2,
-  totalPrice: 4000,
-  orderDate: '03-09-2018',
-  dateToDeliver: '04-09-2018',
-  orderStatus: 'PROCESSING',
+  total_price: 4000,
+  date_to_deliver: '04-09-2018',
+  status: 'PROCESSING',
 };
 
-export const orderDate = '03-09-2018';
+export const secondOrder = {
+  customer_id: 1,
+  item_id: 1,
+  quantity: 3,
+  total_price: 8000,
+  date_to_deliver: '04-09-2018',
+  status: 'PROCESSING',
+};
 
-export const orderId = 1;
+export const firstOrderId = 1;
+
+export const secondOrderId = 2;
+
+export const modifiedStatus = 'DECLINED';
+
+export const invalidStatus = null;
+
+export const created_at = '03-09-2018';
+
 
 export const invalidOrderId = null;

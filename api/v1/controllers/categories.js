@@ -1,49 +1,64 @@
-// Import data structure for categories
-import { allCategories, Category } from '../models/Category';
+import Category from '../models/Category';
 
 export default {
 
-  getAllCategories(req, res) {
+  async getAllCategories(req, res) {
+    const allCategories = await Category.find({});
+    if (!allCategories.length) {
+      return res.status(200).send({ data: [], message: 'No categories yet' });
+    }
+
     res.status(200).json(allCategories);
   },
 
-  getCategoryById(req, res) {
-    const categoryId = parseInt(req.params.categoryId, 10);
-    if (!categoryId) {
-      res.status(400).send({ errors: { categoryId: 'A valid category Id is required' } });
+  async getCategoryById(req, res) {
+    const category_id = parseInt(req.params.category_id, 10);
+    if (!category_id || Number.isNaN(category_id)) {
+      return res.status(400).send({ errors: { category_id: 'A valid category Id is required' } });
     }
 
-    const category = allCategories.find(item => item.id === categoryId);
+    const category = await Category.findById(category_id);
+    if (!category) {
+      return res.status(200).send({ errors: { global: 'Category not found' } });
+    }
+
     res.status(200).json(category);
   },
 
-  createCategory(req, res) {
+  async createCategory(req, res) {
     const category = new Category(req.body);
-    allCategories.push(category);
-
-    res.status(201).json(category);
+    const newCategory = await category.save();
+    res.status(201).json({ data: newCategory, message: 'Category created!' });
   },
 
-  updateCategory(req, res) {
-    const categoryId = parseInt(req.params.categoryId, 10);
-    if (!categoryId) {
-      res.status(400).send({ errors: { categoryId: 'A valid category Id is required' } });
+  async updateCategory(req, res) {
+    const category_id = parseInt(req.params.category_id, 10);
+    if (!category_id || Number.isNaN(category_id)) {
+      return res.status(400).send({ errors: { category_id: 'A valid category Id is required' } });
     }
 
-    const previousCategory = allCategories.find(item => parseInt(item.id, 10) === categoryId);
-    const updatedCategory = { ...previousCategory, ...req.body };
+    const category = await Category.findById(category_id);
+    if (!category) {
+      return res.status(404).send({ errors: { global: 'Category not found' } });
+    }
 
-    const index = allCategories.findIndex(item => parseInt(item.id, 10) === previousCategory.id);
-    allCategories.splice(index, 1, updatedCategory);
+    category.name = req.body.name;
+    category.description = req.body.description;
+    const updatedCategory = await category.update();
 
-    res.status(200).json(updatedCategory);
+    res.status(200).send({
+      data: updatedCategory,
+      message: 'Category updated!',
+    });
   },
 
-  deleteCategory(req, res) {
-    const categoryId = parseInt(req.params.categoryId, 10);
-    const index = allCategories.findIndex(item => parseInt(item.id, 10) === categoryId);
+  async deleteCategory(req, res) {
+    const category_id = parseInt(req.params.category_id, 10);
 
-    allCategories.splice(index, 1);
-    res.status(204).json(allCategories);
+    if (!category_id || Number.isNaN(category_id)) {
+      return res.status(400).send({ errors: { category_id: 'A valid category Id is required' } });
+    }
+    await Category.delete(category_id);
+    return res.status(204).json({ message: 'Category deleted!' });
   },
 };

@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
-import config from '../../config';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function decodeToken(token) {
   try {
-    const decoded = await jwt.verify(token, config.jwtSecret);
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     return decoded;
   } catch (error) {
-    console.log(error);
     return false;
   }
 }
@@ -19,10 +20,11 @@ export default {
     }
 
     const userInfo = await decodeToken(token);
-
     if (!userInfo) {
       return res.status(401).json({ error: 'Failed to authenticate' });
     }
+
+    req.user = userInfo;
     next();
   },
 
@@ -30,15 +32,16 @@ export default {
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
     if (!token) {
-      res.status(403).json({ error: 'No token provided' });
+      return res.status(403).json({ error: 'No token provided' });
     }
 
     const userInfo = await decodeToken(token);
 
     if (!userInfo) {
-      res.status(401).json({ error: 'Failed to authenticate' });
-    } else if (userInfo.role !== 'admin') {
-      res.status(401).json({ error: 'Unauthorized' });
+      return res.status(401).json({ error: 'Failed to authenticate' });
+    }
+    if (userInfo.role !== 'admin') {
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
     next();

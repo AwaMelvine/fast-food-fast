@@ -1,47 +1,58 @@
-// Import data structure for orders
-import { allOrders, Order } from '../models/Order';
+import Order from '../models/Order';
+import FoodItem from '../models/FoodItem';
 
 export default {
 
-  getAllOrders(req, res) {
-    res.status(200).json(allOrders);
+  async getAllOrders(req, res) {
+    const allOrders = await Order.find({});
+    if (!allOrders.length) {
+      return res.status(200).send({ data: [], message: 'No orders yet' });
+    }
+    res.status(200).json({ data: allOrders, message: 'success' });
   },
 
-  getOrderById(req, res) {
-    const orderId = parseInt(req.params.orderId, 10);
-    if (!orderId) {
-      res.status(400).send({ errors: { orderId: 'Order Id is required' } });
+  async getOrderById(req, res) {
+    const order_id = parseInt(req.params.order_id, 10);
+    if (!order_id || Number.isNaN(order_id)) {
+      res.status(400).send({ errors: { order_id: 'A valid order Id is required' } });
     }
 
-    const order = allOrders.find(item => item.id === orderId);
-    res.status(200).json(order);
+    const order = await Order.findById(order_id);
+    if (!order) {
+      return res.status(200).send({ message: 'Order not found' });
+    }
+
+    res.status(200).json({ data: order, message: 'success' });
   },
 
-  placeOrder(req, res) {
+  async placeOrder(req, res) {
+    req.body.customer_id = req.user ? req.user.id : 1; // for testing purposes, use 1 as user id
+
+    const foodItem = await FoodItem.findById(req.body.item_id);
+    if (!foodItem) {
+      return res.status(200).send({ errors: { global: 'Food item not found' } });
+    }
+
     const order = new Order(req.body);
-    allOrders.push(order);
-
-    res.status(201).json(order);
+    const newOrder = await order.save();
+    res.status(201).json({ data: newOrder, message: 'Order placed successfully' });
   },
 
-  updateOrderStatus(req, res) {
-    const { orderId } = req.params;
+  async updateOrderStatus(req, res) {
+    const order_id = parseInt(req.params.order_id, 10);
     const { status } = req.body;
 
-    const id = parseInt(orderId, 10);
-    if (!id) {
-      return res.status(400).send({ errors: { orderId: 'Order Id is required' } });
-    }
-    if (!status) {
-      return res.status(400).send({ errors: { status: 'Order status is required' } });
+    if (!order_id || Number.isNaN(order_id)) {
+      return res.status(400).send({ errors: { order_id: 'A valid order Id is required' } });
     }
 
-    const order = allOrders.find(item => parseInt(item.id, 10) === id);
+    const order = await Order.findById(order_id);
+    if (!order) {
+      return res.status(200).send({ errors: { global: 'Order not found' } });
+    }
 
-    order.orderStatus = status;
-    const index = allOrders.findIndex(item => parseInt(item.id, 10) === order.id);
-    allOrders.splice(index, 1, order);
-
-    res.status(200).json(order);
+    order.status = status;
+    const newOrder = await order.update();
+    res.status(200).json({ data: newOrder, message: 'Order status updated' });
   },
 };

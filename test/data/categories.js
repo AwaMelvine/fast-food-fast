@@ -1,30 +1,24 @@
-import { Category } from '../../api/v1/models/Category';
-
-export const initialCategory = new Category({
-  id: 1,
+export const firstCategory = {
   name: 'Salads',
-  description: 'Healthy!!!',
-  updatedAt: '03-09-2018',
-  createdAt: '03-09-2018',
-});
+  description: 'Healthy',
+};
 
 
-export const category2 = {
-  id: 2,
+export const secondCategory = {
   name: 'Grains',
   description: 'Very delicious',
-  updatedAt: '04-09-2018',
-  createdAt: '04-09-2018',
 };
 
 
-export const modifiedCategory2 = {
-  id: 2,
-  name: 'African cuisine',
+export const modifiedSecondCategory = {
+
+  name: 'African',
   description: 'Only in Africa',
-  updatedAt: '04-09-2018',
-  createdAt: '04-09-2018',
 };
 
 
-export const createdAt = '03-09-2018';
+export const firstCategoryId = 1;
+
+export const secondCategoryId = 2;
+
+export const created_at = '03-09-2018';

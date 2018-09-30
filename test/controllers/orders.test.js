@@ -1,27 +1,28 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { allOrders } from '../../api/v1/models/Order';
 import {
-  initialOrder, order2, orderId, invalidOrderId,
+  firstOrder,
+  firstOrderId,
+  secondOrder,
+  secondOrderId,
+  modifiedStatus,
+  invalidStatus,
+  invalidOrderId,
 } from '../data/orders';
+import { initOrders, initUsers } from '../../api/v1/db/seed.test';
 
 chai.use(chaiHttp);
 
 
 // Initialize test database for test
-beforeEach((done) => {
-  chai.request(app)
-    .post('/api/v1/orders')
-    .send(initialOrder)
-    .end((err, res) => {
-      if (err) return done(err);
-      done();
-    });
+before(async () => {
+  await initUsers();
+  const results = await initOrders();
+  console.log(results);
 });
 
-afterEach((done) => {
-  allOrders.length = 0;
+after((done) => {
   done();
 });
 
@@ -36,12 +37,12 @@ describe('Orders', () => {
           done();
         });
     });
-    it('should all available orders', (done) => {
+    it('should return all available orders', (done) => {
       chai.request(app)
         .get('/api/v1/orders')
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body.length).to.be.equal(1);
+          expect(res.body.data.length).to.be.equal(1);
           done();
         });
     });
@@ -50,19 +51,10 @@ describe('Orders', () => {
   describe('GET /:orderId - Get order by ID', () => {
     it('should return a json Object', (done) => {
       chai.request(app)
-        .get(`/api/v1/orders/${orderId}`)
+        .get(`/api/v1/orders/${firstOrderId}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.a.json;
-          done();
-        });
-    });
-    it('should return an error if value of orderId is invalid', (done) => {
-      chai.request(app)
-        .get(`/api/v1/orders/${invalidOrderId}`)
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property('errors');
           done();
         });
     });
@@ -72,11 +64,11 @@ describe('Orders', () => {
     it('should place a new order', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
-        .send(order2)
+        .send(secondOrder)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.id).equal(2);
+          expect(res.body.data.id).equal(2);
           done();
         });
     });
@@ -94,38 +86,21 @@ describe('Orders', () => {
   });
 
   describe('PUT /:orderId - Update Order Status', () => {
-    const orderId = 1;
-    const status = 'DECLINED';
     it('should update an order status', (done) => {
       chai.request(app)
-        .put(`/api/v1/orders/${orderId}`)
-        .send({ status })
+        .put(`/api/v1/orders/${secondOrderId}`)
+        .send({ status: modifiedStatus })
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-
-          expect(res.body.orderStatus).equal('DECLINED');
-          done();
-        });
-    });
-    it('should return an error if orderId is invalid', (done) => {
-      const orderId = 0;
-      const status = 'CANCELLED';
-      chai.request(app)
-        .put(`/api/v1/orders/${orderId}`)
-        .send({ status })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property('errors');
+          expect(res.body.data.status).equal(modifiedStatus);
           done();
         });
     });
     it('should return an error if status is invalid', (done) => {
-      const orderId = 1;
-      const status = null;
       chai.request(app)
-        .put(`/api/v1/orders/${orderId}`)
-        .send({ status })
+        .put(`/api/v1/orders/${invalidOrderId}`)
+        .send({ status: invalidStatus })
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');

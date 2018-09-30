@@ -1,6 +1,7 @@
-export default (req, res, next) => {
+import Category from '../models/Category';
+
+function basicValidation(category) {
   const errors = {};
-  const category = req.body;
 
   if (!category.name) {
     errors.name = 'Category name is required';
@@ -9,8 +10,33 @@ export default (req, res, next) => {
     errors.description = 'Category Description is required';
   }
 
-  if (Object.keys(errors).length !== 0) {
-    return res.status(400).json({ errors });
-  }
-  next();
+  return errors;
+}
+
+export default {
+  async create(req, res, next) {
+    const category = req.body;
+    const errors = basicValidation(category);
+
+    const otherCategory = await Category.find({ name: category.name });
+    if (otherCategory.length > 0) {
+      errors.name = 'A category with that name already exists';
+    }
+
+    if (Object.keys(errors).length !== 0) {
+      return res.status(400).json({ errors });
+    }
+    next();
+  },
+
+  update(req, res, next) {
+    const category = req.body;
+    const errors = basicValidation(category);
+
+    if (Object.keys(errors).length !== 0) {
+      return res.status(400).json({ errors });
+    }
+    next();
+  },
+
 };

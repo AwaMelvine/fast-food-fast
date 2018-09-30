@@ -19,6 +19,7 @@
     "no-param-reassign": "off",
     "import/no-extraneous-dependencies": "off",
     "no-unused-expressions": "off",
-    "no-useless-escape": "off"
+    "no-useless-escape": "off",
+    "camelcase": "off"
   }
 }
