@@ -63,7 +63,7 @@ describe('Orders', () => {
     it('should place a new order', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
-        .set('authorization', 'token thisisatoken')
+        // .set('authorization', 'token thisisatoken')
         .send(secondOrder)
         .end((err, res) => {
           if (err) return done(err);
