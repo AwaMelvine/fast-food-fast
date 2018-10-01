@@ -5,11 +5,11 @@ import db from '.';
 
 dotenv.config();
 
-let connectionString;
+let connectionString = '';
 if (process.env.NODE_ENV === 'test') {
-  connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@localhost:5432/${process.env.TEST_DB_NAME}`;
+  connectionString = process.env.TEST_DB_URL;
 } else {
-  connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@localhost:5432/${process.env.DB_NAME}`;
+  connectionString = process.env.DB_URL;
 }
 
 const pool = new Pool({
