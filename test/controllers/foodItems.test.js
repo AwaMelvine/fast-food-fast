@@ -22,10 +22,10 @@ after(async () => {
 });
 
 describe('Food Items', () => {
-  describe('GET /foodItems - Get all food items', () => {
+  describe('GET /menu - Get all food items', () => {
     it('should return a json object', (done) => {
       chai.request(app)
-        .get('/api/v1/foodItems')
+        .get('/api/v1/menu')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.a.json;
@@ -34,7 +34,7 @@ describe('Food Items', () => {
     });
     it('should have all available food items', (done) => {
       chai.request(app)
-        .get('/api/v1/foodItems')
+        .get('/api/v1/menu')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.data.length).to.be.equal(1);
@@ -47,7 +47,7 @@ describe('Food Items', () => {
   describe('GET /:foodItemId - Get foodItem by ID', () => {
     it('should return food item as a json object', (done) => {
       chai.request(app)
-        .get(`/api/v1/foodItems/${firstItemId}`)
+        .get(`/api/v1/menu/${firstItemId}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.a.json;
@@ -57,10 +57,10 @@ describe('Food Items', () => {
     });
   });
 
-  describe('POST /foodItems - Create food item', () => {
+  describe('POST /menu - Create food item', () => {
     it('should create a new food item', (done) => {
       chai.request(app)
-        .post('/api/v1/foodItems')
+        .post('/api/v1/menu')
         .send(secondItem)
         .end((err, res) => {
           if (err) return done(err);
@@ -72,7 +72,7 @@ describe('Food Items', () => {
 
     it('should not create food item with invalid data', (done) => {
       chai.request(app)
-        .post('/api/v1/foodItems')
+        .post('/api/v1/menu')
         .send({ a: 1 })
         .end((err, res) => {
           if (err) return done(err);
@@ -86,7 +86,7 @@ describe('Food Items', () => {
   describe('PUT /:foodItemId - Update Food Item', () => {
     it('should update a food item', (done) => {
       chai.request(app)
-        .put(`/api/v1/foodItems/${secondItemId}`)
+        .put(`/api/v1/menu/${secondItemId}`)
         .send(modifiedSecondItem)
         .end((err, res) => {
           if (err) return done(err);
@@ -100,7 +100,7 @@ describe('Food Items', () => {
   describe('DELETE /:foodItemId - Delete food item', () => {
     it('should delete a food item given the item id', (done) => {
       chai.request(app)
-        .delete(`/api/v1/foodItems/${secondItemId}`)
+        .delete(`/api/v1/menu/${secondItemId}`)
         .end((err, res) => {
           expect(res).to.have.status(204);
           expect(res.body).to.deep.equal({});
