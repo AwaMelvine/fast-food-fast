@@ -9,11 +9,11 @@
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/app.js",
     "dev": "nodemon --exec babel-node -- api/app.js",
-    "test": "cross-env NODE_ENV=test nyc mocha --require babel-core/register ./test/**/*.js",
     "coverage": "cross-env NODE_ENV=test babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha",
     "coveralls": "npm run coverage && cat coverage/lcov.info | coveralls",
     "migrate": "babel-node api/v1/db/migrations.js",
-    "migrate:test": "cross-env NODE_ENV=test npm run migrate"
+    "migrate:test": "cross-env NODE_ENV=test && npm run migrate",
+    "test": "npm run migrate:test && cross-env NODE_ENV=test nyc mocha --require babel-core/register ./test/**/*.js"
   },
   "keywords": [],
   "author": "",
