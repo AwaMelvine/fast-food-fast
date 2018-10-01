@@ -1,29 +1,30 @@
-export const allOrders = [];
-
-export const initialOrder = {
-  customerId: 1,
-  itemId: 1,
+export const firstOrder = {
+  customer_id: 1,
+  item_id: 1,
   quantity: 2,
-  totalPrice: 4000,
-  dateToDeliver: '04-09-2018',
-  orderStatus: 'PROCESSING',
+  total_price: 4000,
+  date_to_deliver: '04-09-2018',
+  status: 'PROCESSING',
 };
 
-export const order2 = {
-  customerId: 1,
-  itemId: 1,
+export const secondOrder = {
+  customer_id: 1,
+  item_id: 1,
   quantity: 3,
-  totalPrice: 8000,
-  dateToDeliver: '04-09-2018',
-  orderStatus: 'PROCESSING',
+  total_price: 8000,
+  date_to_deliver: '04-09-2018',
+  status: 'PROCESSING',
 };
 
-export const created_at = '03-09-2018';
+export const firstOrderId = 1;
 
-export const status = 'DECLINED';
+export const secondOrderId = 2;
+
+export const modifiedStatus = 'DECLINED';
 
 export const invalidStatus = null;
 
-export const orderId = 1;
+export const created_at = '03-09-2018';
+
 
 export const invalidOrderId = null;

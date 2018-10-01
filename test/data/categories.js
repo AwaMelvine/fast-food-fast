@@ -1,27 +1,24 @@
-import Category from '../../api/v1/models/Category';
-
-export const allCategories = [];
-
-export const initialCategory = {
+export const firstCategory = {
   name: 'Salads',
   description: 'Healthy',
 };
 
 
-export const category2 = {
+export const secondCategory = {
   name: 'Grains',
   description: 'Very delicious',
 };
 
 
-export const modifiedCategory2 = {
+export const modifiedSecondCategory = {
+
   name: 'African',
   description: 'Only in Africa',
 };
 
 
+export const firstCategoryId = 1;
+
+export const secondCategoryId = 2;
+
 export const created_at = '03-09-2018';
-
-const drop_categories = () => {
-
-};

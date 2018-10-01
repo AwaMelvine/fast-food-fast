@@ -1,28 +1,22 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import db from '../../api/v1/db';
 import {
-  allCategories, initialCategory, category2, modifiedCategory2,
+  secondCategory,
+  modifiedSecondCategory,
+  firstCategoryId,
+  secondCategoryId,
 } from '../data/categories';
+import { initCategories } from '../../api/v1/db/seed.test';
 
 chai.use(chaiHttp);
 
-// Initialize test database for test
-before((done) => {
-  chai.request(app)
-    .post('/api/v1/categories')
-    .send(initialCategory)
-    .end((err, res) => {
-      if (err) return done(err);
-      done();
-    });
+
+before(async () => {
+  await initCategories();
 });
 
 after((done) => {
-  // clear database
-  // clear_categories();
-  allCategories.length = 0;
   done();
 });
 
@@ -33,7 +27,7 @@ describe('Food Categories', () => {
         .get('/api/v1/categories')
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body[0].name).to.be.equal('Salads');
+          expect(res.body[0].name).to.be.equal('Fruits');
           expect(res).to.be.a.json;
           done();
         });
@@ -51,9 +45,8 @@ describe('Food Categories', () => {
 
   describe('GET /:categoryId - Get category by ID', () => {
     it('should return a json Object', (done) => {
-      const categoryId = 1;
       chai.request(app)
-        .get(`/api/v1/categories/${categoryId}`)
+        .get(`/api/v1/categories/${firstCategoryId}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.id).to.be.equal(1);
@@ -67,11 +60,11 @@ describe('Food Categories', () => {
     it('should create a new category', (done) => {
       chai.request(app)
         .post('/api/v1/categories')
-        .send(category2)
+        .send(secondCategory)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.name).equal('Grains');
+          expect(res.body.data.name).equal(secondCategory.name);
           done();
         });
     });
@@ -91,15 +84,13 @@ describe('Food Categories', () => {
 
   describe('PUT /:categoryId - Update Food Item category', () => {
     it('should update a category', (done) => {
-      const categoryId = 1;
       chai.request(app)
-        .put(`/api/v1/categories/${categoryId}`)
-        .send(modifiedCategory2)
+        .put(`/api/v1/categories/${secondCategoryId}`)
+        .send(modifiedSecondCategory)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-
-          expect(res.body.name).equal('African');
+          expect(res.body.data.name).equal(modifiedSecondCategory.name);
           done();
         });
     });
@@ -107,9 +98,8 @@ describe('Food Categories', () => {
 
   describe('DELETE /:categoryId - Delete food category', () => {
     it('should delete a category given the category id', (done) => {
-      const categoryId = 1;
       chai.request(app)
-        .delete(`/api/v1/categories/${categoryId}`)
+        .delete(`/api/v1/categories/${secondCategoryId}`)
         .end((err, res) => {
           expect(res).to.have.status(204);
           expect(res.body).to.eql({});

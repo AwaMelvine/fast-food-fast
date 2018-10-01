@@ -132,8 +132,8 @@ async function initializeTables() {
 
 
     if (process.env.NODE_ENV === 'test') {
-      await initUser();
-      await initFoodItems();
+      // await initUser();
+      // await initFoodItems();
     }
 
 

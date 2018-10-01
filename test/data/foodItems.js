@@ -1,41 +1,31 @@
-import FoodItem from '../../api/v1/models/FoodItem';
-
-export const allFoodItems = [];
-
-export const initialFoodItem = {
+export const firstItem = {
   name: 'Vegetable Salad',
   image: 'http://via.placeholder.com/170x170',
   description: 'A very healthy snack',
   quantity: 200,
-  unitPrice: 500,
+  unit_price: 500,
 };
 
-export const foodItem2 = {
+export const secondItem = {
   name: 'Rice',
   image: 'http://via.placeholder.com/170x170',
   description: 'Very delicious',
   quantity: 1000,
-  unitPrice: 600,
+  unit_price: 600,
 };
 
-// export const modifiedFoodItem2 = {
-//   name: 'Hamburger',
-//   image: 'http://via.placeholder.com/170x170',
-//   description: 'Very delicious',
-//   quantity: 1000,
-//   unitPrice: 600,
-// };
-
-export const modifiedFoodItem2 = {
+export const modifiedSecondItem = {
   name: 'Vegetable',
   image: 'http://via.placeholder.com/170x170',
   description: 'Test description',
   quantity: 200,
-  unitPrice: 250,
+  unit_price: 250,
 };
 
 export const created_at = '03-09-2018';
 
-export const foodItemId = 1;
+export const firstItemId = 1;
+
+export const secondItemId = 2;
 
 export const invalidFoodItemId = undefined;
