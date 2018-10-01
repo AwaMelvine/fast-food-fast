@@ -4,13 +4,14 @@ import dotenv from 'dotenv';
 
 import db from './index';
 
+
 dotenv.config();
 
-let connectionString;
+let connectionString = '';
 if (process.env.NODE_ENV === 'test') {
-  connectionString = process.env.TEST_DATABASE_URL;
+  connectionString = process.env.TEST_DB_URL;
 } else {
-  connectionString = process.env.DATABASE_URL;
+  connectionString = process.env.DB_URL;
 }
 
 const pool = new Pool({
