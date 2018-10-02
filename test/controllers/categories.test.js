@@ -2,6 +2,7 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
 import {
+  firstCategory,
   secondCategory,
   modifiedSecondCategory,
   firstCategoryId,
@@ -27,7 +28,7 @@ describe('Food Categories', () => {
         .get('/api/v1/categories')
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body[0].name).to.be.equal('Fruits');
+          expect(res.body[0].name).to.be.equal(firstCategory.name);
           expect(res).to.be.a.json;
           done();
         });

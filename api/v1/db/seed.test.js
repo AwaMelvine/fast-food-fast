@@ -1,7 +1,9 @@
 import dotenv from 'dotenv';
 import { Pool, Client } from 'pg';
 import db from '.';
-// import initialCategory from '../../../test/data/categories';
+import { firstCategory } from '../../../test/data/categories';
+import { firstItem } from '../../../test/data/foodItems';
+import { firstOrder } from '../../../test/data/orders';
 
 dotenv.config();
 
@@ -32,9 +34,10 @@ export const initUsers = async () => {
 
 
 export const initFoodItems = async () => {
+  const params = [firstItem.name, firstItem.image, firstItem.description, firstItem.quantity, firstItem.unit_price];
   try {
     await db.query(`INSERT INTO food_items (name, image, description, quantity, unit_price)
-    VALUES ('Vegetable Salad', 'http://via.placeholder.com/170x170', 'Good', 4, 500)`);
+    VALUES ($1, $2, $3, $4, $5)`, params);
   } catch (error) {
     return error;
   }
@@ -42,9 +45,10 @@ export const initFoodItems = async () => {
 
 
 export const initCategories = async () => {
+  const params = [firstCategory.name, firstCategory.description];
   try {
     await db.query(`INSERT INTO categories (name, description)
-    VALUES ('Fruits', 'Healthy!')`);
+    VALUES ($1, $2)`, params);
   } catch (error) {
     return error;
   }
@@ -52,9 +56,10 @@ export const initCategories = async () => {
 
 
 export const initOrders = async () => {
+  const params = [firstOrder.customer_id, firstOrder.item_id, firstOrder.quantity, firstOrder.total_price, firstOrder.date_to_deliver, firstOrder.status];
   try {
     await db.query(`INSERT INTO orders (customer_id, item_id, quantity, total_price, date_to_deliver, status)
-    VALUES (1, 1, 2, 4000, '04-09-2018', 'NEW')`);
+    VALUES ($1, $2, $3, $4, $5, $6)`, params);
   } catch (error) {
     return error;
   }

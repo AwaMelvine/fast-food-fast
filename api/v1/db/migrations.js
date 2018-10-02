@@ -120,15 +120,10 @@ async function initializeTables() {
 
     // create tables
     await client.query(createUsersTable);
-    console.log('users table created!');
     await client.query(createTokenBlacklistTable);
-    console.log('token_blacklist table created!');
     await client.query(createCategoriesTable);
-    console.log('categories table created!');
     await client.query(createFoodItemsTable);
-    console.log('food_items table created!');
     await client.query(createOrdersTable);
-    console.log('orders table created!');
 
 
     if (process.env.NODE_ENV === 'test') {

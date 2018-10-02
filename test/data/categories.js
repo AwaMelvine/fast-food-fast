@@ -11,7 +11,6 @@ export const secondCategory = {
 
 
 export const modifiedSecondCategory = {
-
   name: 'African',
   description: 'Only in Africa',
 };
