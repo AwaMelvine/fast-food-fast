@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/User';
+import Order from '../models/Order';
 
 dotenv.config();
 
@@ -70,6 +71,30 @@ export default {
     }
 
     res.status(200).json({ data: user, message: 'success' });
+  },
+
+  async userOrderHistory(req, res) {
+    const user_id = parseInt(req.params.user_id, 10);
+    if (!user_id || Number.isNaN(user_id)) {
+      return res.status(400).send({ errors: { user_id: 'A valid user Id is required' } });
+    }
+
+    const user = await User.findById(user_id);
+    if (!user) {
+      return res.status(404).send({
+        data: [],
+        message: 'User not found',
+      });
+    }
+
+    const orders = await Order.getOrderHistory(user_id);
+    if (!orders) {
+      return res.status(200).send({
+        data: [],
+        message: 'User has not yet mad any orders',
+      });
+    }
+    return res.status(200).json({ data: orders, message: 'success' });
   },
 
   async registerUser(req, res) {
