@@ -21,7 +21,7 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/orders', orders);
 app.use('/api/v1/users', users);
 app.use('/api/v1/categories', categories);
-app.use('/api/v1/foodItems', foodItems);
+app.use('/api/v1/menu', foodItems);
 
 app.use('/*', (req, res) => {
   res.status(404).json({ message: 'Page Not Found. Please go to /api/v1/orders to use our api' });
