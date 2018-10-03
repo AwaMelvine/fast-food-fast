@@ -9,9 +9,9 @@ import {
   secondCategoryId,
 } from '../data/categories';
 import { initCategories } from '../../api/v1/db/seed.test';
+import { adminToken } from '../data/users';
 
 chai.use(chaiHttp);
-
 
 before(async () => {
   await initCategories();
@@ -61,6 +61,7 @@ describe('Food Categories', () => {
     it('should create a new category', (done) => {
       chai.request(app)
         .post('/api/v1/categories')
+        .set('authorization', `token ${adminToken}`)
         .send(secondCategory)
         .end((err, res) => {
           if (err) return done(err);
@@ -70,9 +71,23 @@ describe('Food Categories', () => {
         });
     });
 
+    it('should return an error if category already exists', (done) => {
+      chai.request(app)
+        .post('/api/v1/categories')
+        .set('authorization', `token ${adminToken}`)
+        .send(secondCategory)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res.body.errors.name).to.be.equal('A category with that name already exists');
+          done();
+        });
+    });
+
     it('should not create category with invalid data', (done) => {
       chai.request(app)
         .post('/api/v1/categories')
+        .set('authorization', `token ${adminToken}`)
         .send({ a: 1 })
         .end((err, res) => {
           if (err) return done(err);
@@ -87,11 +102,24 @@ describe('Food Categories', () => {
     it('should update a category', (done) => {
       chai.request(app)
         .put(`/api/v1/categories/${secondCategoryId}`)
+        .set('authorization', `token ${adminToken}`)
         .send(modifiedSecondCategory)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.name).equal(modifiedSecondCategory.name);
+          done();
+        });
+    });
+    it('should return an error if category is invalid', (done) => {
+      chai.request(app)
+        .put(`/api/v1/categories/${secondCategoryId}`)
+        .set('authorization', `token ${adminToken}`)
+        .send({ a: 'test' })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property('errors');
           done();
         });
     });
@@ -101,6 +129,7 @@ describe('Food Categories', () => {
     it('should delete a category given the category id', (done) => {
       chai.request(app)
         .delete(`/api/v1/categories/${secondCategoryId}`)
+        .set('authorization', `token ${adminToken}`)
         .end((err, res) => {
           expect(res).to.have.status(204);
           expect(res.body).to.eql({});

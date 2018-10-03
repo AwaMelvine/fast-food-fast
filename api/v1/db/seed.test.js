@@ -1,9 +1,11 @@
 import dotenv from 'dotenv';
 import { Pool, Client } from 'pg';
+import bcrypt from 'bcryptjs';
 import db from '.';
 import { firstCategory } from '../../../test/data/categories';
 import { firstItem } from '../../../test/data/foodItems';
 import { firstOrder } from '../../../test/data/orders';
+import { firstUser } from '../../../test/data/users';
 
 dotenv.config();
 
@@ -11,7 +13,7 @@ let connectionString = '';
 if (process.env.NODE_ENV === 'test') {
   connectionString = process.env.TEST_DB_URL;
 } else {
-  connectionString = process.env.DB_URL;
+  connectionString = process.env.DATABASE_URL;
 }
 
 const pool = new Pool({
@@ -24,9 +26,11 @@ const client = new Client({
 client.connect();
 
 export const initUsers = async () => {
+  const passwordHash = bcrypt.hashSync(firstUser.password, 10);
+  const params = [firstUser.role, firstUser.username, firstUser.email, passwordHash];
   try {
     await db.query(`INSERT INTO users (role, username, email, password)
-      VALUES ('user', 'Awa', 'testuser@test.com', 'gikflks')`);
+      VALUES ($1, $2, $3, $4)`, params);
   } catch (error) {
     return error;
   }

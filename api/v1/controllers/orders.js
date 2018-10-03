@@ -14,7 +14,7 @@ export default {
   async getOrderById(req, res) {
     const order_id = parseInt(req.params.order_id, 10);
     if (!order_id || Number.isNaN(order_id)) {
-      res.status(400).send({ errors: { order_id: 'A valid order Id is required' } });
+      return res.status(400).send({ errors: { order_id: 'A valid order Id is required' } });
     }
 
     const order = await Order.findById(order_id);

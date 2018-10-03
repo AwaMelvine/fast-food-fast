@@ -36,19 +36,19 @@ export default {
     return res.status(400).json({ errors: { global: 'Wrong credentials' } });
   },
 
-  async logout(req, res) {
-    const token = req.headers.authorization.split(' ')[1];
-    await User.blacklistToken(token);
-    res.status(200).json({ message: 'You are now logged out' });
-  },
-
   async signUp(req, res) {
     const user = new User(req.body);
     user.password = bcrypt.hashSync(req.body.password, 10);
     const newUser = await user.save();
 
     const token = await loginById(newUser.id);
-    return res.status(200).json({ data: token, message: 'Signup successful' });
+    return res.status(200).json({ data: token, message: 'Signup successful!' });
+  },
+
+  async logout(req, res) {
+    const token = req.headers.authorization.split(' ')[1];
+    await User.blacklistToken(token);
+    return res.status(200).json({ message: 'You are now logged out' });
   },
 
   async getAllUsers(req, res) {
@@ -60,9 +60,9 @@ export default {
   },
 
   async getUserById(req, res) {
-    const user_id = parseInt(req.params.order_id, 10);
+    const user_id = parseInt(req.params.user_id, 10);
     if (!user_id || Number.isNaN(user_id)) {
-      res.status(400).send({ errors: { user_id: 'A valid user Id is required' } });
+      return res.status(400).send({ errors: { user_id: 'A valid user Id is required' } });
     }
 
     const user = await User.findById(user_id);
@@ -70,7 +70,7 @@ export default {
       return res.status(200).send({ data: [], message: 'User not found' });
     }
 
-    res.status(200).json({ data: user, message: 'success' });
+    return res.status(200).json({ data: user, message: 'success' });
   },
 
   async userOrderHistory(req, res) {
@@ -100,16 +100,10 @@ export default {
   async registerUser(req, res) {
     const user = new User(req.body);
     user.password = bcrypt.hashSync(req.body.password, 10);
+    user.role = 'admin';
     const newUser = await user.save();
 
-    // If it's a normal user signup (not admin), log that user in
-    if (newUser.role === 'user') {
-      const token = await loginById(user.id);
-      return res.status(201).json({ data: token, message: 'You are not signed in' });
-    }
-
-    const users = await User.find({});
-    return res.status(201).json({ data: users, message: 'Admin user created' });
+    return res.status(201).json({ data: newUser, message: 'Admin user created' });
   },
 
   async updateUser(req, res) {

@@ -27,4 +27,4 @@ export const invalidStatus = null;
 export const created_at = '03-09-2018';
 
 
-export const invalidOrderId = null;
+export const invalidOrderId = 'a';

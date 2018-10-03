@@ -26,7 +26,7 @@ export default class User {
       const newUser = new User(rows[0]);
       return newUser;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -43,7 +43,7 @@ export default class User {
       const user = new User(rows[0]);
       return user;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -71,7 +71,7 @@ export default class User {
       const { rows } = await db.query(queryString, params);
       return rows;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -80,7 +80,7 @@ export default class User {
       const { rows } = await db.query('SELECT * FROM users WHERE id=$1 LIMIT 1', [userId]);
       return rows.length ? new User(rows[0]) : false;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -89,7 +89,7 @@ export default class User {
       const result = await db.query('DELETE FROM users WHERE id=$1', [userId]);
       return result;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -98,7 +98,7 @@ export default class User {
       const result = await db.query('INSERT INTO token_blacklist (token) VALUES ($1)', [token]);
       return result;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }
