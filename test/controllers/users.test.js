@@ -79,6 +79,16 @@ describe('User accounts', () => {
           done();
         });
     });
+    it('should return an error if credentials are not valid', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send({ name: 'Bob' })
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property('errors');
+          done();
+        });
+    });
     it('should not log user in if credentials are wrong', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
@@ -215,6 +225,18 @@ describe('User accounts', () => {
           if (err) return done(err);
           expect(res).to.have.status(400);
           expect(res.body.errors.passwordOld).to.be.equal('Old password does not match');
+          done();
+        });
+    });
+    it('should return an error if user is not valid', (done) => {
+      chai.request(app)
+        .put(`/api/v1/users/${secondUserId}`)
+        .set('authorization', `token ${userToken}`)
+        .send({ name: 'Bob' })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property('errors');
           done();
         });
     });

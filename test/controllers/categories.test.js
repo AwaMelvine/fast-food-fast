@@ -71,6 +71,19 @@ describe('Food Categories', () => {
         });
     });
 
+    it('should return an error if category already exists', (done) => {
+      chai.request(app)
+        .post('/api/v1/categories')
+        .set('authorization', `token ${adminToken}`)
+        .send(secondCategory)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res.body.errors.name).to.be.equal('A category with that name already exists');
+          done();
+        });
+    });
+
     it('should not create category with invalid data', (done) => {
       chai.request(app)
         .post('/api/v1/categories')
@@ -95,6 +108,18 @@ describe('Food Categories', () => {
           if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.name).equal(modifiedSecondCategory.name);
+          done();
+        });
+    });
+    it('should return an error if category is invalid', (done) => {
+      chai.request(app)
+        .put(`/api/v1/categories/${secondCategoryId}`)
+        .set('authorization', `token ${adminToken}`)
+        .send({ a: 'test' })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property('errors');
           done();
         });
     });

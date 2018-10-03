@@ -96,6 +96,18 @@ describe('Food Items', () => {
           done();
         });
     });
+    it('should return an error if food item already exists', (done) => {
+      chai.request(app)
+        .post('/api/v1/menu')
+        .set('authorization', `token ${adminToken}`)
+        .send(firstItem)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res.body.errors.name).equal('Food item already exists');
+          done();
+        });
+    });
     it('should create a new food item', (done) => {
       chai.request(app)
         .post('/api/v1/menu')
@@ -156,6 +168,18 @@ describe('Food Items', () => {
           if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.errors.global).equal('Food item not found');
+          done();
+        });
+    });
+    it('should return an error if item is not avlid', (done) => {
+      chai.request(app)
+        .put(`/api/v1/menu/${notFoundItemId}`)
+        .set('authorization', `token ${adminToken}`)
+        .send({ a: 'test' })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property('errors');
           done();
         });
     });
