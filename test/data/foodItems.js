@@ -28,4 +28,6 @@ export const firstItemId = 1;
 
 export const secondItemId = 2;
 
-export const invalidFoodItemId = undefined;
+export const invalidFoodItemId = 'a';
+
+export const notFoundItemId = 8888;

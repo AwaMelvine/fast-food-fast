@@ -11,6 +11,7 @@ import {
   invalidOrderId,
 } from '../data/orders';
 import { initOrders, initUsers } from '../../api/v1/db/seed.test';
+import { userToken, adminToken } from '../data/users';
 
 chai.use(chaiHttp);
 
@@ -30,6 +31,7 @@ describe('Orders', () => {
     it('should return a json object', (done) => {
       chai.request(app)
         .get('/api/v1/orders')
+        .set('authorization', `token ${adminToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.a.json;
@@ -39,6 +41,7 @@ describe('Orders', () => {
     it('should return all available orders', (done) => {
       chai.request(app)
         .get('/api/v1/orders')
+        .set('authorization', `token ${adminToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body.data.length).to.be.equal(1);
@@ -51,8 +54,20 @@ describe('Orders', () => {
     it('should return a json Object', (done) => {
       chai.request(app)
         .get(`/api/v1/orders/${firstOrderId}`)
+        .set('authorization', `token ${userToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
+          expect(res).to.be.a.json;
+          done();
+        });
+    });
+    it('should an error if order ID is invalid', (done) => {
+      chai.request(app)
+        .get(`/api/v1/orders/${invalidOrderId}`)
+        .set('authorization', `token ${userToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body.errors.order_id).to.equal('A valid order Id is required');
           expect(res).to.be.a.json;
           done();
         });
@@ -63,7 +78,7 @@ describe('Orders', () => {
     it('should place a new order', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
-        // .set('authorization', 'token thisisatoken')
+        .set('authorization', `token ${userToken}`)
         .send(secondOrder)
         .end((err, res) => {
           if (err) return done(err);
@@ -76,6 +91,7 @@ describe('Orders', () => {
     it('should not place an order with invalid data', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
+        .set('authorization', `token ${userToken}`)
         .send({ a: 1 })
         .end((err, res) => {
           if (err) return done(err);
@@ -89,6 +105,7 @@ describe('Orders', () => {
     it('should update an order status', (done) => {
       chai.request(app)
         .put(`/api/v1/orders/${secondOrderId}`)
+        .set('authorization', `token ${userToken}`)
         .send({ status: modifiedStatus })
         .end((err, res) => {
           if (err) return done(err);
@@ -100,6 +117,7 @@ describe('Orders', () => {
     it('should return an error if status is invalid', (done) => {
       chai.request(app)
         .put(`/api/v1/orders/${invalidOrderId}`)
+        .set('authorization', `token ${userToken}`)
         .send({ status: invalidStatus })
         .end((err, res) => {
           expect(res).to.have.status(400);

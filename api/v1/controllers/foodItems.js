@@ -31,14 +31,14 @@ export default {
   },
 
   async updateFoodItem(req, res) {
-    const { food_item_id } = req.params;
-    if (food_item_id == null) {
-      res.status(400).send({ errors: { food_item_id: 'A valid food Item Id is required' } });
+    const food_item_id = parseInt(req.params.food_item_id, 10);
+    if (!food_item_id || Number.isNaN(food_item_id)) {
+      return res.status(400).send({ errors: { food_item_id: 'A valid food Item Id is required' } });
     }
 
     const previousFoodItem = await FoodItem.findById(food_item_id);
     if (!previousFoodItem.id) {
-      res.status(200).send({ errors: { global: 'Food item not found' } });
+      return res.status(200).send({ errors: { global: 'Food item not found' } });
     }
 
     previousFoodItem.name = req.body.name;
