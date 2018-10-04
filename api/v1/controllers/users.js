@@ -6,14 +6,9 @@ import Order from '../models/Order';
 
 dotenv.config();
 
-async function loginById(user_id) {
-  const user = await User.findById(user_id);
-
+function createToken(user) {
   const token = jwt.sign({
     id: user.id,
-    username: user.username,
-    email: user.email,
-    role: user.role,
     exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
   }, process.env.JWT_SECRET);
 
@@ -30,7 +25,7 @@ export default {
       return res.status(400).json({ errors: { global: 'Wrong credentials' } });
     }
     if (bcrypt.compareSync(password, user.password)) {
-      const token = await loginById(user.id);
+      const token = createToken(user);
       return res.status(200).send({ data: token, message: 'Sign in successful' });
     }
     return res.status(400).json({ errors: { global: 'Wrong credentials' } });
@@ -39,9 +34,14 @@ export default {
   async signUp(req, res) {
     const user = new User(req.body);
     user.password = bcrypt.hashSync(req.body.password, 10);
-    const newUser = await user.save();
 
-    const token = await loginById(newUser.id);
+    let newUser;
+    try {
+      newUser = await user.save();
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+    const token = createToken(newUser);
     return res.status(200).json({ data: token, message: 'Signup successful!' });
   },
 
@@ -87,7 +87,13 @@ export default {
       });
     }
 
+    // only admin or logged in user can view their order history
+    if (req.user.id !== user.id || req.user.role === 'admin') {
+      return res.status(403).send({ error: 'Unauthorized!' });
+    }
+
     const orders = await Order.getOrderHistory(user_id);
+
     if (!orders) {
       return res.status(200).send({
         data: [],
