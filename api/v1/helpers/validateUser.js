@@ -4,6 +4,7 @@ import User from '../models/User';
 
 function basicValidation(user) {
   const errors = {};
+  console.log('validating user', user);
   user.username = user.username && validator.trim(user.username);
   user.email = user.email && validator.trim(user.email);
 
@@ -59,7 +60,7 @@ export default {
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
     }
-
+    console.log('User valid, proceeding to controller', errors);
     next();
   },
   update(req, res, next) {
