@@ -26,7 +26,7 @@ export default {
   },
 
   async placeOrder(req, res) {
-    req.body.customer_id = req.user ? req.user.id : 1; // for testing purposes, use 1 as user id
+    req.body.customer_id = req.user.id;
 
     const foodItem = await FoodItem.findById(req.body.item_id);
     if (!foodItem) {

@@ -8,7 +8,7 @@ export default {
       return res.status(200).send({ data: [], message: 'No categories yet' });
     }
 
-    res.status(200).json(allCategories);
+    return res.status(200).json(allCategories);
   },
 
   async getCategoryById(req, res) {
@@ -22,13 +22,13 @@ export default {
       return res.status(200).send({ errors: { global: 'Category not found' } });
     }
 
-    res.status(200).json(category);
+    return res.status(200).json(category);
   },
 
   async createCategory(req, res) {
     const category = new Category(req.body);
     const newCategory = await category.save();
-    res.status(201).json({ data: newCategory, message: 'Category created!' });
+    return res.status(201).json({ data: newCategory, message: 'Category created!' });
   },
 
   async updateCategory(req, res) {
@@ -46,7 +46,7 @@ export default {
     category.description = req.body.description;
     const updatedCategory = await category.update();
 
-    res.status(200).send({
+    return res.status(200).send({
       data: updatedCategory,
       message: 'Category updated!',
     });

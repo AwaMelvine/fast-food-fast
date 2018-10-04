@@ -20,14 +20,14 @@ export default {
     if (!foodItem) {
       return res.status(200).send({ errors: { global: 'Food item not found' } });
     }
-    res.status(200).send({ data: foodItem, message: 'success' });
+    return res.status(200).send({ data: foodItem, message: 'success' });
   },
 
   async createFoodItem(req, res) {
     const foodItem = new FoodItem(req.body);
     const newFoodItem = await foodItem.save();
 
-    res.status(201).send({ data: newFoodItem, message: 'Food item created successfully' });
+    return res.status(201).send({ data: newFoodItem, message: 'Food item created successfully' });
   },
 
   async updateFoodItem(req, res) {
@@ -48,13 +48,13 @@ export default {
     previousFoodItem.unit_price = req.body.unit_price;
     const updatedFoodItem = await previousFoodItem.update();
 
-    res.status(200).json({ data: updatedFoodItem, message: 'Item updated successfully' });
+    return res.status(200).json({ data: updatedFoodItem, message: 'Item updated successfully' });
   },
 
   async deleteFoodItem(req, res) {
     const food_item_id = parseInt(req.params.food_item_id, 10);
     await FoodItem.delete(food_item_id);
 
-    res.status(204).json({ message: 'Item deleted successfully' });
+    return res.status(204).json({ message: 'Item deleted successfully' });
   },
 };

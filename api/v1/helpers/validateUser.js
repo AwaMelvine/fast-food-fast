@@ -4,35 +4,36 @@ import User from '../models/User';
 
 function basicValidation(user) {
   const errors = {};
-  user.username = validator.trim(user.username);
-  user.email = validator.trim(user.email);
+  user.username = user.username && validator.trim(user.username);
+  user.email = user.email && validator.trim(user.email);
 
-  if (!validator.isAlphanumeric(user.username)) {
+  if (user.username && !validator.isAlphanumeric(user.username)) {
     errors.username = 'Username should contain only characters and/or numbers';
   }
-  if (!validator.isLength(user.username, { min: 3, max: 255 })) {
+  if (user.username && !validator.isLength(user.username, { min: 3, max: 255 })) {
     errors.username = 'Username must have between 3 to 255 characters';
   }
-  if (validator.isEmpty(user.username)) {
+  if (user.username && validator.isEmpty(user.username)) {
     errors.username = 'Username is required';
   }
 
-  if (!validator.isEmail(user.email)) {
+  if (user.email && !validator.isEmail(user.email)) {
     errors.email = 'Email address is not valid!!';
   }
-  if (validator.isEmpty(user.email)) {
+  if (user.email && validator.isEmpty(user.email)) {
     errors.email = 'Email is required';
+  }
+
+
+  if ((user.password && user.password.length < 6) || (user.password && validator.isAlpha(user.password))) {
+    errors.password = 'Password must be at least 6 characters long and contain at least a number';
+  }
+  if (user.password && validator.isEmpty(user.password)) {
+    errors.password = 'Password is required';
   }
 
   if (user.password !== user.passwordConf) {
     errors.password = 'The two passwords do not match';
-  }
-
-  if ((user.password && user.password.length < 6) || validator.isAlpha(user.password)) {
-    errors.password = 'Password must be at least 6 characters long and contain at least a number';
-  }
-  if (validator.isEmpty(user.password)) {
-    errors.password = 'Password is required';
   }
 
   return errors;

@@ -1,30 +1,29 @@
 export const firstUser = {
-  role: 'user',
-  username: 'John First',
+  role: 'admin',
+  username: 'JohnFirst',
   email: 'john.first@example.com',
-  password: 'john',
-  passwordConf: 'john',
+  password: 'john123',
+  passwordConf: 'john123',
 };
 
 export const secondUser = {
-  role: 'user',
-  username: 'Smith Second',
+  username: 'SmithSecond',
   email: 'smith.second@example.com',
-  password: 'smith',
-  passwordConf: 'smith',
+  password: 'smith123',
+  passwordConf: 'smith123',
 };
 
 export const thirdUser = {
-  username: 'Jane Third',
+  username: 'JaneThird',
   email: 'jane.third@example.com',
-  password: 'jane',
-  passwordConf: 'jane',
+  password: 'jane123',
+  passwordConf: 'jane123',
 };
 
 
 export const correctCredentials = {
   email: 'john.first@example.com',
-  password: 'john',
+  password: 'john123',
 };
 
 export const wrongCredentials = {
@@ -34,11 +33,11 @@ export const wrongCredentials = {
 
 export const modifiedSecondUser = {
   role: 'user',
-  username: 'Smith Second II',
+  username: 'SmithSecondII',
   email: 'smith.second@example.com',
-  password: 'smith',
-  passwordOld: 'smith',
-  passwordConf: 'smith',
+  password: 'smith123',
+  passwordOld: 'smith123',
+  passwordConf: 'smith123',
 };
 
 export const failPassOldUser = { ...modifiedSecondUser, passwordOld: `${modifiedSecondUser.passwordOld}mutilate` };
@@ -46,7 +45,10 @@ export const failPassOldUser = { ...modifiedSecondUser, passwordOld: `${modified
 export const failConfPassUser = { ...modifiedSecondUser, passwordConf: `${modifiedSecondUser.passwordConf}mutilate` };
 
 export const invalidUser = {
-  name: 'Snowball',
+  username: 'Snowball',
+  email: 'test',
+  password: 'mypass1',
+  passwordConf: 'mypass1',
 };
 
 export const created_at = '03-09-2018';
@@ -60,6 +62,6 @@ export const invalidUserId = 'a';
 export const notFoundUserId = 8888;
 
 
-export const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBd2EiLCJlbWFpbCI6Im1lbHZpbmVhd2FAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJleHAiOjE1Mzg2Mjg3ODAsImlhdCI6MTUzODU0MjM4MH0.W6OL_pOki6yLegoN7-ksOWYQ36oc9T4iNrT8Z_LtZZo';
-export const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJBd2FNZWx2aW5lIiwiZW1haWwiOiJtZWx2aW5lYXdhMUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE1Mzg2MjkxMDYsImlhdCI6MTUzODU0MjcwNn0.iF5lCsXpGCto6oQjAawnsLhAxhqFh3A3KMeLsUgw-NU';
-export const inValidToken = 'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBd2EiLCJlbWFpbCI6ImF3YW1lbHZpbkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImV4cCI6MTUzODI0OTg1OSwiaWF0IjoxNTM4MTYzNDU5fQ.V3tFfAq8AhdgJ3K4BXKRVrNunmQmRgLIg2EZa0NDf5c';
+export const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNTQxMjU1MjE0LCJpYXQiOjE1Mzg2NjMyMTR9.8hEyI6RqQkY6KkSFJjmYQBvvtV-T6U8kIc9pcn6YI_A';
+export const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTQxMjUxOTM1LCJpYXQiOjE1Mzg2NTk5MzV9.MVOHv_qFPuS9lbt4gxK4t5DU6j71vGdAloo85TAHNj4';
+export const inValidToken = 'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTQxMjUxOTM1LCJpYXQiOjE1Mzg2NTk5MzV9.MVOHv_qFPuS9lbt4gxK4t5DU6j71vGdAloo85TAHNj4';
