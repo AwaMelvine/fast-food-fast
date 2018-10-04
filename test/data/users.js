@@ -28,7 +28,7 @@ export const correctCredentials = {
 
 export const wrongCredentials = {
   email: 'wrong.email@example.com',
-  password: 'john',
+  password: 'john123',
 };
 
 export const modifiedSecondUser = {

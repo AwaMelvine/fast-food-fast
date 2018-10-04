@@ -2,13 +2,16 @@ import db from '../db';
 
 export default class User {
   constructor(user) {
-    if (user && user.id) {
+    if (!user) {
+      throw new Error('User details required');
+    }
+    if (user.id) {
       this.id = user.id;
     }
-    this.role = user && user.role ? user.role : 'user';
-    this.username = user && user.username ? user.username : null;
-    this.email = user && user.email ? user.email : null;
-    this.password = user && user.password ? user.password : null;
+    this.role = user.role ? user.role : 'user';
+    this.username = user.username ? user.username : null;
+    this.email = user.email ? user.email : null;
+    this.password = user.password ? user.password : null;
     if (user.created_at) {
       this.created_at = user.created_at;
     }
@@ -66,6 +69,33 @@ export default class User {
     try {
       const { rows } = await db.query(queryString, params);
       return rows;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  static async findOne(query = {}) {
+    let paramsString = '';
+    let queryString = '';
+    const params = [];
+
+    if (Object.keys(query).length > 0) {
+      // Build query string from parameters
+      Object.keys(query).map((key, index) => {
+        index += 1;
+        const extendQuery = index === 1 ? '' : ' AND';
+        paramsString += `${extendQuery} ${key}=$${index}`;
+        params.push(query[key]);
+        return key;
+      });
+
+      queryString = `SELECT * FROM users WHERE ${paramsString} LIMIT 1`;
+    }
+
+    try {
+      const { rows } = await db.query(queryString, params);
+      const user = new User(rows[0]);
+      return user;
     } catch (error) {
       return error;
     }

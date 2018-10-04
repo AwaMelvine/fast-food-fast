@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import User from '../models/User';
 import Order from '../models/Order';
+import User from '../models/User';
 
 dotenv.config();
 
@@ -18,8 +18,15 @@ function createToken(user) {
 export default {
   async login(req, res) {
     const { email, password } = req.body;
-    const rows = await User.find({ email });
-    const user = rows[0];
+
+    let user;
+    try {
+      const rows = await User.find({ email });
+      user = rows[0];
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+
 
     if (!user) {
       return res.status(400).json({ errors: { global: 'Wrong credentials' } });
@@ -52,7 +59,13 @@ export default {
   },
 
   async getAllUsers(req, res) {
-    const users = await User.find({});
+    let users;
+    try {
+      users = await User.find({});
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+
     if (!users.length) {
       return res.status(200).send({ data: [], message: 'No users yet' });
     }
@@ -79,7 +92,12 @@ export default {
       return res.status(400).send({ errors: { user_id: 'A valid user Id is required' } });
     }
 
-    const user = await User.findById(user_id);
+    let user;
+    try {
+      user = await User.findById(user_id);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
     if (!user) {
       return res.status(404).send({
         data: [],
@@ -92,7 +110,12 @@ export default {
       return res.status(403).send({ error: 'Unauthorized!' });
     }
 
-    const orders = await Order.getOrderHistory(user_id);
+    let orders;
+    try {
+      orders = await Order.getOrderHistory(user_id);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
 
     if (!orders) {
       return res.status(200).send({
@@ -107,7 +130,13 @@ export default {
     const user = new User(req.body);
     user.password = bcrypt.hashSync(req.body.password, 10);
     user.role = 'admin';
-    const newUser = await user.save();
+
+    let newUser;
+    try {
+      newUser = await user.save();
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
 
     return res.status(201).json({ data: newUser, message: 'Admin user created' });
   },
@@ -119,7 +148,13 @@ export default {
     }
 
     // Confirm old password before update
-    const user = await User.findById(user_id);
+    let user;
+    try {
+      user = await User.findById(user_id);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+
     if (!user) {
       return res.status(200).send({ errors: { global: 'User not found' } });
     }
@@ -132,7 +167,15 @@ export default {
     user.email = req.body.email;
     user.role = req.body.role;
     user.password = bcrypt.hashSync(req.body.password, 10);
-    const updatedUser = await user.update();
+
+    let updatedUser;
+    try {
+      updatedUser = await user.update();
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+
+
     return res.status(200).json({ data: updatedUser, message: 'User successfully updated' });
   },
 

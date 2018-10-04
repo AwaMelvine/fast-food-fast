@@ -1,12 +1,18 @@
+import validator from 'validator';
 import Category from '../models/Category';
 
 function basicValidation(category) {
   const errors = {};
 
-  if (!category.name) {
+  if (category.name && !validator.isLength(category.name, { min: 3, max: 255 })) {
+    errors.name = 'The category should be at least 3 characters long and at most 255';
+  }
+
+  if (category.name && validator.isEmpty(category.name)) {
     errors.name = 'Category name is required';
   }
-  if (!category.description) {
+
+  if (category.description && validator.isEmpty(category.description)) {
     errors.description = 'Category Description is required';
   }
 
