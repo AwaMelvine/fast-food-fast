@@ -8,7 +8,7 @@ export default {
     if (!allOrders.length) {
       return res.status(200).send({ data: [], message: 'No orders yet' });
     }
-    res.status(200).json({ data: allOrders, message: 'success' });
+    return res.status(200).json({ data: allOrders, message: 'success' });
   },
 
   async getOrderById(req, res) {
