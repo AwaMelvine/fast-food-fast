@@ -4,7 +4,7 @@ import User from '../models/User';
 
 function basicValidation(user) {
   const errors = {};
-  console.log('validating user', user);
+
   user.username = user.username && validator.trim(user.username);
   user.email = user.email && validator.trim(user.email);
 
@@ -44,7 +44,7 @@ export default {
   async create(req, res, next) {
     const user = req.body;
     const errors = basicValidation(user);
-
+    console.log('basic validation errors', errors);
     let otherUser;
     try {
       otherUser = await User.find({ email: user.email });
