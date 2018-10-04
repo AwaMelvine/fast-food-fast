@@ -44,7 +44,14 @@ export default {
     const user = req.body;
     const errors = basicValidation(user);
 
-    const otherUser = await User.find({ email: user.email });
+    let otherUser;
+    try {
+      otherUser = await User.find({ email: user.email });
+    } catch (error) {
+      return res.status(500).send({ error });
+    }
+
+
     if (otherUser.length > 0) {
       errors.email = 'Email already exists';
     }
