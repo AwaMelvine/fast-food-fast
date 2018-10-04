@@ -4,6 +4,7 @@ import User from '../models/User';
 
 function basicValidation(user) {
   const errors = {};
+
   user.username = user.username && validator.trim(user.username);
   user.email = user.email && validator.trim(user.email);
 
@@ -44,16 +45,20 @@ export default {
     const user = req.body;
     const errors = basicValidation(user);
 
-    const otherUser = await User.find({ email: user.email });
-    if (otherUser.length > 0) {
-      errors.email = 'Email already exists';
-    }
+    let otherUser;
+    try {
+      otherUser = await User.find({ email: user.email });
+      if (otherUser.length > 0) {
+        errors.email = 'Email already exists';
+      }
 
-    if (Object.keys(errors).length !== 0) {
-      return res.status(400).json({ errors });
+      if (Object.keys(errors).length !== 0) {
+        return res.status(400).json({ errors });
+      }
+      next();
+    } catch (error) {
+      return res.status(500).send({ error });
     }
-
-    next();
   },
   update(req, res, next) {
     const user = req.body;
