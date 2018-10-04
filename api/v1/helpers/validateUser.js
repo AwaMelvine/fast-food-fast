@@ -44,7 +44,7 @@ export default {
   async create(req, res, next) {
     const user = req.body;
     const errors = basicValidation(user);
-    console.log('basic validation errors', errors);
+
     let otherUser;
     try {
       otherUser = await User.find({ email: user.email });
@@ -55,7 +55,6 @@ export default {
       if (Object.keys(errors).length !== 0) {
         return res.status(400).json({ errors });
       }
-      console.log('User valid, proceeding to controller', errors);
       next();
     } catch (error) {
       return res.status(500).send({ error });
