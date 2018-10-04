@@ -8,11 +8,11 @@ function basicValidation(category) {
     errors.name = 'The category should be at least 3 characters long and at most 255';
   }
 
-  if (category.name && validator.isEmpty(category.name)) {
+  if (!category.name || validator.isEmpty(category.name)) {
     errors.name = 'Category name is required';
   }
 
-  if (category.description && validator.isEmpty(category.description)) {
+  if (!category.description || validator.isEmpty(category.description)) {
     errors.description = 'Category Description is required';
   }
 
@@ -28,7 +28,6 @@ export default {
     if (otherCategory.length > 0) {
       errors.name = 'A category with that name already exists';
     }
-
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
     }

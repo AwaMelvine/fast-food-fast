@@ -59,8 +59,16 @@ export default {
   },
 
   update(req, res, next) {
+    const errors = {};
     const order = req.body;
-    const errors = basicValidation(order);
+
+    if (order.status && !statusEnum.includes(order.status)) {
+      errors.status = 'Order status must be either, COMPLETED, CANCELLED, PROCESSING, DECLINED, ACCEPTED, NEW';
+    }
+
+    if (!order.status || validator.isEmpty(order.status)) {
+      errors.status = 'Order status required';
+    }
 
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
