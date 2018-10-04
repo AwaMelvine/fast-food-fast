@@ -1,6 +1,7 @@
 // This file creates the database tables needed
 import { Pool, Client } from 'pg';
 import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
 
 import db from './index';
 
@@ -84,18 +85,19 @@ const createOrdersTable = `CREATE TABLE orders (
   status order_status DEFAULT 'NEW',
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NULL,
-  date_to_deliver TIMESTAMP DEFAULT NULL,
   FOREIGN KEY (customer_id) REFERENCES users (id),
   FOREIGN KEY (item_id) REFERENCES food_items (id)
 )`;
 
 
 const initUser = async () => {
+  const password = bcrypt.hashSync('melvine1', 10);
+  const params = ['admin', 'Melvine', 'admin.melvine@test.com', password];
   try {
     await db.query(`INSERT INTO users (role, username, email, password)
-      VALUES ('user', 'TestUser', 'testuser@test.com', 'gikflks')`);
+      VALUES ($1, $2, $3, $4)`, params);
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
@@ -126,9 +128,9 @@ async function initializeTables() {
     await client.query(createOrdersTable);
 
 
-    if (process.env.NODE_ENV === 'test') {
-      // await initUser();
-      // await initFoodItems();
+    if (process.env.NODE_ENV !== 'test') {
+      await initUser();
+      await initFoodItems();
     }
 
 

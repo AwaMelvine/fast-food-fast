@@ -9,7 +9,6 @@ export default class Order {
     this.item_id = order.item_id ? order.item_id : 0;
     this.quantity = order.quantity ? order.quantity : 0;
     this.total_price = order.total_price ? order.total_price : 0;
-    this.date_to_deliver = order.date_to_deliver ? order.date_to_deliver : null;
     this.status = order.status ? order.status : null;
     if (order.created_at) {
       this.created_at = order.created_at;
@@ -20,10 +19,10 @@ export default class Order {
   }
 
   async save() {
-    const params = [this.customer_id, this.item_id, this.quantity, this.total_price, this.date_to_deliver, this.status];
+    const params = [this.customer_id, this.item_id, this.quantity, this.total_price, this.status];
     try {
-      const { rows } = await db.query(`INSERT INTO orders (customer_id, item_id, quantity, total_price, date_to_deliver, status)
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, params);
+      const { rows } = await db.query(`INSERT INTO orders (customer_id, item_id, quantity, total_price, status)
+      VALUES ($1, $2, $3, $4, $5) RETURNING *`, params);
       const newOrder = new Order(rows[0]);
       return newOrder;
     } catch (error) {
@@ -32,17 +31,16 @@ export default class Order {
   }
 
   async update() {
-    const params = [this.customer_id, this.item_id, this.quantity, this.total_price, this.date_to_deliver, this.status, this.id];
+    const params = [this.customer_id, this.item_id, this.quantity, this.total_price, this.status, this.id];
     try {
       const { rows } = await db.query(`UPDATE orders SET 
                           customer_id=$1,
                           item_id=$2,
                           quantity=$3,
                           total_price=$4,
-                          date_to_deliver=$5,
-                          status=$6,
+                          status=$5,
                           updated_at=NOW() 
-                      WHERE id=$7 RETURNING *`, params);
+                      WHERE id=$6 RETURNING *`, params);
       const order = new Order(rows[0]);
       return order;
     } catch (error) {
