@@ -48,20 +48,18 @@ export default {
     let otherUser;
     try {
       otherUser = await User.find({ email: user.email });
+      if (otherUser.length > 0) {
+        errors.email = 'Email already exists';
+      }
+
+      if (Object.keys(errors).length !== 0) {
+        return res.status(400).json({ errors });
+      }
+      console.log('User valid, proceeding to controller', errors);
+      next();
     } catch (error) {
       return res.status(500).send({ error });
     }
-
-
-    if (otherUser.length > 0) {
-      errors.email = 'Email already exists';
-    }
-
-    if (Object.keys(errors).length !== 0) {
-      return res.status(400).json({ errors });
-    }
-    console.log('User valid, proceeding to controller', errors);
-    next();
   },
   update(req, res, next) {
     const user = req.body;
