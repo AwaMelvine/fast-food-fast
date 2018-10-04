@@ -88,7 +88,7 @@ describe('Food Categories', () => {
       chai.request(app)
         .post('/api/v1/categories')
         .set('authorization', `token ${adminToken}`)
-        .send({ a: 1 })
+        .send({ foo: 'bar' })
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(400);

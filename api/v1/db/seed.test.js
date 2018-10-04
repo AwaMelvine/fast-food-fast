@@ -60,10 +60,10 @@ export const initCategories = async () => {
 
 
 export const initOrders = async () => {
-  const params = [firstOrder.customer_id, firstOrder.item_id, firstOrder.quantity, firstOrder.total_price, firstOrder.date_to_deliver, firstOrder.status];
+  const params = [firstOrder.customer_id, firstOrder.item_id, firstOrder.quantity, firstOrder.total_price, firstOrder.status];
   try {
-    await db.query(`INSERT INTO orders (customer_id, item_id, quantity, total_price, date_to_deliver, status)
-    VALUES ($1, $2, $3, $4, $5, $6)`, params);
+    await db.query(`INSERT INTO orders (customer_id, item_id, quantity, total_price, status)
+    VALUES ($1, $2, $3, $4, $5)`, params);
   } catch (error) {
     return error;
   }

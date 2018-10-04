@@ -38,6 +38,7 @@ describe('User accounts', () => {
         .post('/api/v1/auth/signup')
         .send(secondUser)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body).to.have.property('data');
           expect(res.body.message).to.be.equal('Signup successful!');
@@ -50,6 +51,7 @@ describe('User accounts', () => {
         .post('/api/v1/auth/signup')
         .send(invalidUser)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
           done();
@@ -60,9 +62,10 @@ describe('User accounts', () => {
         .post('/api/v1/auth/signup')
         .send(failConfPassUser)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
-          expect(res.body.errors.passwordConf).to.be.equal('The two passwords do not match');
+          expect(res.body.errors.password).to.be.equal('The two passwords do not match');
           done();
         });
     });
@@ -73,6 +76,7 @@ describe('User accounts', () => {
         .post('/api/v1/auth/login')
         .send(correctCredentials)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.message).to.be.equal('Sign in successful');
           expect(res).to.be.a.json;
@@ -84,6 +88,7 @@ describe('User accounts', () => {
         .post('/api/v1/auth/login')
         .send({ name: 'Bob' })
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
           done();
@@ -94,6 +99,7 @@ describe('User accounts', () => {
         .post('/api/v1/auth/login')
         .send(wrongCredentials)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('errors');
           expect(res.body.errors.global).to.be.equal('Wrong credentials');
@@ -101,12 +107,13 @@ describe('User accounts', () => {
         });
     });
   });
-  describe('POST /auth/logout - User login', () => {
+  describe('POST /auth/logout - User logout', () => {
     it('should log user out', (done) => {
       chai.request(app)
         .get('/api/v1/auth/logout')
-        .set('authorization', 'token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBd2EiLCJlbWFpbCI6Im1lbHZpbmVhd2FAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJleHAiOjE1Mzg1MjU3ODgsImlhdCI6MTUzODQzOTM4OH0.1a-5wRhK1EDu6P4C2tOA2cwdOiBhnn5H8bNPTaG-dak')
+        .set('authorization', userToken)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.message).to.be.equal('You are now logged out');
           done();
@@ -118,6 +125,7 @@ describe('User accounts', () => {
       chai.request(app)
         .get('/api/v1/users')
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.length).to.be.equal(2);
           expect(res.body.message).to.be.equal('success');
@@ -130,6 +138,7 @@ describe('User accounts', () => {
       chai.request(app)
         .get(`/api/v1/users/${secondUserId}`)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.username).to.be.equal(secondUser.username);
           expect(res.body.message).to.be.equal('success');
@@ -139,7 +148,9 @@ describe('User accounts', () => {
     it('should return an error message if ID is invalid', (done) => {
       chai.request(app)
         .get(`/api/v1/users/${invalidUserId}`)
+        .set('authorization', `token ${userToken}`)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(400);
           expect(res.body.errors.user_id).to.be.equal('A valid user Id is required');
           done();
@@ -149,6 +160,7 @@ describe('User accounts', () => {
       chai.request(app)
         .get(`/api/v1/users/${notFoundUserId}`)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.length).to.be.equal(0);
           expect(res.body.message).to.be.equal('User not found');
@@ -160,7 +172,9 @@ describe('User accounts', () => {
     it('should return an error message if Id is invalid', (done) => {
       chai.request(app)
         .get(`/api/v1/users/${invalidUserId}/orders`)
+        .set('authorization', `token ${userToken}`)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(400);
           expect(res.body.errors.user_id).to.be.equal('A valid user Id is required');
           done();
@@ -169,7 +183,9 @@ describe('User accounts', () => {
     it('should return a message if user not found', (done) => {
       chai.request(app)
         .get(`/api/v1/users/${notFoundUserId}/orders`)
+        .set('authorization', `token ${userToken}`)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(404);
           expect(res.body.message).to.be.equal('User not found');
           done();
@@ -183,6 +199,7 @@ describe('User accounts', () => {
         .set('authorization', `token ${adminToken}`)
         .send(thirdUser)
         .end((err, res) => {
+          if (err) return done(err);
           expect(res).to.have.status(201);
           expect(res.body.data.email).to.be.equal(thirdUser.email);
           expect(res.body.data.role).to.be.equal('admin');
@@ -232,7 +249,7 @@ describe('User accounts', () => {
       chai.request(app)
         .put(`/api/v1/users/${secondUserId}`)
         .set('authorization', `token ${userToken}`)
-        .send({ name: 'Bob' })
+        .send(invalidUser)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(400);
