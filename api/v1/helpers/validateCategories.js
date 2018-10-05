@@ -33,7 +33,6 @@ export default {
     }
     next();
   },
-
   update(req, res, next) {
     const category = req.body;
     const errors = basicValidation(category);
@@ -43,5 +42,4 @@ export default {
     }
     next();
   },
-
 };
