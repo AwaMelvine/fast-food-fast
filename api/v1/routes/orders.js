@@ -6,9 +6,9 @@ import authenticate from '../helpers/authenticate';
 
 const router = express.Router();
 
-router.get('/', authenticate.admin, ordersController.getAllOrders);
+router.get('/', authenticate.user, authenticate.admin, ordersController.getAllOrders);
 router.get('/:order_id', authenticate.user, ordersController.getOrderById);
-router.post('/', validateOrder.create, authenticate.user, ordersController.placeOrder);
+router.post('/', validateOrder.create, authenticate.user, authenticate.admin, ordersController.placeOrder);
 router.put('/:order_id', validateOrder.update, authenticate.user, ordersController.updateOrderStatus);
 
 export default router;
