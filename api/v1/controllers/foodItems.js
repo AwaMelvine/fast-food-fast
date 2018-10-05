@@ -50,7 +50,7 @@ export default {
 
   async deleteFoodItem(req, res) {
     const food_item_id = parseInt(req.params.food_item_id, 10);
-    await FoodItem.delete(food_item_id);
+    const results = await FoodItem.delete(food_item_id);
 
     return res.status(204).json({ message: 'Item deleted successfully' });
   },
