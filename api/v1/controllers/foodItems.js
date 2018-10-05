@@ -4,9 +4,6 @@ export default {
 
   async getAllFoodItems(req, res) {
     const allFoodItems = await FoodItem.find({});
-    if (!allFoodItems.length) {
-      return res.status(200).send({ data: [], message: 'No food items yet' });
-    }
     return res.status(200).send({ data: allFoodItems, message: 'success' });
   },
 

@@ -60,6 +60,7 @@ export default {
       return res.status(500).send({ error });
     }
   },
+
   update(req, res, next) {
     const user = req.body;
     const errors = basicValidation(user);
@@ -69,7 +70,6 @@ export default {
     }
     next();
   },
-
 
   login(req, res, next) {
     const errors = {};
