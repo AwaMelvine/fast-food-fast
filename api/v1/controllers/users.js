@@ -22,7 +22,7 @@ export default {
     let user;
     try {
       const rows = await User.find({ email });
-      user = rows[0];
+      [user] = rows;
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
