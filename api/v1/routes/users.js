@@ -6,7 +6,7 @@ import authenticate from '../helpers/authenticate';
 
 const router = express.Router();
 
-router.get('/', usersController.getAllUsers);
+router.get('/', authenticate.user, authenticate.admin, usersController.getAllUsers);
 router.post('/', validateUser.create, authenticate.user, authenticate.admin, usersController.registerUser);
 
 router.get('/:user_id/orders', authenticate.user, usersController.userOrderHistory);

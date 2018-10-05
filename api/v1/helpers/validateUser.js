@@ -65,6 +65,10 @@ export default {
     const user = req.body;
     const errors = basicValidation(user);
 
+    if (!user.passwordOld || validator.isEmpty(user.passwordOld)) {
+      errors.passwordOld = 'Old password is required';
+    }
+
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
     }
