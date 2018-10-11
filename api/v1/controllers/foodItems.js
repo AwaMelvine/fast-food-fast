@@ -4,9 +4,6 @@ export default {
 
   async getAllFoodItems(req, res) {
     const allFoodItems = await FoodItem.find({});
-    if (!allFoodItems.length) {
-      return res.status(200).send({ data: [], message: 'No food items yet' });
-    }
     return res.status(200).send({ data: allFoodItems, message: 'success' });
   },
 
@@ -53,7 +50,7 @@ export default {
 
   async deleteFoodItem(req, res) {
     const food_item_id = parseInt(req.params.food_item_id, 10);
-    await FoodItem.delete(food_item_id);
+    const results = await FoodItem.delete(food_item_id);
 
     return res.status(204).json({ message: 'Item deleted successfully' });
   },

@@ -86,10 +86,10 @@ export default class Order {
   }
 
   static async getOrderHistory(userId) {
-    const text = 'SELECT orders.*, i.name, i.image FROM food_items i LEFT JOIN orders ON i.id=orders.item_id WHERE customer_id=$1 LIMIT 1';
+    const text = 'SELECT orders.*, i.name, i.image FROM food_items i LEFT JOIN orders ON i.id=orders.item_id WHERE customer_id=$1';
     try {
       const { rows } = await db.query(text, [userId]);
-      return rows.length ? rows : false;
+      return rows.length ? rows : [];
     } catch (error) {
       return error;
     }

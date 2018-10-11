@@ -54,9 +54,15 @@ export default {
     next();
   },
 
-  update(req, res, next) {
+  async update(req, res, next) {
     const foodItem = req.body;
     const errors = basicItemValidation(foodItem);
+
+    const item = await FoodItem.find({ name: foodItem.name });
+
+    if (item.length > 0 && item[0].id !== req.params.food_item_id) {
+      errors.name = 'Food item already exists';
+    }
 
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
