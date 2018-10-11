@@ -1,12 +1,12 @@
-var menuIcon = document.querySelector('.menu-icon');
-var navLinks = document.querySelector('.menu-links');
-var nav = document.getElementsByTagName('nav')[0];
+const menuIcon = document.querySelector('.menu-icon');
+const navLinks = document.querySelector('.menu-links');
+const nav = document.getElementsByTagName('nav')[0];
 
-menuIcon.addEventListener('click', function (e) {
+menuIcon.addEventListener('click', (e) => {
   navLinks.classList.toggle('showing');
 });
 
-window.addEventListener('scroll', function () {
+window.addEventListener('scroll', () => {
   if (document.documentElement.scrollTop >= 30) {
     nav.classList.add('solid');
   } else {

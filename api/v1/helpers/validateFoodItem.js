@@ -59,7 +59,8 @@ export default {
     const errors = basicItemValidation(foodItem);
 
     const item = await FoodItem.find({ name: foodItem.name });
-    if (item.length > 1) {
+
+    if (item.length > 0 && item[0].id !== req.params.food_item_id) {
       errors.name = 'Food item already exists';
     }
 

@@ -67,7 +67,7 @@ const createCategoriesTable = `CREATE TABLE categories (
 
 const createFoodItemsTable = `CREATE TABLE food_items (
   id SERIAL PRIMARY KEY,
-  name varchar(255) NOT NULL,
+  name varchar(255) NOT NULL UNIQUE,
   image varchar(255) NOT NULL,
   description text,
   quantity integer NOT NULL,
