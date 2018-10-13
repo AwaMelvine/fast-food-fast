@@ -66,6 +66,19 @@ h6 {
   border-color: #6e6c74;
 }
 
+.form .form-errors {
+  width: auto;
+  margin: 5px auto;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  position: relative;
+  padding: .5rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+
 /* Buttons */
 .btn {
   text-decoration: none;

@@ -49,7 +49,7 @@ export default {
       return res.status(500).json({ error: error.message });
     }
     const token = createToken(newUser);
-    return res.status(200).json({ data: token, message: 'Signup successful!' });
+    return res.status(200).json({ data: { token, user: newUser }, message: 'Signup successful!' });
   },
 
   async logout(req, res) {
