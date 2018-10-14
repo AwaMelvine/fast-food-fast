@@ -5,6 +5,7 @@ const formInfo = document.getElementById('form-info');
 
 function loginValidation(user) {
   const errors = {};
+  
   if (!user.email || user.email === '') {
     errors.email = 'Email is required';
   }
@@ -31,7 +32,6 @@ function loginUser(e) {
     email: email.value,
     password: password.value,
   };
-  console.log(user);
 
   const errors = loginValidation(user);
   if (Object.keys(errors) > 0) {
@@ -60,7 +60,7 @@ function loginUser(e) {
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
       window.location.href = 'index.html';
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => console.error(error));
 }
 
 loginBtn.addEventListener('click', loginUser);
