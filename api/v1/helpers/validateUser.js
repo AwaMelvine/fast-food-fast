@@ -79,7 +79,7 @@ export default {
   login(req, res, next) {
     const errors = {};
     const user = req.body;
-    if (user.email && validator.isEmpty(user.email)) {
+    if (user.username && validator.isEmpty(user.username)) {
       errors.username = 'Username or Email is required';
     }
     if (!user.password || validator.isEmpty(user.password)) {
