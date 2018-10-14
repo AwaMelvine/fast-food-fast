@@ -33,7 +33,7 @@ export default {
     }
     if (bcrypt.compareSync(password, user.password)) {
       const token = createToken(user);
-      return res.status(200).send({ data: token, message: 'Sign in successful' });
+      return res.status(200).send({ data: { token, user }, message: 'Sign in successful' });
     }
     return res.status(400).json({ errors: { global: 'Wrong credentials' } });
   },
