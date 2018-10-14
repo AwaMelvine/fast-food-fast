@@ -1,12 +1,12 @@
-const username = document.getElementById('username');
+const email = document.getElementById('email');
 const password = document.getElementById('password');
 const loginBtn = document.getElementById('loginBtn');
 const formInfo = document.getElementById('form-info');
 
 function loginValidation(user) {
   const errors = {};
-  if (!user.username || user.username === '') {
-    errors.username = 'Username / Email is required';
+  if (!user.email || user.email === '') {
+    errors.email = 'Email is required';
   }
   if (!user.password || user.password === '') {
     errors.password = 'Password is required';
@@ -28,7 +28,7 @@ function loginUser(e) {
   formInfo.innerHTML = '';
 
   const user = {
-    username: username.value,
+    email: email.value,
     password: password.value,
   };
   console.log(user);
@@ -55,7 +55,7 @@ function loginUser(e) {
       const userInfo = {
         token: response.data.token,
         id: response.data.user.id,
-        username: response.data.user.username,
+        email: response.data.user.email,
       };
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
       window.location.href = 'index.html';
