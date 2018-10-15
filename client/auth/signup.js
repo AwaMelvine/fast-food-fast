@@ -53,7 +53,7 @@ function signupUser(e) {
   if (Object.keys(errors) > 0) {
     displayFormErrors(errors);
   }
-  
+
   fetch('https://fast-food-fast-service.herokuapp.com/api/v1/auth/signup', {
     method: 'POST',
     mode: 'cors',

@@ -86,6 +86,10 @@
   margin: 10px;
 }
 
+#item-details-container {
+  min-height: 500px;
+}
+
 
 .content .sidebar {
   width: 24%;
