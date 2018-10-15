@@ -5,7 +5,7 @@ const formInfo = document.getElementById('form-info');
 
 function loginValidation(user) {
   const errors = {};
-  
+
   if (!user.email || user.email === '') {
     errors.email = 'Email is required';
   }
