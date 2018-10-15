@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', router);
+
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(process.env.PORT || 5000, () => console.log('Server started at localhost:5000'));

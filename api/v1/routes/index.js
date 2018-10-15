@@ -13,8 +13,9 @@ router.use('/api/v1/users', users);
 router.use('/api/v1/categories', categories);
 router.use('/api/v1/menu', foodItems);
 
-router.use('/*', (req, res) => {
-  res.status(404).json({ message: 'Page Not Found. Please go to /api/v1/orders to use our api' });
-});
+
+// router.use('/*', (req, res) => {
+//   res.status(404).json({ message: 'Page Not Found. Please go to /api/v1/orders to use our api' });
+// });
 
 export default router;

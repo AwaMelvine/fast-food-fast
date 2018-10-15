@@ -2,7 +2,7 @@ const detailsContainer = document.getElementById('item-details-container');
 
 const item_id = window.location.search.split('=')[1];
 
-function fetchItems() {
+function fetchItem() {
   fetch(`https://fast-food-fast-service.herokuapp.com/api/v1/menu/${item_id}`, {
     mode: 'cors',
     headers: new Headers({
@@ -33,4 +33,4 @@ function fetchItems() {
     .catch(error => console.error('Error:', error));
 }
 
-fetchItems();
+fetchItem();
