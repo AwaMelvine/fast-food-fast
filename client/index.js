@@ -10,7 +10,7 @@ function fetchItems() {
   }).then(res => res.json())
     .then((response) => {
       let itemsWrapper = '<div class="items-wrapper">';
-      response.data.forEach((item, index) => {
+      response.data.slice(0, 6).forEach((item, index) => {
         const tempIndex = index + 1;
         itemsWrapper = `${itemsWrapper}<div class="food-item">
         <img src="${item.image}" alt="">
