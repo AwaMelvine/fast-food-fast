@@ -68,16 +68,17 @@
     <div class="signup-wrapper">
       <form class="form" action="">
         <h3 class="center-text">Sign in</h3>
+        <div id="form-info"></div>
         <div class="input-group">
-          <label for="user">Username/Email</label>
-          <input type="user" id="user" class="input-field">
+          <label for="email">Email</label>
+          <input type="text" id="email" class="input-field">
         </div>
         <div class="input-group">
           <label for="password">Password</label>
           <input type="password" id="password" class="input-field">
         </div>
         <div class="input-group align-right">
-          <button type="submit" class="btn btn-dark-blue">Sign in</button>
+          <button type="submit" id="loginBtn" class="btn btn-dark-blue">Sign in</button>
         </div>
       </form>
     </div>
@@ -89,6 +90,8 @@
 
   <!-- JavaScripts -->
   <script src="javascripts/scripts.js"></script>
+
+  <script src="build/auth/login.js"></script>
 
 </body>
 

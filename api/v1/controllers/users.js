@@ -33,7 +33,7 @@ export default {
     }
     if (bcrypt.compareSync(password, user.password)) {
       const token = createToken(user);
-      return res.status(200).send({ data: token, message: 'Sign in successful' });
+      return res.status(200).send({ data: { token, user }, message: 'Sign in successful' });
     }
     return res.status(400).json({ errors: { global: 'Wrong credentials' } });
   },
@@ -49,7 +49,7 @@ export default {
       return res.status(500).json({ error: error.message });
     }
     const token = createToken(newUser);
-    return res.status(200).json({ data: token, message: 'Signup successful!' });
+    return res.status(200).json({ data: { token, user: newUser }, message: 'Signup successful!' });
   },
 
   async logout(req, res) {

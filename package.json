@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel ./api -d ./build -s",
+    "clean": "rm -rf build ui/build && mkdir build ui\\build",
+    "build-babel": "babel api -d ./build -s && babel client -d ui/build -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/app.js",
     "dev": "nodemon --exec babel-node -- api/app.js",
@@ -26,6 +26,7 @@
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
+    "cors": "^2.8.4",
     "coveralls": "^3.0.2",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",

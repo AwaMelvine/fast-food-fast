@@ -43,6 +43,7 @@ function basicValidation(user) {
 export default {
   async create(req, res, next) {
     const user = req.body;
+    console.log(req.body);
     const errors = basicValidation(user);
 
     let otherUser;
@@ -78,9 +79,8 @@ export default {
   login(req, res, next) {
     const errors = {};
     const user = req.body;
-
-    if (user.email && validator.isEmpty(user.email)) {
-      errors.username = 'Username or Email is required';
+    if (!user.email || validator.isEmpty(user.email)) {
+      errors.email = 'Email is required';
     }
     if (!user.password || validator.isEmpty(user.password)) {
       errors.password = 'Password is required';
