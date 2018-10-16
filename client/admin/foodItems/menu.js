@@ -2,7 +2,13 @@ const itemsTableBody = document.getElementById('items-table-body');
 const messageDiv = document.getElementById('message-div');
 
 function displayMessage() {
-
+  const message = JSON.parse(localStorage.getItem('message'));
+  console.log(message);
+  if (message) {
+    console.log('message found');
+    messageDiv.innerHTML = `<div class="msg ${message.type}">${message.text}</div>`;
+    localStorage.removeItem('message');
+  }
 }
 
 function fetchItems() {
@@ -69,6 +75,5 @@ function deleteItem(id) {
     });
 }
 
+displayMessage();
 fetchItems();
-
-console.log(document.getElementById('delete-item-btn'));
