@@ -41,7 +41,7 @@ function fetchItems() {
             <td>${item.unit_price}</td>
             <td>${item.quantity}</td>
             <td>
-              <a href="edit_food_item.html" class="btn btn-green btn-sm">
+              <a href="edit_food_item.html?id=${item.id}" class="btn btn-green btn-sm">
                 <i class="fa fa-pencil"></i> Edit</a>
             </td>
             <td>
