@@ -5,7 +5,6 @@ function displayMessage() {
   const message = JSON.parse(localStorage.getItem('message'));
   console.log(message);
   if (message) {
-    console.log('message found');
     messageDiv.innerHTML = `<div class="msg ${message.type}">${message.text}</div>`;
     localStorage.removeItem('message');
   }
@@ -58,7 +57,7 @@ function fetchItems() {
 
 function deleteItem(id) {
   const userInfo = localStorage.getItem('userInfo');
-  const token = userInfo.token;
+  const token = JSON.parse(userInfo).token;
 
   fetch(`https://fast-food-fast-service.herokuapp.com/api/v1/menu/${id}`, {
     method: 'DELETE',
@@ -69,10 +68,17 @@ function deleteItem(id) {
       Authorization: `token ${token}`,
     }),
   })
-    .then(res => res.json())
     .then(() => {
       fetchItems();
-    });
+      const message = {
+        text: 'Food item Deleted',
+        type: 'success',
+      };
+
+      localStorage.setItem('message', JSON.stringify(message));
+      displayMessage();
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 displayMessage();

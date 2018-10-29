@@ -50,7 +50,6 @@ function createItem(e) {
     quantity: quantity.value,
   };
 
-
   const errors = validateItem(item);
   if (Object.keys(errors).length > 0) {
     displayFormErrors(errors);
