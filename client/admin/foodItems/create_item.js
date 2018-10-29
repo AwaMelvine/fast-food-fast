@@ -59,7 +59,7 @@ function createItem(e) {
   const userInfo = localStorage.getItem('userInfo');
   const token = JSON.parse(userInfo).token;
 
-  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
+  fetch('http://localhost:5000/api/v1/menu', {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(item),
