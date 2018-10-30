@@ -10,7 +10,7 @@ const formInfo = document.getElementById('form-info');
 const itemId = window.location.search.split('=')[1];
 let item;
 
-fetch(`http://localhost:5000/api/v1/menu/${itemId}`, {
+fetch(`https://fast-food-fast-service.herokuapp.com/api/v1/menu/${itemId}`, {
   mode: 'cors',
   headers: new Headers({
     'Access-Control-Allow-Origin': '*',
@@ -79,7 +79,7 @@ function updateItem(e) {
   const userInfo = localStorage.getItem('userInfo');
   const token = JSON.parse(userInfo).token;
 
-  fetch(`http://localhost:5000/api/v1/menu/${itemId}`, {
+  fetch(`https://fast-food-fast-service.herokuapp.com/api/v1/menu/${itemId}`, {
     method: 'PUT',
     mode: 'cors',
     body: JSON.stringify(item),
