@@ -60,7 +60,7 @@ export default {
 
     const item = await FoodItem.find({ name: foodItem.name });
 
-    if (item.length > 0 && item[0].id !== req.params.food_item_id) {
+    if (item.length > 0 && item[0].id !== parseInt(req.params.food_item_id, 10)) {
       errors.name = 'Food item already exists';
     }
 

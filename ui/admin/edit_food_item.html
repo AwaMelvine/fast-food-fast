@@ -64,28 +64,30 @@
 
       <form action="food_items.html" class="form">
         <h3 class="center-text">Edit Fast-Food Item</h3>
+        <div id="form-info"></div>
+        <input type="hidden" name="id" id="id" value="1">
         <div class="input-group">
           <label for="name">Name:</label>
-          <input type="text" name="name" id="name" value="Fruit salad" class="input-field">
+          <input type="text" name="name" id="name" class="input-field">
         </div>
         <div class="input-group">
-          <label for="images">Images:</label>
-          <input type="file" name="images[]" id="images" class="input-field">
+          <label for="image">Images:</label>
+          <input type="file" name="image" id="image" class="input-field">
         </div>
         <div class="input-group">
           <label for="description">Description:</label>
-          <textarea name="description" id="description" cols="30" rows="4" class="input-field">Fruit salad is a dish consisting of various kinds of fruit, sometimes served in a liquid, either in their own juices or a syrup. When served as an appetizer or as a dessert, a fruit salad is sometimes known as a fruit cocktail or fruit cup.</textarea>
+          <textarea name="description" id="description" cols="30" rows="4" class="input-field"></textarea>
         </div>
         <div class="input-group">
-          <label for="price">Price per unit (NGN):</label>
-          <input type="number" name="price" id="price" value="1000" class="input-field">
+          <label for="unit_price">Price per unit (NGN):</label>
+          <input type="number" name="unit_price" id="unit_price" class="input-field">
         </div>
         <div class="input-group">
           <label for="quantity">Quantity</label>
-          <input type="number" name="quantity" id="quantity" value="50" class="input-field">
+          <input type="number" name="quantity" id="quantity" class="input-field">
         </div>
         <div class="input-group align-right">
-          <button type="submit" class="btn btn-dark-blue">Save Fast-Food Item</button>
+          <button type="button" id="submit-btn" class="btn btn-dark-blue">Save Fast-Food Item</button>
         </div>
       </form>
 
@@ -95,7 +97,10 @@
 
 
   <!-- JavaScripts -->
-  <script src="javascripts/scripts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
+  <script src="../javascripts/scripts.js"></script>
+
+  <script src="../build/admin/foodItems/edit_item.js"></script>
 
 </body>
 

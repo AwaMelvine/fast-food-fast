@@ -64,28 +64,29 @@
 
       <form action="food_items.html" class="form">
         <h3 class="center-text">Add Fast-Food Item</h3>
+        <div id="form-info"></div>
         <div class="input-group">
           <label for="name">Name:</label>
           <input type="text" name="name" id="name" class="input-field">
         </div>
         <div class="input-group">
-          <label for="images">Images:</label>
-          <input type="file" name="images[]" id="images" class="input-field">
+          <label for="image">Images:</label>
+          <input type="file" name="images" id="image" class="input-field">
         </div>
         <div class="input-group">
           <label for="description">Description:</label>
           <textarea name="description" id="description" cols="30" rows="4" class="input-field"></textarea>
         </div>
         <div class="input-group">
-          <label for="price">Price per unit (NGN):</label>
-          <input type="number" name="price" id="price" class="input-field">
+          <label for="unit_price">Price per unit (NGN):</label>
+          <input type="number" name="unit_price" id="unit_price" class="input-field">
         </div>
         <div class="input-group">
           <label for="quantity">Quantity</label>
           <input type="number" name="quantity" id="quantity" class="input-field">
         </div>
         <div class="input-group align-right">
-          <button type="submit" class="btn btn-dark-blue">Save Fast-Food Item</button>
+          <button type="button" id="submitBtn" class="btn btn-dark-blue">Save Fast-Food Item</button>
         </div>
       </form>
 
@@ -95,7 +96,9 @@
 
 
   <!-- JavaScripts -->
-  <script src="javascripts/scripts.js"></script>
+  <script src="../javascripts/scripts.js"></script>
+
+  <script src="../build/admin/foodItems/create_item.js"></script>
 
 </body>
 

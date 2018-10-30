@@ -62,7 +62,7 @@
   <div class="content full-page clear">
 
     <h3 class="center-text">All Fast-Food Items</h3>
-
+    <div id="message-div"></div>
     <div class="admin orders-table-wrapper">
       <div class="table-filter">
         <form action="" class="form">
@@ -95,44 +95,7 @@
             <th class="center-text" colspan="2">Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Vegetable Salad</td>
-            <td>
-              <img src="../images/salad.png" alt="">
-            </td>
-            <td>A garden salad consisting of lettuce, cucumber, scallions, cherry tomatoes, ...</td>
-            <td>2000</td>
-            <td>20</td>
-            <td>
-              <a href="edit_food_item.html" class="btn btn-green btn-sm">
-                <i class="fa fa-pencil"></i> Edit</a>
-            </td>
-            <td>
-              <a href="#" class="btn btn-red btn-sm">
-                <i class="fa fa-trash"></i> Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Gril led Fish</td>
-            <td>
-              <img src="../images/fish.png" alt="">
-            </td>
-            <td>Grilled fish consists of ...</td>
-            <td>1000</td>
-            <td>50</td>
-            <td>
-              <a href="edit_food_item.html" class="btn btn-green btn-sm">
-                <i class="fa fa-pencil"></i> Edit</a>
-            </td>
-            <td>
-              <a href="#" class="btn btn-red btn-sm">
-                <i class="fa fa-trash"></i> Delete</a>
-            </td>
-          </tr>
-
+        <tbody id="items-table-body">
         </tbody>
       </table>
     </div>
@@ -142,7 +105,10 @@
 
 
   <!-- JavaScripts -->
-  <script src="javascripts/scripts.js"></script>
+  <script src="../javascripts/scripts.js"></script>
+
+
+  <script src="../build/admin/foodItems/menu.js"></script>
 
 </body>
 
