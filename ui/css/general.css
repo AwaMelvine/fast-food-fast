@@ -309,3 +309,13 @@ header nav .auth-links a {
 .menu-links div {
   float: right;
 }
+
+
+/* CART */
+.cart-count {
+  color: gray;
+  background-color: white;
+  padding: 1px 2px;
+  font-size: .8em;
+  border-radius: 50%;
+}
