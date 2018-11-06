@@ -1,13 +1,5 @@
 const itemsContainer = document.getElementById('items-container');
-const cartLink = document.getElementById('cart-link');
 
-const cart = JSON.parse(localStorage.getItem('cart'));
-
-// replace cart count on DOM
-cartLink.innerHTML = `<a href="cart.html">
-    <i class="fa fa-shopping-cart"></i>
-    Cart <span class="cart-count">${cart ? cart.length : 0}</span>
-  </a>`;
 
 function fetchItems() {
   fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
@@ -47,33 +39,23 @@ function addToCart(item) {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   const previousItem = cart.find(cItem => cItem.item.id === item.id);
 
-  let newCart = [];
+  const newCart = [];
 
-  if (previousItem) {
-    newCart = cart.map((cartItem) => {
-      if (cartItem.item.id === item.id) {
-        cartItem.quantity += 1;
-        return cartItem;
-      }
-      return cartItem;
-    });
-    localStorage.setItem('cart', JSON.stringify(newCart));
-  } else {
+  if (!previousItem) {
     const newItem = {
       item,
       quantity: 1,
     };
     cart.push(newItem);
     localStorage.setItem('cart', JSON.stringify(cart));
-  }
+    const updatedCart = JSON.parse(localStorage.getItem('cart'));
 
-  const updatedCart = JSON.parse(localStorage.getItem('cart'));
-
-  // replace cart count on DOM
-  cartLink.innerHTML = `<a href="cart.html">
+    // replace cart count on DOM
+    cartLink.innerHTML = `<a href="cart.html">
       <i class="fa fa-shopping-cart"></i>
       Cart <span class="cart-count">${updatedCart.length}</span>
     </a>`;
+  }
 }
 
 fetchItems();
