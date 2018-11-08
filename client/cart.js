@@ -1,4 +1,5 @@
 const cartTableBody = document.getElementById('cart-table-body');
+const confirmOrderBtn = document.getElementById('confirm-order-btn');
 const totalPriceDisplay = document.getElementById('total-price-display');
 
 
@@ -69,3 +70,31 @@ function removeFromCart(itemId, event) {
 }
 
 displayCart();
+confirmOrderBtn.addEventListener('click', (event) => {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  console.log('Submitting cart', cart);
+
+  const userInfo = localStorage.getItem('userInfo');
+  const token = JSON.parse(userInfo).token;
+
+  fetch('http://localhost:5000/api/v1/orders', {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(cart),
+    headers: new Headers({
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      Authorization: `token ${token}`,
+    }),
+  }).then(res => res.json())
+    .then((response) => {
+      const message = {
+        text: 'Food item created successfully',
+        type: 'success',
+      };
+
+      localStorage.setItem('message', JSON.stringify(message));
+      // window.location.href = 'food_items.html';
+    })
+    .catch(error => console.error('Error:', error));
+});

@@ -27,7 +27,6 @@ export default {
 
   async placeOrder(req, res) {
     req.body.customer_id = req.user.id;
-
     const foodItem = await FoodItem.findById(req.body.item_id);
     if (!foodItem) {
       return res.status(200).send({ errors: { global: 'Food item not found' } });
