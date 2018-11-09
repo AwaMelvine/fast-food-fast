@@ -76,9 +76,13 @@ export default class Order {
         return key;
       });
 
-      queryString = `SELECT * FROM orders WHERE ${paramsString}`;
+      queryString = `SELECT o.*, o_i.*, i.name, i.image
+                      FROM orders o LEFT JOIN order_items o_i ON o.id=o_i.order_id
+                LEFT JOIN food_items i ON i.id=o_i.item_id WHERE ${paramsString}`;
     } else {
-      queryString = 'SELECT * FROM orders';
+      queryString = `SELECT o.*, o_i.*, i.name, i.image
+                          FROM orders o LEFT JOIN order_items o_i ON o.id=o_i.order_id
+                    LEFT JOIN food_items i ON i.id=o_i.item_id`;
     }
 
     try {
