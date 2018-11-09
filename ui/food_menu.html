@@ -44,8 +44,11 @@
               <li>
                 <a href="index.html">Home</a>
               </li>
-              <li>
-                <a href="cart.html">Cart</a>
+              <li id="cart-link">
+                <a href="cart.html">
+                  <i class="fa fa-shopping-cart"></i>
+                  Cart <span class="cart-count">0</span>
+                </a>
               </li>
               <li>
                 <a href="order_history.html">My Orders</a>
@@ -73,44 +76,8 @@
 
       <div id="items-container">
         <div class="items-wrapper">
-          <div class="food-item">
-            <img src="../ui/images/burger.png" alt="">
-            <h4>Hamburger</h4>
-            <p>Ground meat, usually beef, placed inside a sliced
-              bread roll.</p>
-            <div class="action">
-              <span class="price">NGN 2000</span>
-              <a href="item_details.html" class="btn btn-sm btn-orange"><i class="fa fa-cart-plus"></i>Add to cart</a>
-              <a href="item_details.html" class="btn btn-sm btn-dark-blue">Details</a>
-            </div>
-          </div>
-
-          <div class="food-item">
-            <img src="../ui/images/fish.png" alt="">
-            <h4>Grilled fish</h4>
-            <p>Grilled fish and salad is one of our specialties</p>
-            <div class="action">
-              <span class="price">NGN 2000</span>
-              <a href="item_details.html" class="btn btn-sm btn-orange"><i class="fa fa-cart-plus"></i>Add to cart</a>
-              <a href="item_details.html" class="btn btn-sm btn-dark-blue">Details</a>
-            </div>
-          </div>
-
-          <div class="food-item">
-            <img src="../ui/images/salad.png" alt="">
-            <h4>Vegetable Salad</h4>
-            <p>A garden salad consisting of lettuce, cucumber, ...</p>
-            <div class="action">
-              <span class="price">NGN 2000</span>
-              <a href="item_details.html" class="btn btn-sm btn-orange"><i class="fa fa-cart-plus"></i>Add to cart</a>
-              <a href="item_details.html" class="btn btn-sm btn-dark-blue">Details</a>
-            </div>
-          </div>
-
         </div>
       </div>
-
-
     </div>
 
   </div>
@@ -143,6 +110,8 @@
   </footer>
   <!-- JavaScripts -->
   <script src="javascripts/scripts.js"></script>
+  <script src="build/index.js"></script>
+  <script src="build/navbar.js"></script>
 
   <script src="build/foodItems/menu.js"></script>
 

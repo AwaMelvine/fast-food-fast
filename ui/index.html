@@ -41,8 +41,11 @@
               <li>
                 <a href="index.html">Home</a>
               </li>
-              <li>
-                <a href="cart.html">Cart</a>
+              <li id="cart-link">
+                <a href="cart.html">
+                  <i class="fa fa-shopping-cart"></i>
+                  Cart <span class="cart-count">0</span>
+                </a>
               </li>
               <li>
                 <a href="order_history.html">My Orders</a>
@@ -69,13 +72,8 @@
 
   <div class="content clear">
     <div class="food-items">
-
       <h3 class="center-text">Latest delicacies on our menu</h3>
-
       <div id="items-container"></div>
-
-
-
       <div class="center-text">
         <a href="food_menu.html" class="btn btn-orange">
           <i class="fa fa-list"></i> View Complete List
@@ -135,6 +133,9 @@
   <script src="javascripts/scripts.js"></script>
 
   <script src="build/index.js"></script>
+  <script src="build/navbar.js"></script>
+
+  <script src="build/navbar.js"></script>
 
 </body>
 

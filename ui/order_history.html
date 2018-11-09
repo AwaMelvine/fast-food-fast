@@ -44,8 +44,11 @@
               <li>
                 <a href="index.html">Home</a>
               </li>
-              <li>
-                <a href="cart.html">Cart</a>
+              <li id="cart-link">
+                <a href="cart.html">
+                  <i class="fa fa-shopping-cart"></i>
+                  Cart <span class="cart-count">0</span>
+                </a>
               </li>
               <li>
                 <a href="order_history.html">My Orders</a>
@@ -68,6 +71,7 @@
   <div class="content full-page order-history clear">
 
     <h3 class="center-text">My Order History</h3>
+    <div id="message-div"></div>
 
     <div class="orders-table-wrapper">
       <table class="table">
@@ -77,39 +81,14 @@
             <th>Item Name</th>
             <th>Item Image</th>
             <th>Quantity</th>
-            <th>Price (NGN)</th>
+            <th>Unit Price (NGN)</th>
             <th>Order Date</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
-        <tbody>
-          </thead>
-          <tr>
-            <td>1</td>
-            <td>Vegetable Salad</td>
-            <td><img src="images/salad.png" alt=""></td>
-            <td>2</td>
-            <td>2000</td>
-            <td>3 minutes ago</td>
-            <td class="processing">PROCESSING</td>
-            <td>
-              <a href="#" class="btn btn-orange btn-sm">
-                <i class="fa fa-close"></i> Cancel Order</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Grilled Fish</td>
-            <td><img src="images/fish.png" alt=""></td>
-            <td>1</td>
-            <td>1000</td>
-            <td>2 days ago</td>
-            <td class="completed">DELIVERED</td>
-            <td>
-              <a href="#" class="btn btn-red btn-sm">
-                <i class="fa fa-trash"></i> Delete Order</a>
-            </td>
-          </tr>
+        </thead>
+        <tbody id="order-history-container">
+
         </tbody>
       </table>
     </div>
@@ -142,7 +121,12 @@
   </footer>
 
   <!-- JavaScripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
   <script src="javascripts/scripts.js"></script>
+  <script src="build/index.js"></script>
+  <script src="build/navbar.js"></script>
+  <script src="build/order_history.js"></script>
 
 </body>
 

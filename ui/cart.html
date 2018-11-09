@@ -45,8 +45,11 @@
               <li>
                 <a href="index.html">Home</a>
               </li>
-              <li>
-                <a href="cart.html">Cart</a>
+              <li id="cart-link">
+                <a href="cart.html">
+                  <i class="fa fa-shopping-cart"></i>
+                  Cart <span class="cart-count">0</span>
+                </a>
               </li>
               <li>
                 <a href="order_history.html">My Orders</a>
@@ -81,58 +84,15 @@
             <th>Price (NGN)</th>
             <th>Action</th>
           </tr>
-        <tbody>
-          </thead>
-          <tr>
-            <td>1</td>
-            <td>Vegetable Salad</td>
-            <td><img src="images/salad.png" alt=""></td>
-            <td>
-              <form action="order_history.html" class="form">
-                <select name="Quantity" id="quantity" class="input-field dropdown">
-                  <option value="1" selected>1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                </select>
-              </form>
-            </td>
-            <td>2000</td>
-            <td>
-              <a href="#" class="btn btn-red btn-sm">
-                <i class="fa fa-trash"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Grilled Fish</td>
-            <td><img src="images/fish.png" alt=""></td>
-            <td>
-              <form action="order_history.html" class="form">
-                <select name="Quantity" id="quantity" class="input-field dropdown">
-                  <option value="1" selected>1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                </select>
-              </form>
-            </td>
-            <td>1000</td>
-            <td>
-              <a href="#" class="btn btn-red btn-sm">
-                <i class="fa fa-trash"></i></a>
-            </td>
-          </tr>
+        </thead>
+        <tbody id="cart-table-body">
+
         </tbody>
       </table>
 
       <div class="confirm-order-div">
-        <p>Total Cost: NGN 3000</p>
-        <button class="btn btn-orange btn-blk">Confirm Order</button>
+        <div id="total-price-display"></div>
+        <button id="confirm-order-btn" class="btn btn-orange btn-blk">Confirm Order</button>
       </div>
 
     </div>
@@ -167,6 +127,12 @@
 
   <!-- JavaScripts -->
   <script src="javascripts/scripts.js"></script>
+
+  <script src="build/index.js"></script>
+
+  <script src="build/navbar.js"></script>
+
+  <script src="build/cart.js"></script>
 
 </body>
 
