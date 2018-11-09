@@ -43,7 +43,7 @@ function basicValidation(user) {
 export default {
   async create(req, res, next) {
     const user = req.body;
-    console.log(req.body);
+
     const errors = basicValidation(user);
 
     let otherUser;
