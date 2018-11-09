@@ -6,8 +6,6 @@ export default class Order {
       this.id = order.id;
     }
     this.customer_id = order.customer_id ? order.customer_id : null;
-    this.item_id = order.item_id ? order.item_id : 0;
-    this.quantity = order.quantity ? order.quantity : 0;
     this.total_price = order.total_price ? order.total_price : 0;
     this.status = order.status ? order.status : null;
     if (order.created_at) {
@@ -19,12 +17,29 @@ export default class Order {
   }
 
   async save() {
-    const params = [this.customer_id, this.item_id, this.quantity, this.total_price, this.status];
+    const params = [this.customer_id, this.total_price, this.status];
     try {
-      const { rows } = await db.query(`INSERT INTO orders (customer_id, item_id, quantity, total_price, status)
-      VALUES ($1, $2, $3, $4, $5) RETURNING *`, params);
+      const { rows } = await db.query(`INSERT INTO orders (customer_id, total_price, status)
+      VALUES ($1, $2, $3) RETURNING *`, params);
       const newOrder = new Order(rows[0]);
       return newOrder;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async saveOrderItems(items) {
+    let records = '';
+    items.forEach((item, index) => {
+      if (index === 0) {
+        records = `(${this.id}, ${item.item_id}, ${item.quantity}, ${item.unit_price})`;
+      } else {
+        records = `${records}, (${this.id}, ${item.item_id}, ${item.quantity}, ${item.unit_price})`;
+      }
+    });
+    const sql = `INSERT INTO order_items (order_id, item_id, quantity, unit_price) VALUES ${records}`;
+    try {
+      const { rows } = await db.query(sql);
     } catch (error) {
       return error;
     }
@@ -35,10 +50,8 @@ export default class Order {
     try {
       const { rows } = await db.query(`UPDATE orders SET 
                           customer_id=$1,
-                          item_id=$2,
-                          quantity=$3,
-                          total_price=$4,
-                          status=$5,
+                          total_price=$2,
+                          status=$3,
                           updated_at=NOW() 
                       WHERE id=$6 RETURNING *`, params);
       const order = new Order(rows[0]);
@@ -86,7 +99,10 @@ export default class Order {
   }
 
   static async getOrderHistory(userId) {
-    const text = 'SELECT orders.*, i.name, i.image FROM food_items i LEFT JOIN orders ON i.id=orders.item_id WHERE customer_id=$1';
+    const text = `SELECT o.*, o_i.*, i.name, i.image
+                      FROM orders o LEFT JOIN order_items o_i ON o.id=o_i.order_id
+                      LEFT JOIN food_items i ON i.id=o_i.item_id WHERE o.customer_id=$1`;
+
     try {
       const { rows } = await db.query(text, [userId]);
       return rows.length ? rows : [];

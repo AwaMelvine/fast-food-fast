@@ -26,15 +26,29 @@ export default {
   },
 
   async placeOrder(req, res) {
-    req.body.customer_id = req.user.id;
-    const foodItem = await FoodItem.findById(req.body.item_id);
-    if (!foodItem) {
-      return res.status(200).send({ errors: { global: 'Food item not found' } });
-    }
+    let totalPrice = 0;
+    const orderItems = req.body.cart.map((cartItem) => {
+      const itemInfo = {
+        item_id: cartItem.item.id,
+        quantity: cartItem.quantity,
+        unit_price: cartItem.item.unit_price,
+      };
+      totalPrice += cartItem.quantity * cartItem.item.unit_price;
+      return itemInfo;
+    });
 
-    const order = new Order(req.body);
+    const orderObj = {
+      customer_id: req.user.id,
+      total_price: totalPrice,
+      status: req.body.status,
+    };
+
+    const order = new Order(orderObj);
     const newOrder = await order.save();
-    res.status(201).json({ data: newOrder, message: 'Order placed successfully' });
+
+    await newOrder.saveOrderItems(orderItems);
+
+    return res.status(201).json({ data: newOrder, message: 'Order placed successfully' });
   },
 
   async updateOrderStatus(req, res) {

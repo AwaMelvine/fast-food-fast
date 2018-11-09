@@ -24,7 +24,7 @@ const client = new Client({
 });
 client.connect();
 
-const dropAllTables = 'DROP TABLE IF EXISTS users, orders, food_items, token_blacklist, categories';
+const dropAllTables = 'DROP TABLE IF EXISTS users, orders, order_items, food_items, token_blacklist, categories';
 const dropAllTypes = 'DROP TYPE IF EXISTS user_role, order_status';
 
 const createRoleEnum = `CREATE TYPE user_role AS ENUM (
@@ -76,19 +76,25 @@ const createFoodItemsTable = `CREATE TABLE food_items (
   updated_at TIMESTAMP DEFAULT NULL
 )`;
 
+const createOrderItemsTable = `CREATE TABLE order_items (
+  id SERIAL PRIMARY KEY,
+  order_id integer NOT NULL,
+  item_id integer NOT NULL,
+  quantity integer NOT NULL,
+  unit_price integer NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES orders (id),
+  FOREIGN KEY (item_id) REFERENCES food_items (id)
+)`;
+
 const createOrdersTable = `CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   customer_id integer NOT NULL,
-  item_id integer NOT NULL,
-  quantity integer NOT NULL,
   total_price integer NOT NULL,
   status order_status DEFAULT 'NEW',
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NULL,
-  FOREIGN KEY (customer_id) REFERENCES users (id),
-  FOREIGN KEY (item_id) REFERENCES food_items (id)
+  FOREIGN KEY (customer_id) REFERENCES users (id)
 )`;
-
 
 const initUser = async () => {
   const password = bcrypt.hashSync('melvine1', 10);
@@ -126,6 +132,7 @@ async function initializeTables() {
     await client.query(createCategoriesTable);
     await client.query(createFoodItemsTable);
     await client.query(createOrdersTable);
+    await client.query(createOrderItemsTable);
 
 
     if (process.env.NODE_ENV !== 'test') {

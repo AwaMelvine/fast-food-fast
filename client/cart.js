@@ -2,10 +2,11 @@ const cartTableBody = document.getElementById('cart-table-body');
 const confirmOrderBtn = document.getElementById('confirm-order-btn');
 const totalPriceDisplay = document.getElementById('total-price-display');
 
+let total_price = 0;
 
 function displayCart() {
   let itemDisplay = '';
-  let total_price = 0;
+  total_price = 0;
   const cart = JSON.parse(localStorage.getItem('cart'));
   cart.forEach((element, index) => {
     total_price += element.item.unit_price * element.quantity;
@@ -72,15 +73,19 @@ function removeFromCart(itemId, event) {
 displayCart();
 confirmOrderBtn.addEventListener('click', (event) => {
   const cart = JSON.parse(localStorage.getItem('cart'));
-  console.log('Submitting cart', cart);
+  const data = {
+    cart,
+    total_price,
+    status: 'NEW',
+  };
 
   const userInfo = localStorage.getItem('userInfo');
   const token = JSON.parse(userInfo).token;
 
-  fetch('http://localhost:5000/api/v1/orders', {
+  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/orders', {
     method: 'POST',
     mode: 'cors',
-    body: JSON.stringify(cart),
+    body: JSON.stringify(data),
     headers: new Headers({
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
@@ -89,12 +94,13 @@ confirmOrderBtn.addEventListener('click', (event) => {
   }).then(res => res.json())
     .then((response) => {
       const message = {
-        text: 'Food item created successfully',
+        text: 'Order placed successfully',
         type: 'success',
       };
 
       localStorage.setItem('message', JSON.stringify(message));
-      // window.location.href = 'food_items.html';
+      localStorage.removeItem('cart');
+      window.location.href = 'order_history.html';
     })
     .catch(error => console.error('Error:', error));
 });
