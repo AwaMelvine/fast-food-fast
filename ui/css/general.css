@@ -178,7 +178,8 @@ tbody small {
   font-size: .7em;
 }
 
-.processing {
+.processing,
+.new {
   color: #aaa9a9;
 }
 
@@ -192,6 +193,10 @@ tbody small {
 
 .accepted {
   color: rgb(0, 3, 160);
+}
+
+.hide {
+  display: none;
 }
 
 .clear {

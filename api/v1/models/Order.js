@@ -46,14 +46,14 @@ export default class Order {
   }
 
   async update() {
-    const params = [this.customer_id, this.item_id, this.quantity, this.total_price, this.status, this.id];
+    const params = [this.customer_id, this.total_price, this.status, this.id];
     try {
       const { rows } = await db.query(`UPDATE orders SET 
                           customer_id=$1,
                           total_price=$2,
                           status=$3,
                           updated_at=NOW() 
-                      WHERE id=$6 RETURNING *`, params);
+                      WHERE id=$4 RETURNING *`, params);
       const order = new Order(rows[0]);
       return order;
     } catch (error) {
@@ -76,13 +76,17 @@ export default class Order {
         return key;
       });
 
-      queryString = `SELECT o.*, o_i.*, i.name, i.image
-                      FROM orders o LEFT JOIN order_items o_i ON o.id=o_i.order_id
-                LEFT JOIN food_items i ON i.id=o_i.item_id WHERE ${paramsString}`;
+      queryString = `SELECT o.*, o_i.*, i.name, i.image, u.username, u.email
+                      FROM orders o 
+                    LEFT JOIN order_items o_i ON o.id=o_i.order_id
+                    LEFT JOIN food_items i ON i.id=o_i.item_id 
+                    LEFT JOIN users u ON u.id=o.customer_id WHERE ${paramsString}`;
     } else {
-      queryString = `SELECT o.*, o_i.*, i.name, i.image
-                          FROM orders o LEFT JOIN order_items o_i ON o.id=o_i.order_id
-                    LEFT JOIN food_items i ON i.id=o_i.item_id`;
+      queryString = `SELECT o.*, o_i.*, i.name, i.image, u.username, u.email
+                        FROM orders o 
+                      LEFT JOIN order_items o_i ON o.id=o_i.order_id
+                      LEFT JOIN food_items i ON i.id=o_i.item_id 
+                      LEFT JOIN users u ON u.id=o.customer_id`;
     }
 
     try {
