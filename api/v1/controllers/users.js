@@ -9,6 +9,8 @@ dotenv.config();
 function createToken(user) {
   const token = jwt.sign({
     id: user.id,
+    role: user.role,
+    username: user.username,
     exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
   }, process.env.JWT_SECRET);
 

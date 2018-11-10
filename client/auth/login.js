@@ -55,7 +55,8 @@ function loginUser(e) {
       const userInfo = {
         token: response.data.token,
         id: response.data.user.id,
-        email: response.data.user.email,
+        username: response.data.user.username,
+        role: response.data.user.role,
       };
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
       window.location.href = 'index.html';
