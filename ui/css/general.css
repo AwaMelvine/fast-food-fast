@@ -324,3 +324,13 @@ header nav .auth-links a {
   font-size: .8em;
   border-radius: 50%;
 }
+
+#logout-link {
+  color: red;
+  font-size: .95em;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  background: transparent;
+  cursor: pointer;
+}

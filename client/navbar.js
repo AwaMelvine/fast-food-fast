@@ -13,6 +13,29 @@ cartLink.innerHTML = `<a href="cart.html">
     Cart <span class="cart-count">${cart ? cart.length : 0}</span>
   </a>`;
 
-if (userInfo.id) {
-  authLinks.style.display = 'none';
+function headerInfo() {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+  if (userInfo) {
+    authLinks.style.display = 'none';
+    userInfoLink.innerHTML = `<i class="fa fa-user"></i> ${userInfo.username}</br>
+    <button onclick="logout()" id="logout-link">logout</button>`;
+
+    if (userInfo.role !== 'admin') {
+      dashboardLink.style.display = 'none';
+    }
+  } else {
+    authLinks.style.display = 'block';
+    myOrdersLink.style.display = 'none';
+    userInfoLink.style.display = 'none';
+    dashboardLink.style.display = 'none';
+  }
 }
+
+function logout() {
+  localStorage.removeItem('userInfo');
+  headerInfo();
+}
+
+headerInfo();

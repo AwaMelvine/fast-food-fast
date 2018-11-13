@@ -3,7 +3,7 @@ const messageDiv = document.getElementById('message-div');
 
 function displayMessage() {
   const message = JSON.parse(localStorage.getItem('message'));
-  console.log(message);
+
   if (message) {
     messageDiv.innerHTML = `<div class="msg ${message.type}">${message.text}</div>`;
     localStorage.removeItem('message');

@@ -108,16 +108,16 @@ export default {
     }
 
     // only admin or logged in user can view their order history
-    if (req.user.id !== user.id || req.user.role !== 'admin') {
+    if (req.user.id === user.id || req.user.role === 'admin') {
+      let orders;
+      try {
+        orders = await Order.getOrderHistory(user_id);
+        return res.status(200).json({ data: orders });
+      } catch (error) {
+        return res.status(500).json({ error: error.message });
+      }
+    } else {
       return res.status(403).send({ error: 'Unauthorized!' });
-    }
-
-    let orders;
-    try {
-      orders = await Order.getOrderHistory(user_id);
-      return res.status(200).json({ data: orders });
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
     }
   },
 
