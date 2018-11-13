@@ -1,6 +1,5 @@
 const itemsContainer = document.getElementById('items-container');
 
-
 function fetchItems() {
   fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
     mode: 'cors',

@@ -72,6 +72,7 @@ function signupUser(e) {
         token: response.data.token,
         id: response.data.user.id,
         username: response.data.user.username,
+        role: response.data.user.role,
       };
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
       window.location.href = 'index.html';
