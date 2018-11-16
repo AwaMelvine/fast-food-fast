@@ -110,7 +110,7 @@ const initUser = async () => {
 const initFoodItems = async () => {
   try {
     await db.query(`INSERT INTO food_items (name, image, description, quantity, unit_price)
-    VALUES ('Vegetable', 'http://via.placeholder.com/170x170', 'Good', 4, 500)`);
+    VALUES ('Vegetable Salad!', 'http://via.placeholder.com/170x170', 'Good', 4, 500)`);
   } catch (error) {
     return error;
   }
@@ -136,7 +136,7 @@ async function initializeTables() {
 
 
     if (process.env.NODE_ENV !== 'test') {
-      await initUser();
+      // await initUser();
       await initFoodItems();
     }
 
@@ -147,5 +147,14 @@ async function initializeTables() {
     console.log(error);
   }
 }
+
+// export const dropUsersTable = async () => {
+//   try {
+//     await client.query('DELETE FROM users');
+//     client.end();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 initializeTables();

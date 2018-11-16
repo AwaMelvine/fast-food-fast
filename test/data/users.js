@@ -1,4 +1,10 @@
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export const firstUser = {
+  id: 1,
   role: 'admin',
   username: 'JohnFirst',
   email: 'john.first@example.com',
@@ -7,6 +13,8 @@ export const firstUser = {
 };
 
 export const secondUser = {
+  id: 2,
+  role: 'user',
   username: 'SmithSecond',
   email: 'smith.second@example.com',
   password: 'smith123',
@@ -14,10 +22,19 @@ export const secondUser = {
 };
 
 export const thirdUser = {
+  id: 3,
   username: 'JaneThird',
   email: 'jane.third@example.com',
   password: 'jane123',
   passwordConf: 'jane123',
+};
+
+export const fourthUser = {
+  id: 4,
+  username: 'Bob',
+  email: 'Bob.user@example.com',
+  password: 'bob1234',
+  passwordConf: 'bob1234',
 };
 
 
@@ -61,7 +78,28 @@ export const invalidUserId = 'a';
 
 export const notFoundUserId = 8888;
 
+function createUserToken(user) {
+  const token = jwt.sign({
+    id: 1,
+    role: 'user',
+    username: user.username,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
+  }, process.env.JWT_SECRET);
 
-export const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNTQxMjU1MjE0LCJpYXQiOjE1Mzg2NjMyMTR9.8hEyI6RqQkY6KkSFJjmYQBvvtV-T6U8kIc9pcn6YI_A';
-export const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTQyNjQ1MzA2LCJpYXQiOjE1NDAwNTMzMDZ9.vZ8Z_DVXDyOBhKWMuoL7HMHwLmdMBY5_pVQiZYKNlhk';
+  return token;
+}
+
+function createAdminToken(user) {
+  const token = jwt.sign({
+    id: 2,
+    role: 'user',
+    username: user.username,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
+  }, process.env.JWT_SECRET);
+
+  return token;
+}
+
+export const userToken = createUserToken(secondUser);
+export const adminToken = createAdminToken(firstUser);
 export const inValidToken = 'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTQxMjUxOTM1LCJpYXQiOjE1Mzg2NTk5MzV9.MVOHv_qFPuS9lbt4gxK4t5DU6j71vGdAloo85TAHNj4';

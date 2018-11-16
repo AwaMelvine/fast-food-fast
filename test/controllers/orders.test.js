@@ -10,16 +10,22 @@ import {
   invalidStatus,
   invalidOrderId,
 } from '../data/orders';
-import { initOrders, initUsers } from '../../api/v1/db/seed.test';
-import { userToken, adminToken } from '../data/users';
+import { initOrders, initUsers, createToken } from '../../api/v1/db/seed.test';
+import {
+  secondUser, firstUser,
+} from '../data/users';
 
 chai.use(chaiHttp);
 
+let userToken = '';
+let adminToken = '';
 
 // Initialize test database for test
 before(async () => {
-  await initUsers();
+  // await initUsers();
   await initOrders();
+  userToken = await createToken(secondUser);
+  adminToken = await createToken(firstUser);
 });
 
 after((done) => {
@@ -78,7 +84,7 @@ describe('Orders', () => {
     it('should place a new order', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
-        .set('authorization', `token ${adminToken}`)
+        .set('authorization', `token ${userToken}`)
         .send(secondOrder)
         .end((err, res) => {
           if (err) return done(err);
@@ -108,6 +114,7 @@ describe('Orders', () => {
         .set('authorization', `token ${userToken}`)
         .send({ status: modifiedStatus })
         .end((err, res) => {
+          console.log('UPDATING STATUS', req.body);
           if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.status).equal(modifiedStatus);

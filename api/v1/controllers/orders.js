@@ -60,7 +60,6 @@ export default {
     }
 
     const order = await Order.findById(order_id);
-
     if (!order) {
       return res.status(200).send({ errors: { global: 'Order not found' } });
     }

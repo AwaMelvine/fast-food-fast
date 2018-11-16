@@ -9,10 +9,7 @@ export const firstOrder = {
 
 export const secondOrder = {
   customer_id: 1,
-  item_id: 1,
-  quantity: 3,
   total_price: 8000,
-  date_to_deliver: '04-09-2018',
   status: 'PROCESSING',
 };
 

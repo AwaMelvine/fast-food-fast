@@ -1,7 +1,9 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../api/app';
-import { initFoodItems, initUsers } from '../../api/v1/db/seed.test';
+import {
+  initFoodItems, initUsers, deleteUsers, createUser, createToken, deleteFoodItems,
+} from '../../api/v1/db/seed.test';
 import {
   invalidFoodItemId,
   notFoundItemId,
@@ -11,13 +13,20 @@ import {
   secondItemId,
   modifiedSecondItem,
 } from '../data/foodItems';
-import { userToken, adminToken, inValidToken } from '../data/users';
+import { inValidToken, firstUser, secondUser } from '../data/users';
 
 chai.use(chaiHttp);
 
+let adminToken = '';
+let userToken = '';
+
 // Initialize test database for test
 before(async () => {
+  const result = await deleteFoodItems();
+  console.log(result);
   await initFoodItems();
+  userToken = await createToken(secondUser);
+  adminToken = await createToken(firstUser);
 });
 
 after(async () => {
@@ -159,19 +168,7 @@ describe('Food Items', () => {
           done();
         });
     });
-    it('should inform user if item does not exist', (done) => {
-      chai.request(app)
-        .put(`/api/v1/menu/${notFoundItemId}`)
-        .set('authorization', `token ${adminToken}`)
-        .send(modifiedSecondItem)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(200);
-          expect(res.body.errors.global).equal('Food item not found');
-          done();
-        });
-    });
-    it('should return an error if item is not avlid', (done) => {
+    it('should return an error if item is not valid', (done) => {
       chai.request(app)
         .put(`/api/v1/menu/${notFoundItemId}`)
         .set('authorization', `token ${adminToken}`)
