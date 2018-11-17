@@ -15,20 +15,23 @@ import {
   modifiedSecondUser,
   failConfPassUser,
   failPassOldUser,
-  adminToken,
-  userToken,
+  fourthUser,
 } from '../data/users';
-import { initUsers } from '../../api/v1/db/seed.test';
-import { notFoundItemId } from '../data/foodItems';
+import { deleteUsers, createToken } from '../../api/v1/db/seed.test';
 
 chai.use(chaiHttp);
 
-before((done) => {
-  done();
+let adminToken = '';
+let userToken = '';
+
+before(async () => {
+  const result = await deleteUsers();
+  userToken = await createToken(secondUser);
+  adminToken = await createToken(firstUser);
 });
 
-after((done) => {
-  done();
+after(async () => {
+  await deleteUsers();
 });
 
 describe('User accounts', () => {
@@ -36,7 +39,7 @@ describe('User accounts', () => {
     it('should sign user up and return a token', (done) => {
       chai.request(app)
         .post('/api/v1/auth/signup')
-        .send(secondUser)
+        .send(thirdUser)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
@@ -111,7 +114,7 @@ describe('User accounts', () => {
     it('should log user out', (done) => {
       chai.request(app)
         .get('/api/v1/auth/logout')
-        .set('authorization', userToken)
+        .set('authorization', `token ${userToken}`)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
@@ -124,10 +127,11 @@ describe('User accounts', () => {
     it('should return all users', (done) => {
       chai.request(app)
         .get('/api/v1/users')
+        .set('authorization', `token ${adminToken}`)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(200);
-          expect(res.body.data.length).to.be.equal(2);
+          expect(res.body.data.length).to.be.equal(3);
           expect(res.body.message).to.be.equal('success');
           done();
         });
@@ -197,11 +201,11 @@ describe('User accounts', () => {
       chai.request(app)
         .post('/api/v1/users')
         .set('authorization', `token ${adminToken}`)
-        .send(thirdUser)
+        .send(fourthUser)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
-          expect(res.body.data.email).to.be.equal(thirdUser.email);
+          expect(res.body.data.email).to.be.equal(fourthUser.email);
           expect(res.body.data.role).to.be.equal('admin');
           done();
         });
@@ -274,6 +278,7 @@ describe('User accounts', () => {
     it('should return an error if ID is invalid', (done) => {
       chai.request(app)
         .delete(`/api/v1/users/${invalidUserId}`)
+        .set('authorization', `token ${adminToken}`)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(400);
@@ -284,6 +289,7 @@ describe('User accounts', () => {
     it('should delete a user given a user ID', (done) => {
       chai.request(app)
         .delete(`/api/v1/users/${secondUserId}`)
+        .set('authorization', `token ${adminToken}`)
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(204);

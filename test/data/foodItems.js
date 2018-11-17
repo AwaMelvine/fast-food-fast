@@ -15,7 +15,7 @@ export const secondItem = {
 };
 
 export const modifiedSecondItem = {
-  name: 'Vegetable',
+  name: 'Fruit Salad',
   image: 'http://via.placeholder.com/170x170',
   description: 'Test description. Test description. Test description. Test description. Test description. Test description. Test description. Test description. Test description. ',
   quantity: 200,

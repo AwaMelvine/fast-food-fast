@@ -27,6 +27,7 @@ export default {
 
   async placeOrder(req, res) {
     let totalPrice = 0;
+    console.log('BODY: ', req.body);
     const orderItems = req.body.cart.map((cartItem) => {
       const itemInfo = {
         item_id: cartItem.item.id,
@@ -60,7 +61,6 @@ export default {
     }
 
     const order = await Order.findById(order_id);
-
     if (!order) {
       return res.status(200).send({ errors: { global: 'Order not found' } });
     }

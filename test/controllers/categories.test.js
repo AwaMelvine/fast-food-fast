@@ -8,17 +8,24 @@ import {
   firstCategoryId,
   secondCategoryId,
 } from '../data/categories';
-import { initCategories } from '../../api/v1/db/seed.test';
-import { adminToken } from '../data/users';
+import {
+  initCategories, createUser, deleteUsers, createToken,
+} from '../../api/v1/db/seed.test';
+import { firstUser, secondUser } from '../data/users';
 
 chai.use(chaiHttp);
 
+let adminToken = '';
+
 before(async () => {
   await initCategories();
+  await createUser(firstUser);
+  await createUser(secondUser);
+  adminToken = await createToken(firstUser);
 });
 
-after((done) => {
-  done();
+after(async () => {
+
 });
 
 describe('Food Categories', () => {
