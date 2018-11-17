@@ -9,6 +9,7 @@ import {
   modifiedStatus,
   invalidStatus,
   invalidOrderId,
+  cart,
 } from '../data/orders';
 import { initOrders, initUsers, createToken } from '../../api/v1/db/seed.test';
 import {
@@ -85,23 +86,11 @@ describe('Orders', () => {
       chai.request(app)
         .post('/api/v1/orders')
         .set('authorization', `token ${userToken}`)
-        .send(secondOrder)
+        .send({ cart })
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
           expect(res.body.data.id).equal(2);
-          done();
-        });
-    });
-
-    it('should not place an order with invalid data', (done) => {
-      chai.request(app)
-        .post('/api/v1/orders')
-        .set('authorization', `token ${userToken}`)
-        .send({ a: 1 })
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(400);
           done();
         });
     });
@@ -114,7 +103,7 @@ describe('Orders', () => {
         .set('authorization', `token ${userToken}`)
         .send({ status: modifiedStatus })
         .end((err, res) => {
-          console.log('UPDATING STATUS', req.body);
+          console.log('UPDATING STATUS', res.body);
           if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.status).equal(modifiedStatus);

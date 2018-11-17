@@ -27,6 +27,7 @@ export default {
 
   async placeOrder(req, res) {
     let totalPrice = 0;
+    console.log('BODY: ', req.body);
     const orderItems = req.body.cart.map((cartItem) => {
       const itemInfo = {
         item_id: cartItem.item.id,

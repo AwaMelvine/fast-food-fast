@@ -23,5 +23,20 @@ export const invalidStatus = null;
 
 export const created_at = '03-09-2018';
 
-
 export const invalidOrderId = 'a';
+
+export const cart = [
+  {
+    item: {
+      id: 1,
+      name: 'Vegetable',
+      image: 'http://via.placeholder.com/170x170',
+      description: 'Good',
+      quantity: 4,
+      unit_price: 500,
+      created_at: '2018-11-13T06:42:35.954Z',
+      updated_at: null,
+    },
+    quantity: 1,
+  },
+];
