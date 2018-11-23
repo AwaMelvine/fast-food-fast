@@ -110,9 +110,9 @@ export default class Order {
     const text = `SELECT o.*, o_i.*, i.name, i.image
                       FROM orders o LEFT JOIN order_items o_i ON o.id=o_i.order_id
                       LEFT JOIN food_items i ON i.id=o_i.item_id WHERE o.customer_id=$1`;
-
     try {
       const { rows } = await db.query(text, [userId]);
+
       return rows.length ? rows : [];
     } catch (error) {
       return error;

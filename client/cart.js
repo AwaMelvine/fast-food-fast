@@ -79,8 +79,10 @@ confirmOrderBtn.addEventListener('click', (event) => {
     status: 'NEW',
   };
 
-  const userInfo = localStorage.getItem('userInfo');
-  const token = JSON.parse(userInfo).token;
+  const token = JSON.parse(localStorage.getItem('userInfo')).token;
+
+  confirmOrderBtn.classList.add('is-loading');
+  confirmOrderBtn.disabled = true;
 
   fetch('https://fast-food-fast-service.herokuapp.com/api/v1/orders', {
     method: 'POST',
@@ -93,6 +95,8 @@ confirmOrderBtn.addEventListener('click', (event) => {
     }),
   }).then(res => res.json())
     .then((response) => {
+      confirmOrderBtn.classList.remove('is-loading');
+      confirmOrderBtn.disabled = false;
       const message = {
         text: 'Order placed successfully',
         type: 'success',

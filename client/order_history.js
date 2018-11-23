@@ -26,6 +26,7 @@ function fetchUserOrders() {
     }),
   }).then(res => res.json())
     .then((response) => {
+      console.log(response);
       response.data.forEach((item, index) => {
         orderDisplay = `${orderDisplay}<tr>
           <td>${item.order_id}</td>
