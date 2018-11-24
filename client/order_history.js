@@ -26,8 +26,9 @@ function fetchUserOrders() {
     }),
   }).then(res => res.json())
     .then((response) => {
-      response.data.forEach((item, index) => {
-        orderDisplay = `${orderDisplay}<tr>
+      if (response.data && response.data.length > 0) {
+        response.data.forEach((item, index) => {
+          orderDisplay = `${orderDisplay}<tr>
           <td>${item.order_id}</td>
           <td>${item.name}</td>
           <td><img src="${item.image}" alt=""></td>
@@ -40,7 +41,13 @@ function fetchUserOrders() {
               <i class="fa fa-close"></i> Cancel Order</a>
           </td>
         </tr>`;
-      });
+        });
+      } else {
+        orderDisplay = `<tr>
+          <td class="center-text" colspan="8">You have not yet placed any orders!</td>
+        </tr>`;
+      }
+
       orderHistoryContainer.innerHTML = orderDisplay;
     })
     .catch(error => console.error('Error:', error));

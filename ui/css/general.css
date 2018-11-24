@@ -388,3 +388,7 @@ header nav .auth-links a {
   position: relative;
   overflow: hidden;
 }
+
+.disabled:hover {
+  cursor: not-allowed;
+}
