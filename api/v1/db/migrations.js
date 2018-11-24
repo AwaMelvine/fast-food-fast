@@ -136,7 +136,7 @@ async function initializeTables() {
 
 
     if (process.env.NODE_ENV !== 'test') {
-      // await initUser();
+      await initUser();
       await initFoodItems();
     }
 
@@ -147,14 +147,5 @@ async function initializeTables() {
     console.log(error);
   }
 }
-
-// export const dropUsersTable = async () => {
-//   try {
-//     await client.query('DELETE FROM users');
-//     client.end();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 initializeTables();
