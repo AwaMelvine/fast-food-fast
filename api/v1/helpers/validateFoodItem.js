@@ -56,13 +56,19 @@ export default {
 
   async update(req, res, next) {
     const foodItem = req.body;
+    const food_item_id = parseInt(req.params.food_item_id, 10);
     const errors = basicItemValidation(foodItem);
 
-    const item = await FoodItem.find({ name: foodItem.name });
+    if (!food_item_id || Number.isNaN(food_item_id)) {
+      return res.status(400).send({ errors: { food_item_id: 'A valid food Item Id is required' } });
+    }
 
-    if (item.length > 0 && item[0].id !== parseInt(req.params.food_item_id, 10)) {
+    const item = await FoodItem.find({ name: foodItem.name });
+    console.log('ITEM', item);
+    if (item.length > 0 && item[0].id !== food_item_id) {
       errors.name = 'Food item already exists';
     }
+
 
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });

@@ -9,17 +9,24 @@ import {
   modifiedStatus,
   invalidStatus,
   invalidOrderId,
+  cart,
 } from '../data/orders';
-import { initOrders, initUsers } from '../../api/v1/db/seed.test';
-import { userToken, adminToken } from '../data/users';
+import { initOrders, initUsers, createToken } from '../../api/v1/db/seed.test';
+import {
+  secondUser, firstUser,
+} from '../data/users';
 
 chai.use(chaiHttp);
 
+let userToken = '';
+let adminToken = '';
 
 // Initialize test database for test
 before(async () => {
-  await initUsers();
+  // await initUsers();
   await initOrders();
+  userToken = await createToken(secondUser);
+  adminToken = await createToken(firstUser);
 });
 
 after((done) => {
@@ -78,24 +85,12 @@ describe('Orders', () => {
     it('should place a new order', (done) => {
       chai.request(app)
         .post('/api/v1/orders')
-        .set('authorization', `token ${adminToken}`)
-        .send(secondOrder)
+        .set('authorization', `token ${userToken}`)
+        .send({ cart })
         .end((err, res) => {
           if (err) return done(err);
           expect(res).to.have.status(201);
           expect(res.body.data.id).equal(2);
-          done();
-        });
-    });
-
-    it('should not place an order with invalid data', (done) => {
-      chai.request(app)
-        .post('/api/v1/orders')
-        .set('authorization', `token ${userToken}`)
-        .send({ a: 1 })
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res).to.have.status(400);
           done();
         });
     });
@@ -108,6 +103,7 @@ describe('Orders', () => {
         .set('authorization', `token ${userToken}`)
         .send({ status: modifiedStatus })
         .end((err, res) => {
+          console.log('UPDATING STATUS', res.body);
           if (err) return done(err);
           expect(res).to.have.status(200);
           expect(res.body.data.status).equal(modifiedStatus);

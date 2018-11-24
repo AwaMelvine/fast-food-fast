@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { Pool, Client } from 'pg';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import db from '.';
 import { firstCategory } from '../../../test/data/categories';
 import { firstItem } from '../../../test/data/foodItems';
@@ -25,12 +26,56 @@ const client = new Client({
 });
 client.connect();
 
+export const createToken = (user) => {
+  const token = jwt.sign({
+    id: user.id,
+    role: user.role,
+    username: user.username,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
+  }, process.env.JWT_SECRET);
+
+  return token;
+};
+
 export const initUsers = async () => {
   const passwordHash = bcrypt.hashSync(firstUser.password, 10);
   const params = [firstUser.role, firstUser.username, firstUser.email, passwordHash];
   try {
     await db.query(`INSERT INTO users (role, username, email, password)
       VALUES ($1, $2, $3, $4)`, params);
+  } catch (error) {
+    return error;
+  }
+};
+
+
+export const createUser = async (user) => {
+  const passwordHash = bcrypt.hashSync(user.password, 10);
+  const params = [user.role, user.username, user.email, passwordHash];
+
+  try {
+    const { rows } = await db.query(`INSERT INTO users (role, username, email, password)
+      VALUES ($1, $2, $3, $4) RETURNING *`, params);
+    const token = rows[0];
+    return token;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteUsers = async () => {
+  try {
+    const result = await db.query('DELETE FROM users');
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteFoodItems = async () => {
+  try {
+    const result = await db.query('DELETE FROM food_items');
+    return result;
   } catch (error) {
     return error;
   }
@@ -51,7 +96,7 @@ export const initFoodItems = async () => {
 export const initCategories = async () => {
   const params = [firstCategory.name, firstCategory.description];
   try {
-    await db.query(`INSERT INTO categories (name, description)
+    const result = await db.query(`INSERT INTO categories (name, description)
     VALUES ($1, $2)`, params);
   } catch (error) {
     return error;
@@ -60,10 +105,11 @@ export const initCategories = async () => {
 
 
 export const initOrders = async () => {
-  const params = [firstOrder.customer_id, firstOrder.item_id, firstOrder.quantity, firstOrder.total_price, firstOrder.status];
+  const params = [firstOrder.customer_id, firstOrder.total_price, firstOrder.status];
+
   try {
-    await db.query(`INSERT INTO orders (customer_id, item_id, quantity, total_price, status)
-    VALUES ($1, $2, $3, $4, $5)`, params);
+    await db.query(`INSERT INTO orders (customer_id, total_price, status)
+    VALUES ($1, $2, $3)`, params);
   } catch (error) {
     return error;
   }

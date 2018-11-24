@@ -24,8 +24,9 @@ export default {
 
   async admin(req, res, next) {
     const { user } = req;
+
     if (user.role !== 'admin') {
-      return res.status(403).send({ error: 'Unauthorized' });
+      return res.status(401).send({ error: 'Unauthorized' });
     }
     return next();
   },
