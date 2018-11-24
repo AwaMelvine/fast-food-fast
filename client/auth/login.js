@@ -27,6 +27,8 @@ function displayFormErrors(errors) {
 function loginUser(e) {
   e.preventDefault();
   formInfo.innerHTML = '';
+  loginBtn.classList.add('is-loading');
+  loginBtn.disabled = true;
 
   const user = {
     email: email.value,
@@ -48,6 +50,9 @@ function loginUser(e) {
     }),
   }).then(res => res.json())
     .then((response) => {
+      loginBtn.classList.remove('is-loading');
+      loginBtn.disabled = false;
+
       if (response.errors) {
         displayFormErrors(response.errors);
         return;

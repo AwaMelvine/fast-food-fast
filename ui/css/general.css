@@ -334,3 +334,57 @@ header nav .auth-links a {
   background: transparent;
   cursor: pointer;
 }
+
+/* LOADING STATE FOR BUTTONS */
+@keyframes move {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: 3.5em;
+  }
+}
+
+.is-loading:before,
+.is-loading:after {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.is-loading:before {
+  content: ". . .";
+  background: inherit;
+  font-weight: bold;
+  line-height: 1em;
+  left: 0;
+}
+
+.is-loading:after {
+  content: "";
+  background: inherit;
+  border-radius: 100%;
+  opacity: 0.75;
+  width: 2em;
+  margin: auto;
+  left: 3.5em;
+  animation: move 1s infinite;
+}
+
+.is-loading:disabled {
+  cursor: not-allowed;
+}
+
+.load-btn {
+  border-radius: 5px;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}

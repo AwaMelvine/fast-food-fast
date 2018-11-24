@@ -41,6 +41,8 @@ const formInfo = document.getElementById('form-info');
 function signupUser(e) {
   e.preventDefault();
   formInfo.innerHTML = '';
+  submitBtn.classList.add('is-loading');
+  submitBtn.disabled = true;
 
   const user = {
     username: username.value,
@@ -64,6 +66,9 @@ function signupUser(e) {
     }),
   }).then(res => res.json())
     .then((response) => {
+      submitBtn.classList.remove('is-loading');
+      submitBtn.disabled = false;
+
       if (response.errors) {
         displayFormErrors(response.errors);
         return;
