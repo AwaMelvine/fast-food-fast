@@ -8,38 +8,46 @@ function displayCart() {
   let itemDisplay = '';
   total_price = 0;
   const cart = JSON.parse(localStorage.getItem('cart'));
-  cart.forEach((element, index) => {
-    total_price += element.item.unit_price * element.quantity;
-    itemDisplay = `${itemDisplay}<tr>
-        <td>${index + 1}</td>
-        <td>${element.item.name}</td>
-        <td><img src="${element.item.image}" alt=""></td>
-        <td>
-          <form action="order_history.html" class="form">
-            <select onChange='return computePrice(${element.item.id}, this)' name="Quantity" id="quantity" class="input-field dropdown">
-              <option value="1" ${element.quantity === '1' ? 'selected' : ''}>1</option>
-              <option value="2" ${element.quantity === '2' ? 'selected' : ''}>2</option>
-              <option value="3" ${element.quantity === '3' ? 'selected' : ''}>3</option>
-              <option value="4" ${element.quantity === '4' ? 'selected' : ''}>4</option>
-              <option value="5" ${element.quantity === '5' ? 'selected' : ''}>5</option>
-              <option value="6" ${element.quantity === '6' ? 'selected' : ''}>6</option>
-            </select>
-          </form>
-        </td>
-        <td>${element.item.unit_price * element.quantity}</td>
-        <td>
-          <button onClick="return removeFromCart(${element.item.id}, this)" class="btn btn-red btn-sm">
-            <i class="fa fa-trash"></i></button>
-        </td>
-      </tr>`;
-  });
 
-  totalPriceDisplay.innerHTML = `<p>Total Price: NGN ${total_price}</p>`;
+  if (!cart || cart.length === 0) {
+    console.log('object');
+    itemDisplay = `<tr>
+          <td class="center-text" colspan="6">No items in cart yet!</td>
+        </tr>`;
+    confirmOrderBtn.style.display = 'none';
+  } else {
+    cart.forEach((element, index) => {
+      total_price += element.item.unit_price * element.quantity;
+      itemDisplay = `${itemDisplay}<tr>
+          <td>${index + 1}</td>
+          <td>${element.item.name}</td>
+          <td><img src="${element.item.image}" alt=""></td>
+          <td>
+            <form action="order_history.html" class="form">
+              <select onChange='return computePrice(${element.item.id}, this)' name="Quantity" id="quantity" class="input-field dropdown">
+                <option value="1" ${element.quantity === '1' ? 'selected' : ''}>1</option>
+                <option value="2" ${element.quantity === '2' ? 'selected' : ''}>2</option>
+                <option value="3" ${element.quantity === '3' ? 'selected' : ''}>3</option>
+                <option value="4" ${element.quantity === '4' ? 'selected' : ''}>4</option>
+                <option value="5" ${element.quantity === '5' ? 'selected' : ''}>5</option>
+                <option value="6" ${element.quantity === '6' ? 'selected' : ''}>6</option>
+              </select>
+            </form>
+          </td>
+          <td>${element.item.unit_price * element.quantity}</td>
+          <td>
+            <button onClick="return removeFromCart(${element.item.id}, this)" class="btn btn-red btn-sm">
+              <i class="fa fa-trash"></i></button>
+          </td>
+        </tr>`;
+    });
+
+    totalPriceDisplay.innerHTML = `<p>Total Price: NGN ${total_price}</p>`;
+  }
 
   cartTableBody.innerHTML = itemDisplay;
 
   const cartLink = document.getElementById('cart-link');
-
 
   // replace cart count on DOM
   cartLink.innerHTML = `<a href="cart.html">

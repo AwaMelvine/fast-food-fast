@@ -59,6 +59,9 @@ function createItem(e) {
   const userInfo = localStorage.getItem('userInfo');
   const token = JSON.parse(userInfo).token;
 
+  submitBtn.classList.add('is-loading');
+  submitBtn.disabled = true;
+
   fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
     method: 'POST',
     mode: 'cors',
@@ -70,6 +73,9 @@ function createItem(e) {
     }),
   }).then(res => res.json())
     .then((response) => {
+      submitBtn.classList.remove('is-loading');
+      submitBtn.disabled = false;
+
       if (response.errors) {
         displayFormErrors(response.errors);
         return;
