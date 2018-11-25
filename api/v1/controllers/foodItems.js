@@ -55,9 +55,8 @@ export default {
 
   async searchFoodItems(req, res) {
     const { searchTerm } = req.body;
-
-    if (searchTerm.length < 3) {
-      return res.status(401).json({ errors: { global: 'You must provide at least 3 characters' } });
+    if (!searchTerm || searchTerm.length < 3) {
+      return res.status(400).json({ errors: { global: 'You must provide at least 3 characters' } });
     }
     const items = await FoodItem.search(searchTerm);
     return res.status(200).json(items);
