@@ -86,6 +86,15 @@ export default class FoodItem {
     }
   }
 
+  static async search(searchTerm) {
+    try {
+      const { rows } = await db.query(`SELECT * FROM food_items WHERE name LIKE '%${searchTerm}%' OR description LIKE '%${searchTerm}%'`);
+      return rows.length ? rows : [];
+    } catch (error) {
+      return error;
+    }
+  }
+
   static async delete(foodItemId) {
     try {
       const result = await db.query('DELETE FROM food_items WHERE id=$1', [foodItemId]);

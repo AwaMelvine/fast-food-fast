@@ -6,6 +6,7 @@ import authenticate from '../helpers/authenticate';
 const router = express.Router();
 
 router.get('/', foodItemsController.getAllFoodItems);
+router.post('/search', foodItemsController.searchFoodItems);
 router.get('/:food_item_id', foodItemsController.getFoodItemById);
 router.post('/', validateFoodItem.create, authenticate.user, authenticate.admin, foodItemsController.createFoodItem);
 router.put('/:food_item_id', validateFoodItem.update, authenticate.user, authenticate.admin, foodItemsController.updateFoodItem);
