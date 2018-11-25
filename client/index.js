@@ -1,19 +1,50 @@
 const itemsContainer = document.getElementById('items-container');
+const searchField = document.getElementById('search');
+const searchBtn = document.getElementById('search-btn');
+const itemsTitle = document.getElementById('items-title');
+const formInfo = document.getElementById('form-info');
 
-function fetchItems() {
-  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
-    mode: 'cors',
-    headers: new Headers({
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    }),
-  }).then(res => res.json())
-    .then((response) => {
-      let itemsWrapper = '<div class="items-wrapper">';
-      response.data.slice(0, 6).forEach((item, index) => {
-        const tempIndex = index + 1;
-        const stringItem = JSON.stringify(item);
-        itemsWrapper = `${itemsWrapper}<div class="food-item">
+
+function displayFormErrors(errors) {
+  console.log(errors);
+  let formErrors = '<div class="form-errors">';
+  Object.keys(errors).forEach((field) => {
+    formErrors = `${formErrors}<li>${errors[field]}</li>`;
+  });
+  formErrors = `${formErrors}</div>`;
+  formInfo.innerHTML = formErrors; // eslint-disable-line
+}
+
+
+function fetchItems(searchTerm = '') {
+  formInfo.innerHTML = '';
+
+  if (searchTerm) {
+    fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu/search', {
+      mode: 'cors',
+      method: 'POST',
+      body: JSON.stringify({ searchTerm }),
+      headers: new Headers({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      }),
+    }).then(res => res.json())
+      .then((response) => {
+        let itemsWrapper = '<div class="items-wrapper">';
+        if (response.length === 0) {
+          itemsContainer.innerHTML = '<div class="center-text"><p>No items were found!</p></div>';
+          return;
+        }
+
+        if (response.errors) {
+          displayFormErrors(response.errors);
+          console.log(response.errors);
+          return;
+        }
+        response.forEach((item, index) => {
+          const tempIndex = index + 1;
+          const stringItem = JSON.stringify(item);
+          itemsWrapper = `${itemsWrapper}<div class="food-item">
         <img src="${item.image}" alt="">
         <h4>${item.name}</h4>
         <p>${item.description.substring(0, 50)}</p>
@@ -24,14 +55,48 @@ function fetchItems() {
         </div>
       </div>`;
 
-        if (tempIndex % 3 === 0) {
-          itemsWrapper = `${itemsWrapper}</div><br><div class="items-wrapper">`;
-        }
-      });
-      itemsWrapper = `${itemsWrapper}</div>`;
-      itemsContainer.innerHTML = itemsWrapper;
-    })
-    .catch(error => console.error('Error:', error));
+          if (tempIndex % 3 === 0) {
+            itemsWrapper = `${itemsWrapper}</div><br><div class="items-wrapper">`;
+          }
+        });
+        itemsWrapper = `${itemsWrapper}</div>`;
+        itemsContainer.innerHTML = itemsWrapper;
+        itemsTitle.innerHTML = `You searched for "${searchTerm}"`;
+      })
+      .catch(error => console.error('Error:', error));
+  } else {
+    fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
+      mode: 'cors',
+      headers: new Headers({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      }),
+    }).then(res => res.json())
+      .then((response) => {
+        let itemsWrapper = '<div class="items-wrapper">';
+        response.data.slice(0, 6).forEach((item, index) => {
+          const tempIndex = index + 1;
+          const stringItem = JSON.stringify(item);
+          itemsWrapper = `${itemsWrapper}<div class="food-item">
+        <img src="${item.image}" alt="">
+        <h4>${item.name}</h4>
+        <p>${item.description.substring(0, 50)}</p>
+        <div class="action">
+          <span class="price">NGN ${item.unit_price}</span>
+          <button onclick='addToCart(${stringItem})' class="btn btn-sm btn-orange"><i class="fa fa-cart-plus"></i>Add to cart</button>
+          <a href="item_details.html?id=${item.id}" class="btn btn-sm btn-dark-blue">Details</a>
+        </div>
+      </div>`;
+
+          if (tempIndex % 3 === 0) {
+            itemsWrapper = `${itemsWrapper}</div><br><div class="items-wrapper">`;
+          }
+        });
+        itemsWrapper = `${itemsWrapper}</div>`;
+        itemsContainer.innerHTML = itemsWrapper;
+      })
+      .catch(error => console.error('Error:', error));
+  }
 }
 
 function addToCart(item) {
@@ -56,5 +121,14 @@ function addToCart(item) {
     </a>`;
   }
 }
+
+
+searchBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const searchTerm = searchField.value;
+
+  fetchItems(searchTerm);
+});
+
 
 fetchItems();
