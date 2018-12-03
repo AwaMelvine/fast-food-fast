@@ -48,6 +48,16 @@ export default {
       errors.name = 'Food item already exists';
     }
 
+    if (!req.file) {
+      errors.image = 'Food item image required';
+    } else if (req.file.size > 4000000) {
+      errors.image = 'Image size should not be greater than 3MB';
+    }
+
+
+    // console.log(req.file);
+    // return;
+
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
     }

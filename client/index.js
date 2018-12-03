@@ -20,7 +20,7 @@ function fetchItems(searchTerm = '') {
   formInfo.innerHTML = '';
 
   if (searchTerm) {
-    fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu/search', {
+    fetch('http://localhost:5000/api/v1/menu/search', {
       mode: 'cors',
       method: 'POST',
       body: JSON.stringify({ searchTerm }),
@@ -38,14 +38,13 @@ function fetchItems(searchTerm = '') {
 
         if (response.errors) {
           displayFormErrors(response.errors);
-          console.log(response.errors);
           return;
         }
         response.forEach((item, index) => {
           const tempIndex = index + 1;
           const stringItem = JSON.stringify(item);
           itemsWrapper = `${itemsWrapper}<div class="food-item">
-        <img src="${item.image}" alt="">
+        <img src="http://localhost:5000/images/${item.image}" alt="">
         <h4>${item.name}</h4>
         <p>${item.description.substring(0, 50)}</p>
         <div class="action">
@@ -65,7 +64,7 @@ function fetchItems(searchTerm = '') {
       })
       .catch(error => console.error('Error:', error));
   } else {
-    fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
+    fetch('http://localhost:5000/api/v1/menu', {
       mode: 'cors',
       headers: new Headers({
         'Access-Control-Allow-Origin': '*',
@@ -78,7 +77,7 @@ function fetchItems(searchTerm = '') {
           const tempIndex = index + 1;
           const stringItem = JSON.stringify(item);
           itemsWrapper = `${itemsWrapper}<div class="food-item">
-        <img src="${item.image}" alt="">
+        <img src="http://localhost:5000/images/${item.image}" alt="">
         <h4>${item.name}</h4>
         <p>${item.description.substring(0, 50)}</p>
         <div class="action">

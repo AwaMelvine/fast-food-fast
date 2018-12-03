@@ -22,8 +22,9 @@ export default {
 
   async createFoodItem(req, res) {
     const foodItem = new FoodItem(req.body);
-    const newFoodItem = await foodItem.save();
+    foodItem.image = req.file.filename;
 
+    const newFoodItem = await foodItem.save();
     return res.status(201).send({ data: newFoodItem, message: 'Food item created successfully' });
   },
 

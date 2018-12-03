@@ -42,33 +42,38 @@ function createItem(e) {
   e.preventDefault();
   formInfo.innerHTML = '';
 
-  const item = {
-    name: itemName.value,
-    image: image.value || 'http://via.placeholder.com/170x170',
-    description: description.value,
-    unit_price: unitPrice.value,
-    quantity: quantity.value,
-  };
+  const formData = new FormData();
+  formData.append('name', itemName.value);
+  formData.append('image', image.files[0]);
+  formData.append('description', description.value);
+  formData.append('unit_price', unitPrice.value);
+  formData.append('quantity', quantity.value);
 
-  const errors = validateItem(item);
-  if (Object.keys(errors).length > 0) {
-    displayFormErrors(errors);
-    return;
-  }
+  // const item = {
+  //   name: itemName.value,
+  //   image: image.value || 'http://via.placeholder.com/170x170',
+  //   description: description.value,
+  //   unit_price: unitPrice.value,
+  //   quantity: quantity.value,
+  // };
+
+  // const errors = validateItem(item);
+  // if (Object.keys(errors).length > 0) {
+  //   displayFormErrors(errors);
+  // }
 
   const userInfo = localStorage.getItem('userInfo');
   const token = JSON.parse(userInfo).token;
 
-  submitBtn.classList.add('is-loading');
-  submitBtn.disabled = true;
+  // submitBtn.classList.add('is-loading');
+  // submitBtn.disabled = true;
 
-  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
+  fetch('http://localhost:5000/api/v1/menu', {
     method: 'POST',
     mode: 'cors',
-    body: JSON.stringify(item),
+    body: formData,
     headers: new Headers({
       'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
       Authorization: `token ${token}`,
     }),
   }).then(res => res.json())
