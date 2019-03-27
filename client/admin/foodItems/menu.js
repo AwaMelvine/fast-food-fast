@@ -11,7 +11,7 @@ function displayMessage() {
 }
 
 function fetchItems() {
-  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/menu', {
+  fetch('http://localhost:5000/api/v1/menu', {
     mode: 'cors',
     headers: new Headers({
       'Access-Control-Allow-Origin': '*',
@@ -34,7 +34,7 @@ function fetchItems() {
             <td>${tempIndex}</td>
             <td>${item.name}</td>
             <td>
-              <img src="${item.image}" alt="">
+              <img src="http://localhost:5000/images/${item.image}" alt="">
             </td>
             <td>${item.description.substring(0, 60)}</td>
             <td>${item.unit_price}</td>
@@ -59,7 +59,7 @@ function deleteItem(id) {
   const userInfo = localStorage.getItem('userInfo');
   const token = JSON.parse(userInfo).token;
 
-  fetch(`https://fast-food-fast-service.herokuapp.com/api/v1/menu/${id}`, {
+  fetch(`http://localhost:5000/api/v1/menu/${id}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: new Headers({

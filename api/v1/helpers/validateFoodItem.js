@@ -48,6 +48,12 @@ export default {
       errors.name = 'Food item already exists';
     }
 
+    if (!req.file) {
+      errors.image = 'Food item image required';
+    } else if (req.file.size > 4000000) {
+      errors.image = 'Image size should not be greater than 3MB';
+    }
+
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
     }
@@ -64,11 +70,9 @@ export default {
     }
 
     const item = await FoodItem.find({ name: foodItem.name });
-    console.log('ITEM', item);
     if (item.length > 0 && item[0].id !== food_item_id) {
       errors.name = 'Food item already exists';
     }
-
 
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
