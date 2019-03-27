@@ -1,3 +1,4 @@
+import fs from 'fs';
 import FoodItem from '../models/FoodItem';
 
 export default {
@@ -49,9 +50,17 @@ export default {
 
   async deleteFoodItem(req, res) {
     const food_item_id = parseInt(req.params.food_item_id, 10);
+    const foodItem = await FoodItem.findById(food_item_id);
     await FoodItem.delete(food_item_id);
 
-    return res.status(204).json({ message: 'Item deleted successfully' });
+
+    fs.unlink(`../uploads/images/${foodItem.image}`, (err) => {
+      if (err) {
+        return res.send({ error: 'There was a problem deleting file' });
+      }
+
+      return res.status(204).json({ message: 'Item deleted successfully' });
+    });
   },
 
   async searchFoodItems(req, res) {
