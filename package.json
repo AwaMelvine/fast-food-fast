@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "engines": {
-    "node": "8.10.0"
+    "node": "8.10.0",
+    "npm": "6.2.0"
   },
   "scripts": {
     "clean": "rm -rf build ui/build && mkdir build ui\\build",
