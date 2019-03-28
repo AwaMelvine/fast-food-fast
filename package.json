@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "engines": {
-    "node": "8.10.0"
-  },
   "scripts": {
     "clean": "rm -rf build ui/build && mkdir build ui\\build",
     "build-babel": "babel api -d ./build -s && babel client --watch -d ui/build -s",
