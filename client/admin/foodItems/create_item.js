@@ -68,7 +68,7 @@ function createItem(e) {
   // submitBtn.classList.add('is-loading');
   // submitBtn.disabled = true;
 
-  fetch('http://localhost:5000/api/v1/menu', {
+  fetch(`${rootUrl}/api/v1/menu`, {
     method: 'POST',
     mode: 'cors',
     body: formData,

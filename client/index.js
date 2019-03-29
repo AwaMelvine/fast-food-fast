@@ -3,6 +3,7 @@ const searchField = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
 const itemsTitle = document.getElementById('items-title');
 const formInfo = document.getElementById('form-info');
+const rootUrl = 'http://localhost:5000';
 
 
 function displayFormErrors(errors) {
@@ -18,9 +19,9 @@ function displayFormErrors(errors) {
 
 function fetchItems(searchTerm = '') {
   formInfo.innerHTML = '';
-
-  if (searchTerm) {
-    fetch('http://localhost:5000/api/v1/menu/search', {
+  if (searchTerm !== '') {
+    console.log("Searching...");
+    fetch(`${rootUrl}/api/v1/menu/search`, {
       mode: 'cors',
       method: 'POST',
       body: JSON.stringify({ searchTerm }),
@@ -44,7 +45,7 @@ function fetchItems(searchTerm = '') {
           const tempIndex = index + 1;
           const stringItem = JSON.stringify(item);
           itemsWrapper = `${itemsWrapper}<div class="food-item">
-        <img src="http://localhost:5000/images/${item.image}" alt="">
+        <img src="${rootUrl}/images/${item.image}" alt="">
         <h4>${item.name}</h4>
         <p>${item.description.substring(0, 50)}</p>
         <div class="action">
@@ -64,7 +65,7 @@ function fetchItems(searchTerm = '') {
       })
       .catch(error => console.error('Error:', error));
   } else {
-    fetch('http://localhost:5000/api/v1/menu', {
+    fetch(`${rootUrl}/api/v1/menu`, {
       mode: 'cors',
       headers: new Headers({
         'Access-Control-Allow-Origin': '*',
@@ -72,12 +73,13 @@ function fetchItems(searchTerm = '') {
       }),
     }).then(res => res.json())
       .then((response) => {
+        console.log(response);
         let itemsWrapper = '<div class="items-wrapper">';
         response.data.slice(0, 6).forEach((item, index) => {
           const tempIndex = index + 1;
           const stringItem = JSON.stringify(item);
           itemsWrapper = `${itemsWrapper}<div class="food-item">
-        <img src="http://localhost:5000/images/${item.image}" alt="">
+        <img src="${rootUrl}/images/${item.image}" alt="">
         <h4>${item.name}</h4>
         <p>${item.description.substring(0, 50)}</p>
         <div class="action">

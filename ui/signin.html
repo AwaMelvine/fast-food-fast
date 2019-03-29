@@ -7,10 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lora|Nanum+Gothic" rel="stylesheet">
 
   <!-- Default styling -->
   <link rel="stylesheet" href="css/general.css">
@@ -23,56 +23,51 @@
 
 <body>
 
-  <div class="page-wrapper">
+  <header class="navbar custom-page">
+    <nav>
+      <div class="menu-icon">
+        <i class="fa fa-bars fa-2x"></i>
+      </div>
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="">
+        </a>
+      </div>
+      <div class="menu">
+        <ul class="menu-links">
+          <div>
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+            <li id="cart-link">
+              <a href="cart.html">
+                <i class="fa fa-shopping-cart"></i>
+                Cart <span class="cart-count">0</span>
+              </a>
+            </li>
+            <li id="my-orders-link">
+              <a href="order_history.html">My Orders</a>
+            </li>
+            <li id="dashboard-link">
+              <a href="admin/dashboard.html">Dashboard</a>
+            </li>
 
-    <header class="navbar custom-page">
-      <nav>
-        <div class="menu-icon">
-          <i class="fa fa-bars fa-2x"></i>
-        </div>
-        <div class="logo">
-          <a href="index.html">
-            <img src="images/logo.png" alt="">
-          </a>
-        </div>
-        <div class="menu">
-          <ul class="menu-links">
-            <div>
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-              <li id="cart-link">
-                <a href="cart.html">
-                  <i class="fa fa-shopping-cart"></i>
-                  Cart <span class="cart-count">0</span>
-                </a>
-              </li>
-              <li id="my-orders-link">
-                <a href="order_history.html">My Orders</a>
-              </li>
-              <li id="dashboard-link">
-                <a href="admin/dashboard.html">Dashboard</a>
-              </li>
-
-              <li class="auth-links" id="auth-links">
-                <a href="signin.html">Login</a>
-                <a href="signup.html">Sign up</a>
-              </li>
-              <li class="user-info-link" id="user-info-link">
-              </li>
-            </div>
-          </ul>
-        </div>
-      </nav>
-    </header>
-  </div>
+            <li class="auth-links" id="auth-links">
+              <a href="signin.html">Login</a>
+              <a href="signup.html">Sign up</a>
+            </li>
+            <li class="user-info-link" id="user-info-link">
+            </li>
+          </div>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <div class="content full-page clear">
-
-
     <div class="signup-wrapper">
       <form class="form" action="">
-        <h3 class="center-text">Sign in</h3>
+        <h2 class="center-text">Sign in</h2>
         <div id="form-info"></div>
         <div class="input-group">
           <label for="email">Email</label>

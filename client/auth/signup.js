@@ -56,7 +56,7 @@ function signupUser(e) {
     displayFormErrors(errors);
   }
 
-  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/auth/signup', {
+  fetch(`${rootUrl}/api/v1/auth/signup`, {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(user),

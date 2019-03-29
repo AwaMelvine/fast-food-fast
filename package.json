@@ -10,7 +10,9 @@
   "scripts": {
     "clean": "rm -rf build ui/build && mkdir build ui\\build",
     "build-babel": "babel api -d ./build -s && babel client -d ui/build -s",
+    "build-babel:dev": "babel api -d ./build -s && babel client --watch -d ui/build -s",
     "build": "npm run clean && npm run build-babel",
+    "build:dev": "npm run clean && npm run build-babel:dev",
     "start": "npm run build && node ./build/app.js",
     "dev": "nodemon --exec babel-node -- api/app.js",
     "coverage": "cross-env NODE_ENV=test babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha",

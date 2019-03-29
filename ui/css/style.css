@@ -3,11 +3,13 @@
 ***************************/
 
 .content {
-  margin: 1em 0px 0px -200px;
+  width: 100%;
   font-size: 20px;
   line-height: 30px;
   text-align: justify;
-  margin: auto;
+  min-height: calc(100% - 250px);
+  border: thin transparent solid;
+  padding-bottom: 50px;
 }
 
 .content.full-page {
@@ -43,7 +45,6 @@
   position: relative;
   margin: 5px;
 }
-
 
 .content.menu-page .food-items .food-item {
   margin: 10px;
@@ -90,7 +91,6 @@
   min-height: 500px;
 }
 
-
 .content .sidebar {
   width: 24%;
   float: left;
@@ -133,10 +133,10 @@
   border-bottom: 1px dashed #f0f0f0;
 }
 
-
 /**************************
 ** SIGN UP/SIGNIN PAGE Styling
 ***************************/
+
 .signup-wrapper {
   border: 1px solid #cbcbd6;
   border-radius: 5px;
@@ -144,64 +144,69 @@
   margin: 30px auto;
 }
 
-
 /**************************
 ** FOOTER Styling
 ***************************/
 footer {
-  background: #4f495f;
-  color: white;
-  Height: 250px;
-  margin-top: 100px;
+  height: 250px;
   display: flex;
   flex-direction: column;
+  background: #484f62;
+  color: #f5f5f5;
+  position: relative;
+  font-size: 1.04em;
 }
 
-footer h2 {
-  text-align: center;
-}
-
-footer .more-info {
+footer .footer-content {
   display: flex;
-  flex-direction: row;
-  flex: 4;
 }
 
-footer .footer-left {
+footer .footer-bottom {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  background: #3c4353;
+}
+
+footer .footer-content .footer-section {
   flex: 1;
-  padding: 0px 30px 0px 30px;
-  padding-left: 5rem;
+  padding: 50px;
+  padding-top: 0px;
 }
 
-footer .footer-left p {
-  font-size: 1em;
-  line-height: 26px;
+footer .footer-content .footer-section .contact-details div {
+  margin-bottom: 7px;
 }
 
-footer .footer-right {
-  flex: 1;
-  padding-left: 5em;
+footer .footer-content .footer-section .socials {
+  margin-top: 20px;
 }
 
-footer .footer-right .social {
+footer .footer-content .footer-section .socials a {
+  color: #c5c2c2;
+  border: 1px solid #c5c2c2;
+  display: inline-block;
+  margin-right: 8px;
+  height: 41px;
+  width: 45px;
   text-align: center;
+  font-size: 1.2em;
+  padding-top: 7px;
+  border-radius: 5px;
+  transition: all .25s;
 }
 
-footer .footer-right i {
-  font-size: 2em;
-  color: #8f8f8f;
-  margin: 0px 10px;
-  text-align: center;
-}
-
-footer .copyright-info {
-  color: #b4b4b4;
-  text-align: center;
+footer .footer-content .footer-section .socials a:hover {
+  color: white;
+  border: 1px solid white;
+  transition: all .25s;
 }
 
 /****************************************
 ** Media Queries for mobile responsiveness
 *******************************************/
+
 @media(max-width: 1128px) {
   .content.menu-page {
     width: 100%;
@@ -274,7 +279,6 @@ footer .copyright-info {
   .stats {
     width: 100%;
   }
-
 }
 
 @media(max-width: 868px) {
@@ -315,9 +319,7 @@ footer .copyright-info {
   .orders-table-wrapper {
     width: 98%;
   }
-
 }
-
 
 @media (max-width: 458px) {
   .signup-wrapper {
@@ -339,8 +341,19 @@ footer .copyright-info {
     padding: 5px;
   }
 
-}
+  footer {
+    height: auto;
+  }
 
+  footer .footer-content {
+    flex-direction: column;
+  }
+
+  footer .footer-content .footer-section {
+    padding: 20px;
+  }
+
+}
 
 @media screen and (min-width: 2200px) {
   .btn {
@@ -372,11 +385,9 @@ footer .copyright-info {
     font-size: 3em;
     margin: 0px 15px;
   }
-
 }
 
 @media screen and (min-width: 2800px) {
-
   .btn {
     padding: 10px;
     font-size: 1.2em;
@@ -386,5 +397,4 @@ footer .copyright-info {
     Height: 350px;
     margin-top: 1100px;
   }
-
 }

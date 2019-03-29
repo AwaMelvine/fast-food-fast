@@ -92,7 +92,7 @@ confirmOrderBtn.addEventListener('click', (event) => {
   confirmOrderBtn.classList.add('is-loading');
   confirmOrderBtn.disabled = true;
 
-  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/orders', {
+  fetch(`${rootUrl}/api/v1/orders`, {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(data),

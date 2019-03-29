@@ -9,6 +9,11 @@ body {
   height: 100%;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: 'Lora', serif;
+}
+
 .small {
   font-size: .7em;
 }
@@ -19,7 +24,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Nanum Gothic', sans-serif;
+  /* font-family: 'Nanum Gothic', sans-serif; */
+  font-family: 'Josefin Sans', sans-serif;
+
 }
 
 .center-text {
@@ -199,7 +206,7 @@ tbody small {
   display: none;
 }
 
-.clear {
+.clear::after {
   content: "";
   display: block;
   clear: both;

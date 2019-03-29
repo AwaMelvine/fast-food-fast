@@ -7,10 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lora|Nanum+Gothic" rel="stylesheet">
 
   <!-- Default styling -->
   <link rel="stylesheet" href="css/general.css">
@@ -23,54 +23,51 @@
 
 <body>
 
-  <div class="page-wrapper">
-
-    <header class="navbar landing-page">
-      <nav>
-        <div class="menu-icon">
-          <i class="fa fa-bars fa-2x"></i>
-        </div>
-        <div class="logo">
-          <a href="index.html">
-            <img src="images/logo.png" alt="">
-          </a>
-        </div>
-        <div class="menu">
-          <ul class="menu-links">
-            <div>
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-              <li id="cart-link">
-                <a href="cart.html">
-                  <i class="fa fa-shopping-cart"></i>
-                  Cart <span class="cart-count">0</span>
-                </a>
-              </li>
-              <li id="my-orders-link">
-                <a href="order_history.html">My Orders</a>
-              </li>
-              <li id="dashboard-link">
-                <a href="admin/dashboard.html">Dashboard</a>
-              </li>
-
-              <li class="auth-links" id="auth-links">
-                <a href="signin.html">Login</a>
-                <a href="signup.html">Sign up</a>
-              </li>
-              <li class="user-info-link" id="user-info-link">
-              </li>
-            </div>
-          </ul>
-        </div>
-      </nav>
-      <div class="intro">
-        <h1>Fast Food. Fast Delivery!</h1>
-        <p>Get our latest delicacies delivered right at your doorstep with lightening speed!</p>
-        <a href="food_menu.html" class="btn btn-orange">Place Your Order Now!</a>
+  <header class="navbar landing-page">
+    <nav>
+      <div class="menu-icon">
+        <i class="fa fa-bars fa-2x"></i>
       </div>
-    </header>
-  </div>
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="">
+        </a>
+      </div>
+      <div class="menu">
+        <ul class="menu-links">
+          <div>
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+            <li id="cart-link">
+              <a href="cart.html">
+                <i class="fa fa-shopping-cart"></i>
+                Cart <span class="cart-count">0</span>
+              </a>
+            </li>
+            <li id="my-orders-link">
+              <a href="order_history.html">My Orders</a>
+            </li>
+            <li id="dashboard-link">
+              <a href="admin/dashboard.html">Dashboard</a>
+            </li>
+
+            <li class="auth-links" id="auth-links">
+              <a href="signin.html">Login</a>
+              <a href="signup.html">Sign up</a>
+            </li>
+            <li class="user-info-link" id="user-info-link">
+            </li>
+          </div>
+        </ul>
+      </div>
+    </nav>
+    <div class="intro">
+      <h1>Fast Food. Fast Delivery!</h1>
+      <p>Get our latest delicacies delivered right at your doorstep with lightening speed!</p>
+      <a href="food_menu.html" class="btn btn-orange">Place Your Order Now!</a>
+    </div>
+  </header>
 
   <div class="content clear">
     <div class="food-items">
@@ -93,7 +90,7 @@
       </form>
 
       <div class="categories">
-        <h3>Categories</h3>
+        <h2>Categories</h2>
         <ul>
           <li><a href="food_menu.html"><i class="fa fa-chevron-circle-right"></i>&nbsp;Salads</a></li>
           <li><a href="food_menu.html"><i class="fa fa-chevron-circle-right"></i>&nbsp;Vegetables</a></li>
@@ -108,26 +105,33 @@
   <div class="clear"></div>
 
   <footer>
-    <div class="more-info">
-      <div class="footer-left clear">
+    <div class="footer-content">
+      <div class="footer-section about">
         <h2>About</h2>
-        <p class="center-text">Fast-Food-Fast is a fast food delivery service. As a user, all you have to do is browse
+        <p>Fast-Food-Fast is a fast food delivery service. As a user, all you have to do is browse
           through our list of
           available
           food items, select your favorite and order. Then our deliver agents will bring what you ordered to you
           wherever
           you are. </p>
+
       </div>
-      <div class="footer-right clear">
-        <h2>Follow us</h2>
-        <div class="social">
-          <i class="fa  fa-facebook-square"></i>
-          <i class="fa  fa-twitter-square"></i>
-          <i class="fa  fa-linkedin-square"></i>
+      <div class="footer-section">
+        <h2>Get in touch</h2>
+        <div class="contact-details">
+          <div><i class="fas fa-phone"></i>&nbsp; 123-456-789</div>
+          <div><i class="fas fa-envelope"></i>&nbsp; info@fast-food-fast.com</div>
         </div>
+        <div class="socials">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+
       </div>
     </div>
-    <div class="copyright-info">
+    <div class="footer-bottom">
       <p class="copyright">Copyright 2018 Fast-Food-Fast</p>
     </div>
   </footer>
