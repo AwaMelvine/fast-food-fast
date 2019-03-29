@@ -1,11 +1,15 @@
 {
-  "name": "server",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "engines": {
+    "node": "8.10.0",
+    "npm": "6.2.0"
+  },
   "scripts": {
     "clean": "rm -rf build ui/build && mkdir build ui\\build",
-    "build-babel": "babel api -d ./build -s && babel client --watch -d ui/build -s",
+    "build-babel": "babel api -d ./build -s && babel client -d ui/build -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/app.js",
     "dev": "nodemon --exec babel-node -- api/app.js",
@@ -31,7 +35,6 @@
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.4",
