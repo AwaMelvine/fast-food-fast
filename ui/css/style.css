@@ -9,6 +9,7 @@
   text-align: justify;
   min-height: calc(100% - 250px);
   border: thin transparent solid;
+  padding-bottom: 50px;
 }
 
 .content.full-page {
@@ -146,55 +147,60 @@
 /**************************
 ** FOOTER Styling
 ***************************/
-
 footer {
-  background: #4f495f;
-  color: white;
-  Height: 250px;
+  height: 250px;
   display: flex;
   flex-direction: column;
+  background: #484f62;
+  color: #f5f5f5;
+  position: relative;
+  font-size: 1.04em;
 }
 
-footer h2 {
-  text-align: center;
-}
-
-footer .more-info {
+footer .footer-content {
   display: flex;
-  flex-direction: row;
-  flex: 4;
 }
 
-footer .footer-left {
+footer .footer-bottom {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  background: #3c4353;
+}
+
+footer .footer-content .footer-section {
   flex: 1;
-  padding: 0px 30px 0px 30px;
-  padding-left: 5rem;
+  padding: 50px;
+  padding-top: 0px;
 }
 
-footer .footer-left p {
-  font-size: 1em;
-  line-height: 26px;
+footer .footer-content .footer-section .contact-details div {
+  margin-bottom: 7px;
 }
 
-footer .footer-right {
-  flex: 1;
-  padding-left: 5em;
+footer .footer-content .footer-section .socials {
+  margin-top: 20px;
 }
 
-footer .footer-right .social {
+footer .footer-content .footer-section .socials a {
+  color: #c5c2c2;
+  border: 1px solid #c5c2c2;
+  display: inline-block;
+  margin-right: 8px;
+  height: 41px;
+  width: 45px;
   text-align: center;
+  font-size: 1.2em;
+  padding-top: 7px;
+  border-radius: 5px;
+  transition: all .25s;
 }
 
-footer .footer-right i {
-  font-size: 2em;
-  color: #8f8f8f;
-  margin: 0px 10px;
-  text-align: center;
-}
-
-footer .copyright-info {
-  color: #b4b4b4;
-  text-align: center;
+footer .footer-content .footer-section .socials a:hover {
+  color: white;
+  border: 1px solid white;
+  transition: all .25s;
 }
 
 /****************************************
@@ -334,6 +340,19 @@ footer .copyright-info {
   .content .food-items {
     padding: 5px;
   }
+
+  footer {
+    height: auto;
+  }
+
+  footer .footer-content {
+    flex-direction: column;
+  }
+
+  footer .footer-content .footer-section {
+    padding: 20px;
+  }
+
 }
 
 @media screen and (min-width: 2200px) {
