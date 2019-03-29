@@ -17,7 +17,7 @@ function fetchUserOrders() {
   const token = JSON.parse(userInfo).token;
   let orderDisplay = '';
 
-  fetch(`https://fast-food-fast-service.herokuapp.com/api/v1/users/${JSON.parse(userInfo).id}/orders`, {
+  fetch(`${rootUrl}/api/v1/users/${JSON.parse(userInfo).id}/orders`, {
     mode: 'cors',
     headers: new Headers({
       'Access-Control-Allow-Origin': '*',

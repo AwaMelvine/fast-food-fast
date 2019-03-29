@@ -16,7 +16,7 @@ function fetchAllOrders() {
   const token = JSON.parse(userInfo).token;
   let ordersDisplay = '';
 
-  fetch('https://fast-food-fast-service.herokuapp.com/api/v1/orders', {
+  fetch(`${rootUrl}/api/v1/orders`, {
     mode: 'cors',
     headers: new Headers({
       'Access-Control-Allow-Origin': '*',
@@ -70,7 +70,7 @@ function changeStatus(newStatus, orderId) {
   const userInfo = localStorage.getItem('userInfo');
   const token = JSON.parse(userInfo).token;
 
-  fetch(`https://fast-food-fast-service.herokuapp.com/api/v1/orders/${orderId}`, {
+  fetch(`${rootUrl}/api/v1/orders/${orderId}`, {
     mode: 'cors',
     method: 'PUT',
     body: JSON.stringify({ status: newStatus }),
