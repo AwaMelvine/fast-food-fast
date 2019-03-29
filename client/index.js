@@ -19,8 +19,8 @@ function displayFormErrors(errors) {
 
 function fetchItems(searchTerm = '') {
   formInfo.innerHTML = '';
-
-  if (searchTerm) {
+  if (searchTerm !== '') {
+    console.log("Searching...");
     fetch(`${rootUrl}/api/v1/menu/search`, {
       mode: 'cors',
       method: 'POST',
@@ -73,6 +73,7 @@ function fetchItems(searchTerm = '') {
       }),
     }).then(res => res.json())
       .then((response) => {
+        console.log(response);
         let itemsWrapper = '<div class="items-wrapper">';
         response.data.slice(0, 6).forEach((item, index) => {
           const tempIndex = index + 1;

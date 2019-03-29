@@ -9,6 +9,10 @@ body {
   height: 100%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .small {
   font-size: .7em;
 }
@@ -199,7 +203,7 @@ tbody small {
   display: none;
 }
 
-.clear {
+.clear::after {
   content: "";
   display: block;
   clear: both;

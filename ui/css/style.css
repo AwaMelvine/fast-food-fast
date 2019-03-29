@@ -3,11 +3,12 @@
 ***************************/
 
 .content {
-  margin: 1em 0px 0px -200px;
+  width: 100%;
   font-size: 20px;
   line-height: 30px;
   text-align: justify;
-  margin: auto;
+  min-height: calc(100% - 250px);
+  border: thin transparent solid;
 }
 
 .content.full-page {
@@ -43,7 +44,6 @@
   position: relative;
   margin: 5px;
 }
-
 
 .content.menu-page .food-items .food-item {
   margin: 10px;
@@ -90,7 +90,6 @@
   min-height: 500px;
 }
 
-
 .content .sidebar {
   width: 24%;
   float: left;
@@ -133,10 +132,10 @@
   border-bottom: 1px dashed #f0f0f0;
 }
 
-
 /**************************
 ** SIGN UP/SIGNIN PAGE Styling
 ***************************/
+
 .signup-wrapper {
   border: 1px solid #cbcbd6;
   border-radius: 5px;
@@ -144,15 +143,14 @@
   margin: 30px auto;
 }
 
-
 /**************************
 ** FOOTER Styling
 ***************************/
+
 footer {
   background: #4f495f;
   color: white;
   Height: 250px;
-  margin-top: 100px;
   display: flex;
   flex-direction: column;
 }
@@ -202,6 +200,7 @@ footer .copyright-info {
 /****************************************
 ** Media Queries for mobile responsiveness
 *******************************************/
+
 @media(max-width: 1128px) {
   .content.menu-page {
     width: 100%;
@@ -274,7 +273,6 @@ footer .copyright-info {
   .stats {
     width: 100%;
   }
-
 }
 
 @media(max-width: 868px) {
@@ -315,9 +313,7 @@ footer .copyright-info {
   .orders-table-wrapper {
     width: 98%;
   }
-
 }
-
 
 @media (max-width: 458px) {
   .signup-wrapper {
@@ -338,9 +334,7 @@ footer .copyright-info {
   .content .food-items {
     padding: 5px;
   }
-
 }
-
 
 @media screen and (min-width: 2200px) {
   .btn {
@@ -372,11 +366,9 @@ footer .copyright-info {
     font-size: 3em;
     margin: 0px 15px;
   }
-
 }
 
 @media screen and (min-width: 2800px) {
-
   .btn {
     padding: 10px;
     font-size: 1.2em;
@@ -386,5 +378,4 @@ footer .copyright-info {
     Height: 350px;
     margin-top: 1100px;
   }
-
 }
