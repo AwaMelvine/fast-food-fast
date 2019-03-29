@@ -1,4 +1,5 @@
 const userInfoLink = document.getElementById('user-info-link');
+const rootUrl = 'http://localhost:5000';
 
 const cart = JSON.parse(localStorage.getItem('cart'));
 const userInfo = JSON.parse(localStorage.getItem('userInfo'));

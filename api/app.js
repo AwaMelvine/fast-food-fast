@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 
 
-// app.use(express.static(path.join(__dirname, 'v1/uploads')));
+app.use(express.static(path.join(__dirname, 'v1/uploads')));
 app.use(express.static(path.join(__dirname, '../ui')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
