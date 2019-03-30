@@ -14,11 +14,9 @@ function fetchItem() {
       const item = response.data;
 
       const itemDisplay = `<h3 class="center-text">${item.name}</h3>
-      <div class="item">
+      <div class="item clear">
         <div class="item-images">
-          <h3 class="center-text">Images</h3>
-          <div class="image"></div>
-          <div class="image"></div>
+          <div class="image"><img src="${rootUrl}/images/${item.image}" width="100%" /></div>
         </div>
         <div class="item-details">
           <h3>Details</h3>
