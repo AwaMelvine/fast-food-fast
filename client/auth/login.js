@@ -2,6 +2,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const loginBtn = document.getElementById('loginBtn');
 const formInfo = document.getElementById('form-info');
+const rootUrl = 'http://localhost:5000';
 
 function loginValidation(user) {
   const errors = {};
