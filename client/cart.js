@@ -21,7 +21,7 @@ function displayCart() {
       itemDisplay = `${itemDisplay}<tr>
           <td>${index + 1}</td>
           <td>${element.item.name}</td>
-          <td><img src="${element.item.image}" alt=""></td>
+          <td><img src="images/${element.item.image}" alt=""></td>
           <td>
             <form action="order_history.html" class="form">
               <select onChange='return computePrice(${element.item.id}, this)' name="Quantity" id="quantity" class="input-field dropdown">

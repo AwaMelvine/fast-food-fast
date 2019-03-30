@@ -3,11 +3,11 @@ const searchField = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
 const itemsTitle = document.getElementById('items-title');
 const formInfo = document.getElementById('form-info');
+const cartLink = document.getElementById('cart-link');
 const rootUrl = 'http://localhost:5000';
 
 
 function displayFormErrors(errors) {
-  console.log(errors);
   let formErrors = '<div class="form-errors">';
   Object.keys(errors).forEach((field) => {
     formErrors = `${formErrors}<li>${errors[field]}</li>`;
@@ -123,13 +123,15 @@ function addToCart(item) {
   }
 }
 
+if(searchBtn) {
+  searchBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const searchTerm = searchField.value;
+  
+    fetchItems(searchTerm);
+  });
+}
 
-searchBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const searchTerm = searchField.value;
-
-  fetchItems(searchTerm);
-});
-
-
-fetchItems();
+if(formInfo) {
+  fetchItems();
+}
