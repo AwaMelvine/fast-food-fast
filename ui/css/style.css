@@ -269,7 +269,6 @@ footer .footer-content .footer-section .socials a:hover {
   footer {
     height: 400px;
     width: 100%;
-    /* flex-direction: column; */
   }
 
   .orders-table-wrapper {
@@ -351,6 +350,27 @@ footer .footer-content .footer-section .socials a:hover {
 
   footer .footer-content .footer-section {
     padding: 20px;
+  }
+
+
+  /**************************
+** ORDER PAGE Styling
+***************************/
+  .item {
+    width: 100%;
+  }
+
+  .item .item-images {
+    width: 100%;
+  }
+
+  .item .item-images .image {
+    margin: 10px;
+  }
+
+  .item .item-details {
+    width: 100%;
+    /* padding: 20px; */
   }
 
 }
